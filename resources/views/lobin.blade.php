@@ -13,8 +13,10 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-  </head>
-  <body>
-      <a href="/AR">AR</a>
-  </body>
+</head>
+<body>
+    <a href="/signIn">ログイン</a>
+    <a href="/signUp">新規登録</a>
+    <div id="app"></div>
+</body>
 </html>
