@@ -18,5 +18,6 @@ Route::get('/', [App\Http\Controllers\TopController::class, 'show']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+#Route::get('/login',[App\Http\Controllers\LoginController::class, 'show']);
 Route::get('/main', [App\Http\Controllers\MainController::class, 'show']);
 Route::get('/AR',[App\Http\Controllers\ARController::class, 'show']);
