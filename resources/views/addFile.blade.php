@@ -15,7 +15,10 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <a href="/main">login</a>
-    <div id="app"></div>
+    <form action="{{ url('sample/upload') }}" method="post"  enctype="multipart/form-data">
+            @csrf
+            <input type="file" name="a" >
+            <input type="submit" >
+    </form>
 </body>
 </html>

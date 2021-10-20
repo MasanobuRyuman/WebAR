@@ -16,5 +16,6 @@
   </head>
   <body>
       <a href="/AR">AR</a>
+      <a href="addFile">ファイルの追加</a>
   </body>
 </html>
