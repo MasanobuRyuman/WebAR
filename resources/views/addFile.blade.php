@@ -15,10 +15,12 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <form action="{{ url('sample/upload') }}" method="post"  enctype="multipart/form-data">
-            @csrf
-            <input type="file" name="a" >
-            <input type="submit" >
+    <form action="{{ url('upload') }}" method="post"  enctype="multipart/form-data">
+        @csrf
+
+        <input type="file" name="obj" >
+        <input type="file" name="mtl">
+        <input type="submit" >
     </form>
 </body>
 </html>

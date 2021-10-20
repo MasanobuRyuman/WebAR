@@ -8,17 +8,19 @@ class UploadController extends Controller
 {
     public function upload(Request $request)
     {
-        $file = $request->file('a');
+        $objFile = $request->file('obj');
+        
 
-        if (!is_null($file)) {
+        if (!is_null($objFile)) {
             date_default_timezone_set('Asia/Tokyo');
-            $originalName = $file->getClientOriginalName();
+            $objName = $objFile->getClientOriginalName();
+
             $micro = explode(" ", microtime());
             $fileTail = date("Ymd_His", $micro[1]) . '_' . (explode('.', $micro[0])[1]);
-
-            $dir = 'upFiles';
-            $fileName = $originalName . '.' . $fileTail;
-            $file->storeAs($dir, $fileName, ['disk' => 'local']);
+            $dir = 'public';
+            $fileName = $objName;
+            echo $fileName;
+            $objFile->storeAs($dir, $fileName, ['disk' => 'local']);
 
         }
 
