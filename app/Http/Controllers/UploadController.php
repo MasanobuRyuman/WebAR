@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\userInfo;
+use App\Models\content;
 
 class UploadController extends Controller
 {
@@ -23,11 +25,16 @@ class UploadController extends Controller
             $objFileName = $uniqName . "." . $objFileType;
             $mtlFileName = $uniqName . "." . $mtlFileType;
             $dir = 'public';
+            content::insert([
+                'name' => '名前',
+                'contentName' => $objName,
+                'saveName' => $objFileName
+            ]);
 
             $objFile->storeAs($dir, $objFileName, ['disk' => 'local']);
             $mtlFile->storeAs($dir, $mtlFileName, ['disk' => 'local']);
         }
 
-        return view('addFile');
+        return view('main');
     }
 }
