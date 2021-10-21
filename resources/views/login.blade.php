@@ -15,7 +15,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <a href="/main">login</a>
+    <a href="/signIn">ログイン</a>
+    <a href="/signUp">新規登録</a>
     <div id="app"></div>
 </body>
 </html>
