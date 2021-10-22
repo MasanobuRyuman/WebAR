@@ -15,8 +15,15 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <a href="/signIn">ログイン</a>
-    <a href="/signUp">新規登録</a>
+    <form action="{{ url('signUp') }}" method="post"  enctype="multipart/form-data">
+        @csrf
+        <p>名前</p>
+        <input name="name">
+        <p>パスワード</p>
+        <input name="password">
+        <input type="submit" name="login" value="ログイン">
+        <input type="submit" name="newLogin" value="新規登録">
+    </form>
     <div id="app"></div>
 </body>
 </html>

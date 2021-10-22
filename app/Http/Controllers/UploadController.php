@@ -12,6 +12,7 @@ class UploadController extends Controller
     {
         $objFile = $request->file('obj');
         $mtlFile = $request->file('mtl');
+        $contentName = $request->get('contentName');
 
         if (!is_null($objFile) and !is_null($mtlFile)) {
             date_default_timezone_set('Asia/Tokyo');
@@ -25,11 +26,14 @@ class UploadController extends Controller
             $objFileName = $uniqName . "." . $objFileType;
             $mtlFileName = $uniqName . "." . $mtlFileType;
             $dir = 'public';
-            content::insert([
-                'name' => '名前',
-                'contentName' => $objName,
-                'saveName' => $objFileName
-            ]);
+            $content = new content;
+            $name = "nobu";
+            if ($request->get('releaseSetting') == "public")
+            {
+                $content->addContent($name,$contentName,$uniqName,"public");
+            }else{
+                $content->addContent($name,$contentName,$uniqName,"private");
+            }
 
             $objFile->storeAs($dir, $objFileName, ['disk' => 'local']);
             $mtlFile->storeAs($dir, $mtlFileName, ['disk' => 'local']);

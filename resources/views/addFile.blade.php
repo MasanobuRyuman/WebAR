@@ -18,8 +18,14 @@
     <form action="{{ url('upload') }}" method="post"  enctype="multipart/form-data">
         @csrf
 
-        <input type="file" name="obj" >
-        <input type="file" name="mtl">
+        <input type="file" name="obj" value="オブジェクトファイルを選択してください。">
+        <input type="file" name="mtl" value="マテリアルファイルを選択してください。">
+        <p>作品名を入力してください</p>
+        <input name="contentName">
+        <input type="radio" id="public" name="releaseSetting" name="public" value="public">
+        <label for="public">public</label>
+        <input type="radio" id="private" name="releaseSetting" name="private" value="private">
+        <label for="private">private</label>
         <input type="submit" >
     </form>
 </body>
