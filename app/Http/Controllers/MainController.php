@@ -8,7 +8,7 @@ class MainController extends Controller
 {
     public function show(){
         echo "llllllll";
-        $users = content::select('name')->paginate(3);
+        $users = content::select('name','contentName','saveName')->paginate(3);
         return view('main', ['users' => $users]);
 
     }

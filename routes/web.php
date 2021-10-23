@@ -21,6 +21,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/sign',[App\Http\Controllers\LoginController::class, 'show']);
 Route::post('/signUp',[App\Http\Controllers\LoginProcessController::class, 'show']);
 Route::get('/main', [App\Http\Controllers\MainController::class, 'show']);
-Route::post('/upload', [App\Http\Controllers\UploadController::class, 'upload']);
+Route::get('/upload', [App\Http\Controllers\UploadController::class, 'upload']);
 Route::get('/AR',[App\Http\Controllers\ARController::class, 'show']);
 Route::get('/addFile', [App\Http\Controllers\addFileController::class, 'show']);

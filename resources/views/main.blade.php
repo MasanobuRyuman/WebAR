@@ -22,11 +22,11 @@
     <ul>
         @foreach($users as $user)
         <li>
-            {{$user->name}}
+            <p>{{$user->name}}</p>
+            <p>{{$user->contentName}}</p>
         </li>
         @endforeach
     </ul>
     {{$users->links()}}
-
   </body>
 </html>
