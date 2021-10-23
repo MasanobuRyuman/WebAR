@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\userInfo;
 use App\Models\content;
+use App\Http\Controllers\MainController;
 
 class UploadController extends Controller
 {
@@ -38,7 +39,8 @@ class UploadController extends Controller
             $objFile->storeAs($dir, $objFileName, ['disk' => 'local']);
             $mtlFile->storeAs($dir, $mtlFileName, ['disk' => 'local']);
         }
-
-        return view('main');
+        $main= app()->make('App\Http\Controllers\MainController');
+        return $main->show();
+        
     }
 }
