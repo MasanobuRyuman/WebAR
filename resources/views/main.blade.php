@@ -13,10 +13,20 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-  </head>
-  <body>
-      <a href="/AR">AR</a>
-      <a href="addFile">ファイルの追加</a>
-      <a href="/">トップページに戻る</a>
+</head>
+<body>
+    <a href="/AR">AR</a>
+    <a href="addFile">ファイルの追加</a>
+    <a href="/">トップページに戻る</a>
+    <h1>一覧表示（普通）</h1>
+    <ul>
+        @foreach($users as $user)
+        <li>
+            {{$user->name}}
+        </li>
+        @endforeach
+    </ul>
+    {{$users->links()}}
+
   </body>
 </html>

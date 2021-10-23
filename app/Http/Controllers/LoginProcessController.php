@@ -30,7 +30,7 @@ class LoginProcessController extends Controller
             {
                 $userInfo -> loginRegister($name,$password);
                 $items = userInfo::all();
-                echo $items;
+                
                 return view('main');
             }else{
                 return view('login');
