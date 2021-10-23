@@ -27,7 +27,7 @@
         <input type="radio" id="private" name="releaseSetting" name="private" value="private">
         <label for="private">private</label>
         <input type="submit">
-        
+
     </form>
 </body>
 </html>

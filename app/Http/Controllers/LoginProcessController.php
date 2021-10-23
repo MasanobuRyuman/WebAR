@@ -19,7 +19,8 @@ class LoginProcessController extends Controller
             $existence = $userInfo ->loginCheck($name,$password);
             if ($existence == 1)
             {
-                return view('main');
+                $main= app()->make('App\Http\Controllers\MainController');
+                return $main->show();
             }else{
                 return view('login');
             }
@@ -29,9 +30,7 @@ class LoginProcessController extends Controller
             if ($nameCount == 0)
             {
                 $userInfo -> loginRegister($name,$password);
-                $items = userInfo::all();
-                
-                return view('main');
+                header("location: /main");
             }else{
                 return view('login');
             }

@@ -39,8 +39,6 @@ class UploadController extends Controller
             $objFile->storeAs($dir, $objFileName, ['disk' => 'local']);
             $mtlFile->storeAs($dir, $mtlFileName, ['disk' => 'local']);
         }
-        $main= app()->make('App\Http\Controllers\MainController');
-        return $main->show();
-        
+        header("location: main");
     }
 }
