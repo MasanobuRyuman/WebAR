@@ -18,7 +18,6 @@
     <a href="/AR">AR</a>
     <a href="addFile">ファイルの追加</a>
     <a href="/">トップページに戻る</a>
-    <h1>一覧表示（普通）</h1>
     <ul>
         @foreach($users as $user)
         <li>

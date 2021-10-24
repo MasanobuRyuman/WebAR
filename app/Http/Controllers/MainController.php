@@ -7,8 +7,9 @@ use App\Models\content;
 class MainController extends Controller
 {
     public function show(){
-        echo "llllllll";
-        $users = content::select('name','contentName','saveName')->paginate(3);
+        $content = new content;
+        $userName = session('name');
+        $users = $content->userContent($userName);
         return view('main', ['users' => $users]);
 
     }
