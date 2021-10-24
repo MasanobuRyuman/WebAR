@@ -18,4 +18,9 @@ class content extends Model
             DB::table('content')->insert(["name"=> $name,"contentName"=>$contentName,"saveName"=>$saveName,"public"=>1]);
         }
     }
+    public function userContent($name)
+    {
+        $userContent = DB::table('content')->select('name','contentName','saveName')->where('name',$name)->paginate(3);
+        return $userContent;
+    }
 }

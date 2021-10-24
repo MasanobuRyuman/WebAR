@@ -10,11 +10,6 @@ use App\Models\userInfo;
 class TopController extends Controller
 {
     public function show(){
-        $items = userInfo::all();
-        echo $items;
-        $temp = new userInfo;
-        $temp = $temp -> getData();
-        echo $temp;
         return view('top');
     }
 }

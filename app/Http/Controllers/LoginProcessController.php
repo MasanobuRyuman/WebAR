@@ -19,6 +19,7 @@ class LoginProcessController extends Controller
             $existence = $userInfo ->loginCheck($name,$password);
             if ($existence == 1)
             {
+                session(['UserName' => $name]);
                 $main= app()->make('App\Http\Controllers\MainController');
                 return $main->show();
             }else{
@@ -29,6 +30,7 @@ class LoginProcessController extends Controller
             $nameCount = $userInfo -> newLoginCheck($name);
             if ($nameCount == 0)
             {
+                session(['UserName' => $name]);
                 $userInfo -> loginRegister($name,$password);
                 header("location: /main");
             }else{
