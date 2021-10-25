@@ -26,7 +26,6 @@
         @endforeach
     </ul>
     {{$users->links()}}
-     <div id="mainPage"></div>
-     <div id="example"></div>
+    <div id="mainPage"></div>
 </body>
 </html>
