@@ -10,6 +10,7 @@ class MainController extends Controller
         $content = new content;
         $userName = session('name');
         $users = $content->userContent($userName);
+        
         return view('main', ['users' => $users]);
 
     }

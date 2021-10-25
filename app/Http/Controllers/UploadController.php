@@ -40,7 +40,7 @@ class UploadController extends Controller
         }
 
         header("location: main");
-        
+        exit(); 
 
     }
 }
