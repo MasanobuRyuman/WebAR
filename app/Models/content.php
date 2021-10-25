@@ -10,6 +10,11 @@ class content extends Model
 {
     protected $table = 'content';
     use HasFactory;
+    public function publicContent()
+    {
+        $publicContent = DB::table('content')->select('name','contentName')->where('public',1)->paginate(3);
+        return $publicContent;
+    }
     public function addContent($name,$contentName,$saveName,$relese)
     {
         if ($relese == "public"){
@@ -20,7 +25,7 @@ class content extends Model
     }
     public function userContent($name)
     {
-        $userContent = DB::table('content')->select('name','contentName','saveName')->where('name',$name)->paginate(3);
+        $userContent = DB::table('content')->select('contentName')->where('name',$name)->paginate(3);
         return $userContent;
     }
 }

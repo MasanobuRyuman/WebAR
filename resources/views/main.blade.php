@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="./../js/app.js" defer></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -21,11 +21,11 @@
     <ul>
         @foreach($users as $user)
         <li>
-            <p>{{$user->name}}</p>
             <p>{{$user->contentName}}</p>
         </li>
         @endforeach
     </ul>
     {{$users->links()}}
-  </body>
+    <div id="mainPage"></div>
+</body>
 </html>
