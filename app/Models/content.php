@@ -15,17 +15,17 @@ class content extends Model
         $publicContent = DB::table('content')->select('name','contentName')->where('public',1)->paginate(3);
         return $publicContent;
     }
+    public function userContent($name)
+    {
+        $userContent = DB::table('content')->select('contentName')->where('name',$name)->paginate(3);
+        return $userContent;
+    }
     public function addContent($name,$contentName,$saveName,$relese)
     {
         if ($relese == "public"){
             DB::table('content')->insert(["name"=> $name,"contentName"=>$contentName,"saveName"=>$saveName,"public"=>1]);
         }else{
-            DB::table('content')->insert(["name"=> $name,"contentName"=>$contentName,"saveName"=>$saveName,"public"=>1]);
+            DB::table('content')->insert(["name"=> $name,"contentName"=>$contentName,"saveName"=>$saveName,"public"=>0]);
         }
-    }
-    public function userContent($name)
-    {
-        $userContent = DB::table('content')->select('contentName')->where('name',$name)->paginate(3);
-        return $userContent;
     }
 }
