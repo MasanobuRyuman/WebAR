@@ -33,10 +33,10 @@ class LoginProcessController extends Controller
                 session(['UserName' => $name]);
                 $userInfo -> loginRegister($name,$password);
                 header("location: /main");
+                exit();
             }else{
                 return view('login');
             }
         }
-        echo "koooo";
     }
 }

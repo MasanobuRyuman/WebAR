@@ -9,15 +9,7 @@ use Illuminate\Support\Facades\DB;
 class userInfo extends Model
 {
     protected $table = 'userInfo';
-    public function getData()
-    {
-        /**
-        * モデルと関連しているテーブル
-        *
-        * @var string
-        */
-        return '名前：'.$this -> name.'---メール：'.$this -> password;
-    }
+    
     public function loginCheck($name,$password)
     {
         $data = DB::table('userInfo')->where([['name',$name],['password',$password]])->limit(1)->count();
