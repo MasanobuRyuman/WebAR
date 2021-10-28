@@ -17,10 +17,7 @@ function MainPage() {
 
     return (
         <div>
-            <h1>Userページ</h1>
-            <ul>
-
-            </ul>
+            <h1>Userペ-ジ</h1>
         </div>
     );
 }

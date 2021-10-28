@@ -9,7 +9,9 @@ class TaskController extends Controller
 {
     public function show()
     {
+        echo "kita";
         $users = App\userInfo::all()
+        echo $users;
         return response()->json(['users' => $users]);
     }
 }
