@@ -2088,7 +2088,7 @@ console.log("lkkkk");
 
 __webpack_require__(/*! ./components/Example */ "./resources/js/components/Example.js");
 
-__webpack_require__(/*! ./components/MainPage */ "./resources/js/components/MainPage.js");
+__webpack_require__(/*! ./components/UserContent */ "./resources/js/components/UserContent.js");
 
 /***/ }),
 
@@ -2185,10 +2185,10 @@ if (document.getElementById('example')) {
 
 /***/ }),
 
-/***/ "./resources/js/components/MainPage.js":
-/*!*********************************************!*\
-  !*** ./resources/js/components/MainPage.js ***!
-  \*********************************************/
+/***/ "./resources/js/components/UserContent.js":
+/*!************************************************!*\
+  !*** ./resources/js/components/UserContent.js ***!
+  \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2202,7 +2202,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-js-pagination'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2226,11 +2227,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-function MainPage() {
+
+function UserContent() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
-      users = _useState2[0],
-      setUsers = _useState2[1];
+      userContent = _useState2[0],
+      setUserContent = _useState2[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     getUsers();
@@ -2244,13 +2246,15 @@ function MainPage() {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_2___default().get('/api/user');
+              return axios__WEBPACK_IMPORTED_MODULE_2___default().get('/api/userContent');
 
             case 2:
               response = _context.sent;
-              setUsers(response);
+              setUserContent(response.data);
+              console.log("中身表示");
+              console.log(response);
 
-            case 4:
+            case 6:
             case "end":
               return _context.stop();
           }
@@ -2263,17 +2267,18 @@ function MainPage() {
     };
   }();
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h1", {
       children: "User\u30DA-\u30B8"
     })
   });
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MainPage);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UserContent);
 
 if (document.getElementById('mainPage')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_3__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(MainPage, {}), document.getElementById('mainPage'));
+  react_dom__WEBPACK_IMPORTED_MODULE_3__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(UserContent, {}), document.getElementById('mainPage'));
+  console.log();
 }
 
 /***/ }),
