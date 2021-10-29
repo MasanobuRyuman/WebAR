@@ -2226,6 +2226,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 function MainPage() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -2248,9 +2249,11 @@ function MainPage() {
 
             case 2:
               response = _context.sent;
-              setUsers(response);
+              setUsers(response.data);
+              console.log("中身表示");
+              console.log(response.data);
 
-            case 4:
+            case 6:
             case "end":
               return _context.stop();
           }
@@ -2264,8 +2267,8 @@ function MainPage() {
   }();
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
-      children: "User\u30DA-\u30B8"
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("h1", {
+      children: ["User\u30DA-\u30B8+", users.name]
     })
   });
 }
@@ -2274,6 +2277,7 @@ function MainPage() {
 
 if (document.getElementById('mainPage')) {
   react_dom__WEBPACK_IMPORTED_MODULE_3__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(MainPage, {}), document.getElementById('mainPage'));
+  console.log();
 }
 
 /***/ }),

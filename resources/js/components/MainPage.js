@@ -12,12 +12,14 @@ function MainPage() {
 
     const getUsers = async () => {
         const response = await axios.get('/api/user');
-        setUsers(response)
+        setUsers(response.data);
+        console.log("中身表示");
+        console.log(response.data);
     }
 
     return (
         <div>
-            <h1>Userペ-ジ</h1>
+            <h1>Userペ-ジ+{users.name}</h1>
         </div>
     );
 }
@@ -25,4 +27,5 @@ function MainPage() {
 export default MainPage;
 if (document.getElementById('mainPage')) {
     ReactDOM.render(<MainPage />, document.getElementById('mainPage'));
+    console.log();
 }
