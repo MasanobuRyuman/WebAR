@@ -10,9 +10,7 @@ class userContentAPI extends Controller
         $userName = session('name');
         $users = $content->userContent($userName);
 
-        foreach ($users as $user){
-            echo $user;
-        }
+        return \Response::json($users);
 
     }
 }
