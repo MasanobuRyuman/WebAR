@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
-import Pagination from 'react-js-pagination';
 
 function UserContent() {
 
@@ -15,7 +14,7 @@ function UserContent() {
         const response = await axios.get('/api/userContent');
         setUserContent(response.data);
         console.log("中身表示");
-        console.log(response);
+        console.log(response.data);
     }
 
 
