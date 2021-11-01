@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
-import Pagination from "react-js-pagination";
 
 function UserContent() {
 

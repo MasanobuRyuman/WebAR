@@ -8,7 +8,6 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="./../components/Tasks.js"></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -27,8 +26,7 @@
     </ul>
     {{$publicContent->links()}}
 
-    <div id="example"></div>
-    <div id="task"></div>
+    <div id="PublicContent"></div>
 
 
 </body>

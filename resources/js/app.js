@@ -14,4 +14,5 @@ require('./bootstrap');
 console.log("lkkkk");
 
 require('./components/Example');
+require('./components/PublicContent');
 require('./components/UserContent');
