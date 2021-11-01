@@ -10,10 +10,6 @@ class MainController extends Controller
         $content = new content;
         $userName = session('name');
         $users = $content->userContent($userName);
-        foreach ($users as $user){
-            print_r($user);
-            print_r($user->contentName);
-        }
 
         return view('main', ['users' => $users]);
 

@@ -18,14 +18,7 @@
     <a href="/AR">AR</a>
     <a href="addFile">ファイルの追加</a>
     <a href="/">トップページに戻る</a>
-    <ul>
-        @foreach($users as $user)
-        <li>
-            <p>{{$user->contentName}}</p>
-        </li>
-        @endforeach
-    </ul>
-    {{$users->links()}}
+    
     <div id="mainPage"></div>
 </body>
 </html>
