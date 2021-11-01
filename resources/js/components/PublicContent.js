@@ -27,7 +27,7 @@ function PublicContent() {
                     <div className="card">
                         <div className="card-header">User List : CodeCheef</div>
                         <div className="card-body">
-                            
+
                             <div>
                                 <Pagination
                                     activePage={state?.users?.current_page ? state?.users?.current_page : 0}
