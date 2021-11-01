@@ -14,13 +14,15 @@ function UserContent() {
         const response = await axios.get('/api/userContent');
         setUserContent(response.data);
         console.log("中身表示");
-        console.log(response.data);
+        console.log(response.data.data);
     }
-
 
     return (
         <div>
             <h1>Userペ-ジ</h1>
+            {userContent?.data?.map((data,index)=>(
+                <p key={index}>{data.contentName}</p>
+            ))}
         </div>
     );
 }
@@ -28,5 +30,4 @@ function UserContent() {
 export default UserContent;
 if (document.getElementById('mainPage')) {
     ReactDOM.render(<UserContent />, document.getElementById('mainPage'));
-    console.log();
 }

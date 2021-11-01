@@ -2364,7 +2364,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 function UserContent() {
+  var _userContent$data;
+
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       userContent = _useState2[0],
@@ -2388,7 +2391,7 @@ function UserContent() {
               response = _context.sent;
               setUserContent(response.data);
               console.log("中身表示");
-              console.log(response.data);
+              console.log(response.data.data);
 
             case 6:
             case "end":
@@ -2403,10 +2406,14 @@ function UserContent() {
     };
   }();
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
       children: "User\u30DA-\u30B8"
-    })
+    }), userContent === null || userContent === void 0 ? void 0 : (_userContent$data = userContent.data) === null || _userContent$data === void 0 ? void 0 : _userContent$data.map(function (data, index) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+        children: data.contentName
+      }, index);
+    })]
   });
 }
 
@@ -2414,7 +2421,6 @@ function UserContent() {
 
 if (document.getElementById('mainPage')) {
   react_dom__WEBPACK_IMPORTED_MODULE_3__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(UserContent, {}), document.getElementById('mainPage'));
-  console.log();
 }
 
 /***/ }),
