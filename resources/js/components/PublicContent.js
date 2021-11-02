@@ -11,7 +11,7 @@ function PublicContent() {
     },[nowPage]);
 
     const getUsers = async () => {
-        const response = await axios.get(`/api/user?page=${nowPage}`);
+        const response = await axios.get(`/api/publicContentAPI?page=${nowPage}`);
         setUserContent(response);
         console.log("中身表示");
         console.log(response);

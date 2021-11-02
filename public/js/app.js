@@ -2251,7 +2251,7 @@ function PublicContent() {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return axios.get("/api/user?page=".concat(nowPage));
+              return axios.get("/api/publicContentAPI?page=".concat(nowPage));
 
             case 2:
               response = _context.sent;
@@ -2348,16 +2348,22 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function UserContent() {
-  var _userContent$data;
+  var _publicContent$data, _publicContent$data$d;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
-      userContent = _useState2[0],
+      publicContent = _useState2[0],
       setUserContent = _useState2[1];
 
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(1),
+      _useState4 = _slicedToArray(_useState3, 2),
+      nowPage = _useState4[0],
+      setNowPage = _useState4[1];
+
+  var userName = document.getElementById('userName').value;
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     getUsers();
-  }, []);
+  }, [nowPage]);
 
   var getUsers = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -2367,13 +2373,17 @@ function UserContent() {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_2___default().get('/api/userContent');
+              return axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/userContentAPI?page=".concat(nowPage), {
+                params: {
+                  userName: userName
+                }
+              });
 
             case 2:
               response = _context.sent;
-              setUserContent(response.data);
+              setUserContent(response);
               console.log("中身表示");
-              console.log(response.data.data);
+              console.log(response);
 
             case 6:
             case "end":
@@ -2388,13 +2398,25 @@ function UserContent() {
     };
   }();
 
+  function add_current_page() {
+    setNowPage(nowPage + 1); //useEffect();
+  }
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
       children: "User\u30DA-\u30B8"
-    }), userContent === null || userContent === void 0 ? void 0 : (_userContent$data = userContent.data) === null || _userContent$data === void 0 ? void 0 : _userContent$data.map(function (data, index) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
-        children: data.contentName
+    }), publicContent === null || publicContent === void 0 ? void 0 : (_publicContent$data = publicContent.data) === null || _publicContent$data === void 0 ? void 0 : (_publicContent$data$d = _publicContent$data.data) === null || _publicContent$data$d === void 0 ? void 0 : _publicContent$data$d.map(function (data, index) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+          children: data.contentName
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
+          name: data.contentName,
+          children: "AR"
+        })]
       }, index);
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
+      onClick: add_current_page,
+      children: "\u6B21\u306B"
     })]
   });
 }

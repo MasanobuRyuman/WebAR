@@ -13,6 +13,7 @@ class LoginProcessController extends Controller
         $name = $request->input("name");
         $password = $request->input("password");
         $userInfo = new userInfo;
+        session_start();
 
         if ($request->get("login"))
         {
@@ -20,6 +21,8 @@ class LoginProcessController extends Controller
             if ($existence == 1)
             {
                 session(['UserName' => $name]);
+                $request->session()->put('userName',$name );
+                
                 $main= app()->make('App\Http\Controllers\MainController');
                 return $main->show();
             }else{
@@ -31,6 +34,8 @@ class LoginProcessController extends Controller
             if ($nameCount == 0)
             {
                 session(['UserName' => $name]);
+                $_SESSION['username'] = $name;
+                session_write_close(); // ロックを解除
                 $userInfo -> loginRegister($name,$password);
                 header("location: /main");
                 exit();

@@ -5,11 +5,11 @@ use Illuminate\Http\Request;
 use App\Models\content;
 class userContentAPI extends Controller
 {
-    public function show(){
+    public function show(Request $request){
         $content = new content;
-        $userName = session('name');
+
+        $userName = $_GET['userName'];
         $users = $content->userContent($userName);
-        
         return \Response::json($users);
 
     }

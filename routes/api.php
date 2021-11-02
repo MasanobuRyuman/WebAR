@@ -18,5 +18,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('/user',[App\Http\Controllers\api\TaskController::class, 'show']);
-Route::get('/userContent',[App\Http\Controllers\api\userContentAPI::class, 'show']);
-Route::get('/user',[App\Http\Controllers\api\publicContentAPI::class, 'show']);
+Route::get('/userContentAPI',[App\Http\Controllers\api\userContentAPI::class, 'show']);
+Route::get('/publicContentAPI',[App\Http\Controllers\api\publicContentAPI::class, 'show']);

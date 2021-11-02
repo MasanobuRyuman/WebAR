@@ -17,7 +17,7 @@ class content extends Model
     }
     public function userContent($name)
     {
-        $userContent = DB::table('content')->select('contentName')->where('name',$name)->paginate(3);
+        $userContent = DB::table('content')->select('contentName',)->where('name',$name)->paginate(3);
         return $userContent;
     }
     public function addContent($name,$contentName,$saveName,$relese)

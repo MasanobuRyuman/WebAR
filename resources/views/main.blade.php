@@ -18,7 +18,8 @@
     <a href="/AR">AR</a>
     <a href="addFile">ファイルの追加</a>
     <a href="/">トップページに戻る</a>
-    
+    <input id="userName" type="hidden" value={{$users}}>
+
     <div id="mainPage"></div>
 </body>
 </html>
