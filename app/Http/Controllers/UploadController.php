@@ -18,7 +18,8 @@ class UploadController extends Controller
             date_default_timezone_set('Asia/Tokyo');
             $uniqName = uniqid();
             $content = new content;
-            $name = session('name');
+            $name = session('UserName','default');
+            
             if ($request->get('releaseSetting') == "public")
             {
                 $content->addContent($name,$contentName,$uniqName,"public");
