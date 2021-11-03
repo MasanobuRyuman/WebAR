@@ -2348,17 +2348,22 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function UserContent() {
-  var _publicContent$data, _publicContent$data$d;
+  var _userContent$data, _userContent$data$dat;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
-      publicContent = _useState2[0],
+      userContent = _useState2[0],
       setUserContent = _useState2[1];
 
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(1),
       _useState4 = _slicedToArray(_useState3, 2),
       nowPage = _useState4[0],
       setNowPage = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+      _useState6 = _slicedToArray(_useState5, 2),
+      paging = _useState6[0],
+      setPaging = _useState6[1];
 
   var userName = document.getElementById('userName').value;
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
@@ -2384,8 +2389,9 @@ function UserContent() {
               setUserContent(response);
               console.log("中身表示");
               console.log(response);
+              pageButton();
 
-            case 6:
+            case 7:
             case "end":
               return _context.stop();
           }
@@ -2399,13 +2405,48 @@ function UserContent() {
   }();
 
   function add_current_page() {
-    setNowPage(nowPage + 1); //useEffect();
+    if (userContent.data.last_page != nowPage) {
+      setNowPage(nowPage + 1);
+    }
+  }
+
+  function prev_current_page() {
+    if (nowPage != 1) {
+      setNowPage(nowPage - 1);
+    }
+  }
+
+  function pageButton() {
+    var prev = true;
+    var outputPage = nowPage;
+    var list = [nowPage];
+
+    while (true) {
+      if (outputPage == 1) {
+        prev = false;
+        outputPage = nowPage;
+      }
+
+      if (prev == true) {
+        outputPage -= 1;
+        list.unshift(outputPage);
+      } else {
+        outputPage += 1;
+        list.push(outputPage);
+      }
+
+      if (outputPage == 5) {
+        break;
+      }
+    }
+
+    setPaging(list);
   }
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
       children: "User\u30DA-\u30B8"
-    }), publicContent === null || publicContent === void 0 ? void 0 : (_publicContent$data = publicContent.data) === null || _publicContent$data === void 0 ? void 0 : (_publicContent$data$d = _publicContent$data.data) === null || _publicContent$data$d === void 0 ? void 0 : _publicContent$data$d.map(function (data, index) {
+    }), userContent === null || userContent === void 0 ? void 0 : (_userContent$data = userContent.data) === null || _userContent$data === void 0 ? void 0 : (_userContent$data$dat = _userContent$data.data) === null || _userContent$data$dat === void 0 ? void 0 : _userContent$data$dat.map(function (data, index) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
           children: data.contentName
@@ -2414,6 +2455,13 @@ function UserContent() {
           children: "AR"
         })]
       }, index);
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
+      onClick: prev_current_page,
+      children: "\u524D\u306B"
+    }), paging.map(function (data) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
+        children: data
+      }, data);
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
       onClick: add_current_page,
       children: "\u6B21\u306B"
