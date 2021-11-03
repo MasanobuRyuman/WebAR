@@ -11,5 +11,6 @@ class userContentAPI extends Controller
         $userName = $_GET['userName'];
         $users = $content->userContent($userName);
         return \Response::json($users);
+
     }
 }

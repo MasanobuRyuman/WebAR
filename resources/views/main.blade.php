@@ -15,11 +15,14 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+
     <a href="/AR">AR</a>
     <a href="addFile">ファイルの追加</a>
     <a href="/">トップページに戻る</a>
     <input id="userName" type="hidden" value={{$users}}>
-
-    <div id="mainPage"></div>
+    <form method="POST" action="../AR" >
+        @csrf
+        <div id="mainPage"></div>
+    </form>
 </body>
 </html>

@@ -2239,9 +2239,38 @@ function PublicContent() {
       nowPage = _useState4[0],
       setNowPage = _useState4[1];
 
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+      _useState6 = _slicedToArray(_useState5, 2),
+      paging = _useState6[0],
+      setPaging = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(true),
+      _useState8 = _slicedToArray(_useState7, 2),
+      firstUseEffect = _useState8[0],
+      setFirstUseEffect = _useState8[1];
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+      _useState10 = _slicedToArray(_useState9, 2),
+      userName = _useState10[0],
+      setUserName = _useState10[1];
+
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+      _useState12 = _slicedToArray(_useState11, 2),
+      saveName = _useState12[0],
+      setSaveName = _useState12[1];
+
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     getUsers();
   }, [nowPage]);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    if (firstUseEffect == true) {
+      console.log("kita");
+      setFirstUseEffect(false);
+    } else {
+      console.log(publicContent);
+      pageButton();
+    }
+  }, [publicContent]);
 
   var getUsers = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -2258,8 +2287,9 @@ function PublicContent() {
               setUserContent(response);
               console.log("中身表示");
               console.log(response);
+              console.log(response.data.last_page);
 
-            case 6:
+            case 7:
             case "end":
               return _context.stop();
           }
@@ -2273,26 +2303,88 @@ function PublicContent() {
   }();
 
   function add_current_page() {
-    setNowPage(nowPage + 1); //useEffect();
+    if (publicContent.data.last_page != nowPage) {
+      setNowPage(nowPage + 1);
+    }
+  }
+
+  function prev_current_page() {
+    if (nowPage != 1) {
+      setNowPage(nowPage - 1);
+    }
+  }
+
+  function move_page(pageNumber) {
+    setNowPage(pageNumber);
+  }
+
+  function pageButton() {
+    var prev = true;
+    var outputPage = nowPage;
+    var list = [nowPage];
+
+    while (true) {
+      if (outputPage == 1) {
+        prev = false;
+        outputPage = nowPage;
+      }
+
+      if (prev == true) {
+        outputPage -= 1;
+        list.unshift(outputPage);
+      } else if (outputPage == publicContent.data.last_page) {
+        break;
+      } else {
+        outputPage += 1;
+        list.push(outputPage);
+      }
+    }
+
+    setPaging(list);
+  }
+
+  function arLink(name, saveName) {
+    setUserName(name);
+    setSaveName(saveName);
   }
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
       children: "User\u30DA-\u30B8"
-    }), publicContent === null || publicContent === void 0 ? void 0 : (_publicContent$data = publicContent.data) === null || _publicContent$data === void 0 ? void 0 : (_publicContent$data$d = _publicContent$data.data) === null || _publicContent$data$d === void 0 ? void 0 : _publicContent$data$d.map(function (data, index) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-          children: data.name
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-          children: data.contentName
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
-          name: data.contentName,
-          children: "AR"
-        })]
-      }, index);
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
-      onClick: add_current_page,
-      children: "\u6B21\u306B"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
+      method: "POST",
+      action: "/AR",
+      children: [publicContent === null || publicContent === void 0 ? void 0 : (_publicContent$data = publicContent.data) === null || _publicContent$data === void 0 ? void 0 : (_publicContent$data$d = _publicContent$data.data) === null || _publicContent$data$d === void 0 ? void 0 : _publicContent$data$d.map(function (data, index) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+            children: data.contentName
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+            onClick: function onClick() {
+              return arLink(data.name, data.saveName);
+            },
+            children: "AR"
+          })]
+        }, index);
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+        onClick: prev_current_page,
+        children: "\u524D"
+      }), paging.map(function (data) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+          onClick: function onClick() {
+            return move_page(data);
+          },
+          children: data
+        }, data);
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+        onClick: add_current_page,
+        children: "\u6B21"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+        type: "hidden",
+        value: userName
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+        type: "hidden",
+        value: saveName
+      })]
     })]
   });
 }
@@ -2365,10 +2457,29 @@ function UserContent() {
       paging = _useState6[0],
       setPaging = _useState6[1];
 
-  var userName = document.getElementById('userName').value;
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(true),
+      _useState8 = _slicedToArray(_useState7, 2),
+      firstUseEffect = _useState8[0],
+      setFirstUseEffect = _useState8[1];
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+      _useState10 = _slicedToArray(_useState9, 2),
+      saveName = _useState10[0],
+      setSaveName = _useState10[1];
+
+  var getUserName = document.getElementById('userName').value;
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     getUsers();
   }, [nowPage]);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    if (firstUseEffect == true) {
+      console.log("kita");
+      setFirstUseEffect(false);
+    } else {
+      console.log(userContent);
+      pageButton();
+    }
+  }, [userContent]);
 
   var getUsers = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -2380,7 +2491,7 @@ function UserContent() {
               _context.next = 2;
               return axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/userContentAPI?page=".concat(nowPage), {
                 params: {
-                  userName: userName
+                  userName: getUserName
                 }
               });
 
@@ -2389,7 +2500,7 @@ function UserContent() {
               setUserContent(response);
               console.log("中身表示");
               console.log(response);
-              pageButton();
+              console.log(response.data.last_page);
 
             case 7:
             case "end":
@@ -2416,6 +2527,10 @@ function UserContent() {
     }
   }
 
+  function move_page(pageNumber) {
+    setNowPage(pageNumber);
+  }
+
   function pageButton() {
     var prev = true;
     var outputPage = nowPage;
@@ -2430,17 +2545,20 @@ function UserContent() {
       if (prev == true) {
         outputPage -= 1;
         list.unshift(outputPage);
+      } else if (outputPage == userContent.data.last_page) {
+        break;
       } else {
         outputPage += 1;
         list.push(outputPage);
       }
-
-      if (outputPage == 5) {
-        break;
-      }
     }
 
     setPaging(list);
+  }
+
+  function arLink(saveName) {
+    console.log("AR");
+    setSaveName(saveName);
   }
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
@@ -2449,22 +2567,34 @@ function UserContent() {
     }), userContent === null || userContent === void 0 ? void 0 : (_userContent$data = userContent.data) === null || _userContent$data === void 0 ? void 0 : (_userContent$data$dat = _userContent$data.data) === null || _userContent$data$dat === void 0 ? void 0 : _userContent$data$dat.map(function (data, index) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+          children: data.name
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
           children: data.contentName
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
-          name: data.contentName,
-          children: "AR"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+          type: "submit",
+          onClick: function onClick() {
+            return arLink(data.saveName);
+          },
+          value: "AR"
         })]
       }, index);
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
       onClick: prev_current_page,
-      children: "\u524D\u306B"
+      children: "\u524D"
     }), paging.map(function (data) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
+        onClick: function onClick() {
+          return move_page(data);
+        },
         children: data
       }, data);
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
       onClick: add_current_page,
-      children: "\u6B21\u306B"
+      children: "\u6B21"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+      name: "saveName",
+      type: "hidden",
+      value: saveName
     })]
   });
 }
