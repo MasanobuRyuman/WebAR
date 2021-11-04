@@ -19,7 +19,7 @@ class UploadController extends Controller
             $uniqName = uniqid();
             $content = new content;
             $name = session('UserName','default');
-            
+
             if ($request->get('releaseSetting') == "public")
             {
                 $content->addContent($name,$contentName,$uniqName,"public");
