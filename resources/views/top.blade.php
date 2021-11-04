@@ -16,15 +16,6 @@
 </head>
 <body>
     <a href="/sign">login</a>
-    <ul>
-        @foreach($publicContent as $temp)
-        <li>
-            <p>{{$temp->name}}</p>
-            <p>{{$temp->contentName}}</p>
-        </li>
-        @endforeach
-    </ul>
-    {{$publicContent->links()}}
 
     <div id="PublicContent"></div>
 
