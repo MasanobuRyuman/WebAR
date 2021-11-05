@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 function WebAR() {
 
     const [vector, setVector] = useState([]);
-    console.log("kita");
+    console.log("webAR");
 
     return (
         <a-scene embedded arjs="debugUIEnabled:false;">
@@ -16,7 +16,7 @@ function WebAR() {
           <a-marker preset="hiro">
             <a-obj-model src="#cow" mtl="#mtl" scale=".5 .5 .5" rotation="270 0 0"></a-obj-model>
           </a-marker>
-          <a-entity camera></a-entity>
+          <a-entity camera=""></a-entity>
         </a-scene>
 
     );
@@ -24,6 +24,5 @@ function WebAR() {
 
 export default WebAR;
 if (document.getElementById('WebAR')) {
-    console.log("kita");
     ReactDOM.render(<WebAR />, document.getElementById('WebAR'));
 }

@@ -2649,7 +2649,7 @@ function WebAR() {
       vector = _useState2[0],
       setVector = _useState2[1];
 
-  console.log("kita");
+  console.log("webAR");
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a-scene", {
     embedded: true,
     arjs: "debugUIEnabled:false;",
@@ -2670,7 +2670,7 @@ function WebAR() {
         rotation: "270 0 0"
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a-entity", {
-      camera: true
+      camera: ""
     })]
   });
 }
@@ -2678,7 +2678,6 @@ function WebAR() {
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (WebAR);
 
 if (document.getElementById('WebAR')) {
-  console.log("kita");
   react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(WebAR, {}), document.getElementById('WebAR'));
 }
 
