@@ -16,8 +16,8 @@
 
       <!-- OBJ形式のCGモデルの読み込み -->
       <a-assets>
-        <a-asset-item id="cow" src="{{asset("61832f25de9ec.obj")}}"></a-asset-item>
-        <a-asset-item id="mtl" src="{{asset("61832f25de9ec.mtl")}}"></a-asset-item>
+        <a-asset-item id="cow" src="{{asset("storage/$saveNameObj")}}"></a-asset-item>
+        <a-asset-item id="mtl" src="{{asset("storage/$saveNameMtl")}}"></a-asset-item>
       </a-assets>
 
       <!-- マーカーを登録（プリセットされている「hiro」マーカー） -->

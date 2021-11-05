@@ -8,8 +8,8 @@ class ARController extends Controller
 {
     function show(){
         $saveName = $_POST["saveName"];
-        $saveNameType = $saveName.".obj";
-
-        return view('ar',compact('saveNameType'));
+        $saveNameObj = $saveName.".obj";
+        $saveNameMtl = $saveName.".mtl";
+        return view('ar',compact('saveNameObj','saveNameMtl'));
     }
 }
