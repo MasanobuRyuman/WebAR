@@ -2360,11 +2360,12 @@ function PublicContent() {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
             children: data.contentName
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+            type: "submit",
             onClick: function onClick() {
               return arLink(data.name, data.saveName);
             },
-            children: "AR"
+            value: "AR"
           })]
         }, index);
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
@@ -2653,6 +2654,7 @@ function WebAR() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a-scene", {
     embedded: true,
     arjs: "debugUIEnabled:false;",
+    loaded: "setHeight()",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a-assets", {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a-asset-item", {
         id: "cow",
@@ -2678,6 +2680,10 @@ function WebAR() {
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (WebAR);
 
 if (document.getElementById('WebAR')) {
+  var temp = document.getElementsByClassName("a-canvas");
+  console.log("temp");
+  console.log(temp);
+  temp[0].style.color = "white";
   react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(WebAR, {}), document.getElementById('WebAR'));
 }
 
