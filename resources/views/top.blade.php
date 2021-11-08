@@ -16,8 +16,10 @@
 </head>
 <body>
     <a href="/sign">login</a>
-
-    <div id="PublicContent"></div>
+    <form method="POST" action="../AR">
+        @csrf
+        <div id="PublicContent"></div>
+    </form>
 
 
 </body>

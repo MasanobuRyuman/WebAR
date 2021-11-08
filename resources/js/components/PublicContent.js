@@ -85,7 +85,7 @@ function PublicContent() {
             {publicContent?.data?.data?.map((data,index)=>(
                 <div key={index}>
                     <p>{data.contentName}</p>
-                    <a onClick={() => arLink(data.name,data.saveName)}>AR</a>
+                    <input type="submit" onClick={() => arLink(data.name,data.saveName)} value="AR"></input>
                 </div>
             ))}
             <a onClick={prev_current_page}>前</a>
