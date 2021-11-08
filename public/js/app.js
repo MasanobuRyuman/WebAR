@@ -2650,29 +2650,36 @@ function WebAR() {
       vector = _useState2[0],
       setVector = _useState2[1];
 
-  console.log("webAR");
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a-scene", {
-    embedded: true,
-    arjs: "debugUIEnabled:false;",
-    loaded: "setHeight()",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a-assets", {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a-asset-item", {
-        id: "cow",
-        src: "storage/618330511d8a8.obj"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a-asset-item", {
-        id: "mtl",
-        src: "storage/618330511d8a8.mtl"
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    id: "a-frame",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a-scene", {
+      embedded: true,
+      arjs: "debugUIEnabled:false;",
+      loaded: "setHeight()",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a-assets", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a-asset-item", {
+          id: "cow",
+          src: "storage/618330511d8a8.obj"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a-asset-item", {
+          id: "mtl",
+          src: "storage/618330511d8a8.mtl"
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a-marker", {
+        preset: "hiro",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a-obj-model", {
+          src: "#cow",
+          mtl: "#mtl",
+          scale: ".5 .5 .5",
+          rotation: "270 0 0"
+        })
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a-marker", {
-      preset: "hiro",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a-obj-model", {
-        src: "#cow",
-        mtl: "#mtl",
-        scale: ".5 .5 .5",
-        rotation: "270 0 0"
-      })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a-entity", {
-      camera: ""
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+      id: "vecter",
+      children: "\u5EA7\u6A19"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+      type: "submit",
+      id: "arEnd",
+      value: "Submit"
     })]
   });
 }
@@ -2680,10 +2687,6 @@ function WebAR() {
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (WebAR);
 
 if (document.getElementById('WebAR')) {
-  var temp = document.getElementsByClassName("a-canvas");
-  console.log("temp");
-  console.log(temp);
-  temp[0].style.color = "white";
   react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(WebAR, {}), document.getElementById('WebAR'));
 }
 

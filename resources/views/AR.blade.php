@@ -10,8 +10,21 @@
 
     <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
     <style>
-    a-scene { display: block; width: 80%; height: 80%;}
-    .a-canvas {display: block; width: 80%; height: 80%;}
+
+    #WebAR {
+        height: 80%;
+    }
+    #a-frame {
+        height: 100%;
+    }
+    #vecter {
+        position: fixed;
+        bottom: 150px;
+    }
+    #arEnd {
+        position: fixed;
+        bottom: 150px;
+    }
     </style>
   </head>
   <body style="margin:0px; overflow:hidden;">
@@ -23,9 +36,7 @@
     </script>
 
     <div id="WebAR"></div>
-    <div style="position: fixed; bottom: 150px;">
-        <input type="button" id="b1" value="change" onclick="click1">
-    </div>
+
 
   </body>
 </html>
