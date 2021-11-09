@@ -5,6 +5,9 @@ import ReactDOM from 'react-dom';
 function WebAR() {
 
     const [vector, setVector] = useState([]);
+    const getUsers = async () => {
+        const response = await axios.get(`/api/lotationVectorDataAPI`);
+    }
 
     return (
         <div id="a-frame">
