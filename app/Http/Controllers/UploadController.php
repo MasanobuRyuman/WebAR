@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\userInfo;
 use App\Models\content;
-use App\Models\lotationVectorData;
+use App\Models\rotationVectorData;
 
 class UploadController extends Controller
 {
@@ -35,8 +35,8 @@ class UploadController extends Controller
             }else{
                 $content->addContent($name,$contentName,$uniqName,"private");
             }
-            $lotationVectorData = new lotationVectorData;
-            $lotationVectorData->addLotationVector($name,$uniqName);
+            $rotationVectorData = new rotationVectorData;
+            $rotationVectorData->addRotationVector($name,$uniqName);
         }
 
         header("location: main");

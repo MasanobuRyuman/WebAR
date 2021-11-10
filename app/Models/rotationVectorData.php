@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\DB;
 class rotationVectorData extends Model
 {
     use HasFactory;
-    function addLotationVector($name,$saveName){
-        DB::table('rotationVectorData')->insert(['name' => $name , 'saveName' => $saveName , 'rotationX' => 270,'rotationY' => 0,'rotationZ' => 0);
+    function addRotationVector($name,$saveName){
+        DB::table('rotationVectorData')->insert(['name' => $name , 'saveName' => $saveName , 'rotationX' => 270,'rotationY' => 0,'rotationZ' => 0]);
     }
-    function lotationVector($saveName){
-        $vectorData = DB::table('rotationVectorData')->select('rotationX','rotationY','rotationZ') => where('saveName',$saveName);
+    function rotationVector($saveName){
+        $vectorData = DB::table('rotationVectorData')->select('rotationX','rotationY','rotationZ') -> where('saveName',$saveName);
         return $vectorData;
     }
 }

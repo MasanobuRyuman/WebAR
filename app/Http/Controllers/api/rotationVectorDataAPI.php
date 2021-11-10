@@ -5,11 +5,11 @@ use Illuminate\Http\Request;
 use App\Models\rotationVectorData;
 class rotationVectorDataAPI extends Controller
 {
-    public function show(){
+    public function show(Request $request){
         $rotationVectorData = new rotationVectorData;
         $saveName = $_GET['saveName'];
         $vector = $rotationVectorData->rotationVector($saveName);
-        echo $vector;
+    
         return \Response::json($vector);
     }
 }
