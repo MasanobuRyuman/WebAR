@@ -28,13 +28,13 @@ class UploadController extends Controller
             $dir = 'public';
             $objFile->storeAs($dir, $objFileName, ['disk' => 'local']);
             $mtlFile->storeAs($dir, $mtlFileName, ['disk' => 'local']);
+            $content = new content;
             if ($request->get('releaseSetting') == "public")
             {
                 $content->addContent($name,$contentName,$uniqName,"public");
             }else{
                 $content->addContent($name,$contentName,$uniqName,"private");
             }
-            $content = new content;
             $lotationVectorData = new lotationVectorData;
             $lotationVectorData->addLotationVector($name,$uniqName);
         }

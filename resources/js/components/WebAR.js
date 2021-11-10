@@ -3,10 +3,15 @@ import axios from 'axios';
 import ReactDOM from 'react-dom';
 
 function WebAR() {
-
+    let saveName = document.getElementById("saveName").value;
     const [vector, setVector] = useState([]);
-    const getUsers = async () => {
-        const response = await axios.get(`/api/lotationVectorDataAPI`);
+    useEffect(() => {
+        getrotationVectorData();
+    },[]);
+    const getrotationVectorData = async () => {
+        const response = await axios.get(`/api/rotationVectorDataAPI`,{ params: { saveName: saveName }});
+        console.log("rotationData");
+        console.log("response");
     }
 
     return (

@@ -108,7 +108,6 @@ function UserContent() {
             ))}
             <a onClick={add_current_page}>次</a>
             <input name="saveName" type="hidden" value={saveName}></input>
-
         </div>
     );
 }
