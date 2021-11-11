@@ -38,6 +38,5 @@
     <div id="WebAR"></div>
     <input type="hidden" id="saveName" value={{$saveName}}>
 
-
   </body>
 </html>

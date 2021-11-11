@@ -8,8 +8,8 @@ class rotationVectorDataAPI extends Controller
     public function show(Request $request){
         $rotationVectorData = new rotationVectorData;
         $saveName = $_GET['saveName'];
+
         $vector = $rotationVectorData->rotationVector($saveName);
-    
         return \Response::json($vector);
     }
 }

@@ -13,7 +13,7 @@ class rotationVectorData extends Model
         DB::table('rotationVectorData')->insert(['name' => $name , 'saveName' => $saveName , 'rotationX' => 270,'rotationY' => 0,'rotationZ' => 0]);
     }
     function rotationVector($saveName){
-        $vectorData = DB::table('rotationVectorData')->select('rotationX','rotationY','rotationZ') -> where('saveName',$saveName);
+        $vectorData = DB::table('rotationVectorData')->select('rotationX','rotationY','rotationZ') -> where('saveName',$saveName)->get();
         return $vectorData;
     }
 }

@@ -3,15 +3,22 @@ import axios from 'axios';
 import ReactDOM from 'react-dom';
 
 function WebAR() {
-    let saveName = document.getElementById("saveName").value;
     const [vector, setVector] = useState([]);
+    let saveName = document.getElementById("saveName").value;
+    console.log("セーブ名");
+    console.log(saveName);
+
     useEffect(() => {
         getrotationVectorData();
     },[]);
     const getrotationVectorData = async () => {
         const response = await axios.get(`/api/rotationVectorDataAPI`,{ params: { saveName: saveName }});
         console.log("rotationData");
-        console.log("response");
+        console.log(response.data[0].rotationX);
+        let rotationData = response.data[0];
+        let li = [rotationData.rotationX,rotationData.rotationY,rotationData.rotationZ];
+        console.log(li[0]);
+        setVector([rotationData.rotationX,rotationData.rotationY,rotationData.rotationZ]);
     }
 
     return (
@@ -22,7 +29,7 @@ function WebAR() {
                     <a-asset-item id="mtl" src="storage/618330511d8a8.mtl"></a-asset-item>
                 </a-assets>
                 <a-marker preset="hiro">
-                     <a-obj-model src="#cow" mtl="#mtl" scale=".5 .5 .5" rotation="270 0 0"></a-obj-model>
+                     <a-obj-model src="#cow" mtl="#mtl" scale=".5 .5 .5" rotation="0 0 0"></a-obj-model>
                 </a-marker>
 
             </a-scene>
@@ -35,5 +42,6 @@ function WebAR() {
 
 export default WebAR;
 if (document.getElementById('WebAR')) {
+
     ReactDOM.render(<WebAR />, document.getElementById('WebAR'));
 }
