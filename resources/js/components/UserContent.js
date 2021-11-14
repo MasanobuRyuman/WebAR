@@ -91,6 +91,11 @@ function UserContent() {
         setSaveName(saveName);
     }
 
+    function edit(saveName){
+        window.location.href = ../UserContentEdit; // 通常の遷移
+        window.open(../UserContentEdit, '_blank'); // 新しいタブを開き、ページを表示
+    }
+
     return (
         <div>
             <h1>Userペ-ジ</h1>
@@ -100,6 +105,7 @@ function UserContent() {
                     <p>{data.name}</p>
                     <p>{data.contentName}</p>
                     <input type="submit" onClick={() => arLink(data.saveName)} value="AR"></input>
+                    <input type="submit" onClick={() => edit(data.saveName)} value="編集"></input>
                 </div>
             ))}
             <a onClick={prev_current_page}>前</a>
