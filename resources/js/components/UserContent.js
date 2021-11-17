@@ -92,8 +92,7 @@ function UserContent() {
     }
 
     function edit(saveName){
-        window.location.href = ../UserContentEdit; // 通常の遷移
-        window.open(../UserContentEdit, '_blank'); // 新しいタブを開き、ページを表示
+        window.location.href = "/UserContentEdit"; // 通常の遷移
     }
 
     return (

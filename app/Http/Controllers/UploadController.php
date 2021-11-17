@@ -36,7 +36,7 @@ class UploadController extends Controller
                 $content->addContent($name,$contentName,$uniqName,"private");
             }
             $rotationVectorData = new rotationVectorData;
-            $rotationVectorData->addRotationVector($name,$uniqName);
+            $rotationVectorData->addRotationVector($uniqName);
         }
 
         header("location: main");

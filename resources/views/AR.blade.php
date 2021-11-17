@@ -25,6 +25,10 @@
         position: fixed;
         bottom: 150px;
     }
+
+    #left {
+        margin-top:20px;
+    }
     </style>
   </head>
   <body style="margin:0px; overflow:hidden;">
