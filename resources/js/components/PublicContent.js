@@ -18,8 +18,8 @@ function PublicContent() {
             console.log("kita");
             setFirstUseEffect(false);
         }else{
-            console.log(publicContent);
-            pageButton();
+
+            buttonSet();
         }
     },[publicContent]);
 
@@ -49,7 +49,7 @@ function PublicContent() {
         setNowPage(pageNumber);
     }
 
-    function pageButton()
+    function buttonSet()
     {
         let prev = true;
         let outputPage = nowPage;

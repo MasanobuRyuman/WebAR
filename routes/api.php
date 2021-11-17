@@ -20,3 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/user',[App\Http\Controllers\api\TaskController::class, 'show']);
 Route::get('/userContentAPI',[App\Http\Controllers\api\userContentAPI::class, 'show']);
 Route::get('/publicContentAPI',[App\Http\Controllers\api\publicContentAPI::class, 'show']);
+Route::get('/rotationVectorDataAPI',[App\Http\Controllers\api\rotationVectorDataAPI::class, 'show']);

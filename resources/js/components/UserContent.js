@@ -19,7 +19,7 @@ function UserContent() {
             setFirstUseEffect(false);
         }else{
             console.log(userContent);
-            pageButton();
+            buttonSet();
         }
     },[userContent]);
 
@@ -49,24 +49,37 @@ function UserContent() {
         setNowPage(pageNumber);
     }
 
-    function pageButton()
+    function buttonSet()
     {
         let prev = true;
         let outputPage = nowPage;
-        let list = [nowPage]
+        let list = [nowPage];
+        let pageCount = 0;
+        let addprevpage = userContent.data.last_page - outputPage;
+        console.log("pageCount");
         while (true){
+            console.log(outputPage);
             if (outputPage == 1){
+                prev = false;
+                outputPage = nowPage;
+            } else if(prev == true && pageCount == 5 + (5-addprevpage)){
                 prev = false;
                 outputPage = nowPage;
             }
 
             if (prev == true){
+                console.log("prevTrue");
                 outputPage -= 1;
+                pageCount += 1;
                 list.unshift(outputPage);
             }else if (outputPage == userContent.data.last_page){
                 break;
+            }else if (pageCount == 10){
+                break;
             }else{
                 outputPage += 1;
+                pageCount += 1;
+                console.log("add");
                 list.push(outputPage);
             }
         }
@@ -78,6 +91,10 @@ function UserContent() {
         setSaveName(saveName);
     }
 
+    function edit(saveName){
+        window.location.href = "/UserContentEdit"; // 通常の遷移
+    }
+
     return (
         <div>
             <h1>Userペ-ジ</h1>
@@ -87,15 +104,15 @@ function UserContent() {
                     <p>{data.name}</p>
                     <p>{data.contentName}</p>
                     <input type="submit" onClick={() => arLink(data.saveName)} value="AR"></input>
+                    <input type="submit" onClick={() => edit(data.saveName)} value="編集"></input>
                 </div>
             ))}
             <a onClick={prev_current_page}>前</a>
             {paging.map((data)=>(
                 <a key={data} onClick={() => move_page(data)}>{data}</a>
             ))}
-            <a onClick={add_current_page}　>次</a>
+            <a onClick={add_current_page}>次</a>
             <input name="saveName" type="hidden" value={saveName}></input>
-        
         </div>
     );
 }

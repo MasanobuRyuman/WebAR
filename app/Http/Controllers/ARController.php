@@ -10,6 +10,6 @@ class ARController extends Controller
         $saveName = $_POST["saveName"];
         $saveNameObj = $saveName.".obj";
         $saveNameMtl = $saveName.".mtl";
-        return view('ar',compact('saveNameObj','saveNameMtl'));
+        return view('ar',compact('saveNameObj','saveNameMtl','saveName'));
     }
 }
