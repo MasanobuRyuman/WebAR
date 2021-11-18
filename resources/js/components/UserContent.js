@@ -104,7 +104,7 @@ function UserContent() {
                     <p>{data.name}</p>
                     <p>{data.contentName}</p>
                     <input type="submit" onClick={() => arLink(data.saveName)} value="AR"></input>
-                    <input type="submit" onClick={() => edit(data.saveName)} value="編集"></input>
+                    <a onClick={() => edit(data.saveName)}>編集</a>
                 </div>
             ))}
             <a onClick={prev_current_page}>前</a>
