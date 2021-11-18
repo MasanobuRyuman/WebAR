@@ -28,3 +28,4 @@ Route::get('/users', function (Request $request) {
     $users = User::paginate(10);
     return $users;
 });
+Route::get('/UserContentEdit', [App\Http\Controllers\UserContentEditController::class, 'show']);
