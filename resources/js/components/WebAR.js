@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
+import {matrix,index,subset,atan2,asin} from 'mathjs';
+
 
 function WebAR() {
     const [vector, setVector] = useState([]);
@@ -62,6 +64,32 @@ function WebAR() {
         setVectorData(vector[0]+" "+vector[1]+" "+move);
     }
 
+    function rotation(){
+        let xpMat = matrix([[1,0,0],[0,0.7,-0.7],[0,0.7,0.7]]);
+        let xmMat = matrix([[1,0,0],[0,0.7,0.7],[0,-0.7,0.7]]);
+        let ypMat = matrix([[0.7,0,-0.7],[0,1,0],[-0.7,0,0.7]]);
+        let ymMat = matrix([[-0.7,0,0.7],[0,1,0],[0.7,0,-0.7]]);
+        let zpMat = matrix([[0.7,-0.7,0],[0.7,0.7,0],[0,0,1]]);
+        let zmMat = matrix([[0.7,0.7,0],[-0.7,0.7,0],[0,0,1]]);
+        let rotMat = matrix([[1,0,0],[0,0.7,-0.7],[0,0.7,0.7]]);
+
+        console.log(rotMat);
+
+        let yaw = atan2(subset(rotMat, index(1,0)),subset(rotMat,index(0,0)));
+        console.log("test");
+        let pitch = asin(subset(rotMat,index(2,0)) * -1);
+        let roll = atan2(subset(rotMat,index(2,1)),subset(rotMat,index(2,2)));
+        roll = Number(roll * 180 / 3.14);
+        console.log("roll");
+        console.log(roll);
+        console.log("pitch");
+        console.log(pitch);
+        console.log("yaw");
+        console.log(yaw);
+        setVector([pitch,yaw,roll]);
+        setVectorData(pitch+" "+yaw+" "+roll);
+    }
+
     const getrotationVectorData = async () => {
         const response = await axios.get(`/api/rotationVectorDataAPI`,{ params: { saveName: saveName }});
         console.log("rotationData");
@@ -89,6 +117,7 @@ function WebAR() {
             </a-scene>
             <a id="vecter" >座標</a>
             <input type="submit" id="arEnd" value="Submit" />
+            <input type="submit" onClick={rotation} id="left" value="test"/>
             <input type="submit" onClick={upRotation} id="left" value="上"/>
             <input type="submit" onClick={downRotation} id="left" value="下"/>
             <input type="submit" onClick={leftTilt} id="left" value="左に傾く"/>
