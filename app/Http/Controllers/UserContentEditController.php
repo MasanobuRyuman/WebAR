@@ -11,7 +11,7 @@ use App\Models\content;
 class UserContentEditController extends Controller
 {
     public function show(){
-
+        
         return view('userContentEdit');
     }
 }
