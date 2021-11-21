@@ -66,16 +66,31 @@ function WebAR() {
         setVectorData(vector[0]+" "+vector[1]+" "+move);
     }
 
-    function rotation(){
+    function rotation(move){
         let xpMat = matrix([[1,0,0],[0,0.7,-0.7],[0,0.7,0.7]]);
         let xmMat = matrix([[1,0,0],[0,0.7,0.7],[0,-0.7,0.7]]);
         let ypMat = matrix([[0.7,0,-0.7],[0,1,0],[-0.7,0,0.7]]);
         let ymMat = matrix([[-0.7,0,0.7],[0,1,0],[0.7,0,-0.7]]);
         let zpMat = matrix([[0.7,-0.7,0],[0.7,0.7,0],[0,0,1]]);
         let zmMat = matrix([[0.7,0.7,0],[-0.7,0.7,0],[0,0,1]]);
+        let mat = matrix([[1,0,0],[0,1,0],[0,0,1]]);
+        if(move == "xp"){
+            mat = matrix([[1,0,0],[0,0.7,-0.7],[0,0.7,0.7]]);
+        }else if(move == "xm"){
+            mat = matrix([[1,0,0],[0,0.7,0.7],[0,-0.7,0.7]]);
+        }else if(move == "yp"){
+            mat = matrix([[0.7,0,-0.7],[0,1,0],[-0.7,0,0.7]]);
+        }else if(move == "xm"){
+            mat = matrix([[-0.7,0,0.7],[0,1,0],[0.7,0,-0.7]]);
+        }else if(move == "zp"){
+            console.log("zp");
+            mat = matrix([[0.7,-0.7,0],[0.7,0.7,0],[0,0,1]]);
+        }else if(move == "zm"){
+            mat = matrix([[0.7,0.7,0],[-0.7,0.7,0],[0,0,1]]);
+        }
+        console.log(mat);
 
-
-        let rotMat = multiply(rotationData,xmMat);
+        let rotMat = multiply(rotationData,mat);
         setRotationData(rotMat);
 
         let yaw = atan2(subset(rotMat, index(1,0)),subset(rotMat,index(0,0)));
@@ -124,12 +139,12 @@ function WebAR() {
             <a id="vecter" >座標</a>
             <input type="submit" id="arEnd" value="Submit" />
             <input type="submit" onClick={rotation} id="left" value="test"/>
-            <input type="submit" onClick={upRotation} id="left" value="上"/>
-            <input type="submit" onClick={downRotation} id="left" value="下"/>
-            <input type="submit" onClick={leftTilt} id="left" value="左に傾く"/>
-            <input type="submit" onClick={rightTile} id="left" value="右に傾く"/>
-            <input type="submit" onClick={leftRotation} id="left" value="左"/>
-            <input type="submit" onClick={rightRotation} id="left" value="右"/>
+            <input type="submit" onClick={() => rotation("yp")} id="left" value="上"/>
+            <input type="submit" onClick={() => rotation("ym")} id="left" value="下"/>
+            <input type="submit" onClick={() => rotation("zp")} id="left" value="左に傾く"/>
+            <input type="submit" onClick={() => rotation("zm")} id="left" value="右に傾く"/>
+            <input type="submit" onClick={() => rotation("xp")} id="left" value="左"/>
+            <input type="submit" onClick={() => rotation("xm")} id="left" value="右"/>
         </div>
     );
 }
