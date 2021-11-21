@@ -7,7 +7,9 @@ import {matrix,index,subset,atan2,asin,multiply} from 'mathjs';
 function WebAR() {
     const [vector, setVector] = useState([]);
     const [vectorData,setVectorData] = useState("0 0 0");
+    const [rotationData,setRotationData] = useState(matrix([[1,0,0],[0,1,0],[0,0,1]]));
     let saveName = document.getElementById("saveName").value;
+
 
     console.log("セーブ名");
     console.log(saveName);
@@ -63,7 +65,7 @@ function WebAR() {
         setVector([vector[0],vector[1],move]);
         setVectorData(vector[0]+" "+vector[1]+" "+move);
     }
-    let rotMat = matrix([[1,0,0],[0,1,0],[0,0,1]]);
+
     function rotation(){
         let xpMat = matrix([[1,0,0],[0,0.7,-0.7],[0,0.7,0.7]]);
         let xmMat = matrix([[1,0,0],[0,0.7,0.7],[0,-0.7,0.7]]);
@@ -72,8 +74,9 @@ function WebAR() {
         let zpMat = matrix([[0.7,-0.7,0],[0.7,0.7,0],[0,0,1]]);
         let zmMat = matrix([[0.7,0.7,0],[-0.7,0.7,0],[0,0,1]]);
 
-        console.log(rotMat);
-        rotMat = multiply(rotMat,xpMat)
+
+        let rotMat = multiply(rotationData,xmMat);
+        setRotationData(rotMat);
 
         let yaw = atan2(subset(rotMat, index(1,0)),subset(rotMat,index(0,0)));
         console.log("test");
