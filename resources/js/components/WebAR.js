@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
-import {matrix,index,subset,atan2,asin} from 'mathjs';
+import {matrix,index,subset,atan2,asin,multiply} from 'mathjs';
 
 
 function WebAR() {
@@ -63,7 +63,7 @@ function WebAR() {
         setVector([vector[0],vector[1],move]);
         setVectorData(vector[0]+" "+vector[1]+" "+move);
     }
-
+    let rotMat = matrix([[1,0,0],[0,1,0],[0,0,1]]);
     function rotation(){
         let xpMat = matrix([[1,0,0],[0,0.7,-0.7],[0,0.7,0.7]]);
         let xmMat = matrix([[1,0,0],[0,0.7,0.7],[0,-0.7,0.7]]);
@@ -71,15 +71,18 @@ function WebAR() {
         let ymMat = matrix([[-0.7,0,0.7],[0,1,0],[0.7,0,-0.7]]);
         let zpMat = matrix([[0.7,-0.7,0],[0.7,0.7,0],[0,0,1]]);
         let zmMat = matrix([[0.7,0.7,0],[-0.7,0.7,0],[0,0,1]]);
-        let rotMat = matrix([[1,0,0],[0,0.7,-0.7],[0,0.7,0.7]]);
 
         console.log(rotMat);
+        rotMat = multiply(rotMat,xpMat)
 
         let yaw = atan2(subset(rotMat, index(1,0)),subset(rotMat,index(0,0)));
         console.log("test");
         let pitch = asin(subset(rotMat,index(2,0)) * -1);
         let roll = atan2(subset(rotMat,index(2,1)),subset(rotMat,index(2,2)));
+        yaw = Number(yaw * 180 / 3.14);
+        pitch = Number(pitch * 180 / 3.14);
         roll = Number(roll * 180 / 3.14);
+
         console.log("roll");
         console.log(roll);
         console.log("pitch");
