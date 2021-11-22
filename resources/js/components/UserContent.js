@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Route, Switch , Link } from 'react-router-dom';
 
 function UserContent() {
     const [userContent, setUserContent] = useState([]);
@@ -104,7 +105,12 @@ function UserContent() {
                     <p>{data.name}</p>
                     <p>{data.contentName}</p>
                     <input type="submit" onClick={() => arLink(data.saveName)} value="AR"></input>
-                    <a onClick={() => edit(data.saveName)}>編集</a>
+                    <BrowserRouter>
+                        <Route>
+                            <Link to="/">Home</Link>
+                        </Route>
+                    </BrowserRouter>
+
                 </div>
             ))}
             <a onClick={prev_current_page}>前</a>
