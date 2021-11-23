@@ -134,7 +134,6 @@ function WebAR() {
                 <a-marker preset="hiro">
                      <a-obj-model src="#cow" mtl="#mtl" scale=".5 .5 .5" rotation={vectorData}></a-obj-model>
                 </a-marker>
-
             </a-scene>
             <a id="vecter" >座標</a>
             <input type="submit" id="arEnd" value="Submit" />

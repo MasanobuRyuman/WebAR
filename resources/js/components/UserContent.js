@@ -95,6 +95,9 @@ function UserContent() {
     function edit(saveName){
         window.location.href = "/UserContentEdit"; // 通常の遷移
     }
+    function ContentEdit(){
+        return <h1>編集</h1>;
+    }
 
     return (
         <div>
@@ -107,8 +110,13 @@ function UserContent() {
                     <input type="submit" onClick={() => arLink(data.saveName)} value="AR"></input>
                     <BrowserRouter>
                         <Route>
-                            <Link to="/">Home</Link>
+                            <Link to="/contentEdit">Home</Link>
                         </Route>
+                        <Switch>
+                            <Route path="/contentEdit">
+                                <ContentEdit />
+                            </Route>
+                        </Switch>
                     </BrowserRouter>
 
                 </div>
