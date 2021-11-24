@@ -80,7 +80,7 @@ function WebAR() {
             mat = matrix([[1,0,0],[0,0.7,0.7],[0,-0.7,0.7]]);
         }else if(move == "yp"){
             mat = matrix([[0.7,0,-0.7],[0,1,0],[-0.7,0,0.7]]);
-        }else if(move == "xm"){
+        }else if(move == "ym"){
             mat = matrix([[-0.7,0,0.7],[0,1,0],[0.7,0,-0.7]]);
         }else if(move == "zp"){
             console.log("zp");
@@ -134,13 +134,12 @@ function WebAR() {
                 <a-marker preset="hiro">
                      <a-obj-model src="#cow" mtl="#mtl" scale=".5 .5 .5" rotation={vectorData}></a-obj-model>
                 </a-marker>
-
             </a-scene>
             <a id="vecter" >座標</a>
             <input type="submit" id="arEnd" value="Submit" />
             <input type="submit" onClick={rotation} id="left" value="test"/>
-            <input type="submit" onClick={() => rotation("yp")} id="left" value="上"/>
-            <input type="submit" onClick={() => rotation("ym")} id="left" value="下"/>
+            <input type="submit" onClick={() => rotation("yp")} id="left" value="下"/>
+            <input type="submit" onClick={() => rotation("ym")} id="left" value="上"/>
             <input type="submit" onClick={() => rotation("zp")} id="left" value="左に傾く"/>
             <input type="submit" onClick={() => rotation("zm")} id="left" value="右に傾く"/>
             <input type="submit" onClick={() => rotation("xp")} id="left" value="左"/>
