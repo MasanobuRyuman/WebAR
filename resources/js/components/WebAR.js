@@ -90,7 +90,7 @@ function WebAR() {
         }
         console.log(mat);
 
-        let rotMat = multiply(rotationData,mat);
+        let rotMat = multiply(mat,rotationData);
         setRotationData(rotMat);
         console.log(rotMat,index(2,0));
         let yaw = atan2(subset(rotMat, index(1,0)),subset(rotMat,index(0,0)));
