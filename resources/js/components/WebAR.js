@@ -67,21 +67,21 @@ function WebAR() {
     }
 
     function rotation(move){
-        let xpMat = matrix([[1,0,0],[0,0.7,-0.7],[0,0.7,0.7]]);
-        let xmMat = matrix([[1,0,0],[0,0.7,0.7],[0,-0.7,0.7]]);
-        let ypMat = matrix([[0.7,0,-0.7],[0,1,0],[-0.7,0,0.7]]);
-        let ymMat = matrix([[-0.7,0,0.7],[0,1,0],[0.7,0,-0.7]]);
-        let zpMat = matrix([[0.7,-0.7,0],[0.7,0.7,0],[0,0,1]]);
-        let zmMat = matrix([[0.7,0.7,0],[-0.7,0.7,0],[0,0,1]]);
+        //let xpMat = matrix([[1,0,0],[0,0.7,-0.7],[0,0.7,0.7]]);
+        //let xmMat = matrix([[1,0,0],[0,0.7,0.7],[0,-0.7,0.7]]);
+        //let ypMat = matrix([[0.7,0,-0.7],[0,1,0],[-0.7,0,0.7]]);
+        //let ymMat = matrix([[-0.7,0,0.7],[0,1,0],[0.7,0,-0.7]]);
+        //let zpMat = matrix([[0.7,-0.7,0],[0.7,0.7,0],[0,0,1]]);
+        //let zmMat = matrix([[0.7,0.7,0],[-0.7,0.7,0],[0,0,1]]);
         let mat = matrix([[1,0,0],[0,1,0],[0,0,1]]);
         if(move == "xp"){
             mat = matrix([[1,0,0],[0,0.7,-0.7],[0,0.7,0.7]]);
         }else if(move == "xm"){
             mat = matrix([[1,0,0],[0,0.7,0.7],[0,-0.7,0.7]]);
         }else if(move == "yp"){
-            mat = matrix([[0.7,0,-0.7],[0,1,0],[-0.7,0,0.7]]);
+            mat = matrix([[0.7,0,0.7],[0,1,0],[-0.7,0,0.7]]);
         }else if(move == "ym"){
-            mat = matrix([[-0.7,0,0.7],[0,1,0],[0.7,0,-0.7]]);
+            mat = matrix([[0.7,0,-0.7],[0,1,0],[0.7,0,0.7]]);
         }else if(move == "zp"){
             console.log("zp");
             mat = matrix([[0.7,-0.7,0],[0.7,0.7,0],[0,0,1]]);
@@ -92,9 +92,9 @@ function WebAR() {
 
         let rotMat = multiply(rotationData,mat);
         setRotationData(rotMat);
-
+        console.log(rotMat,index(2,0));
         let yaw = atan2(subset(rotMat, index(1,0)),subset(rotMat,index(0,0)));
-        console.log("test");
+        //console.log("test");
         let pitch = asin(subset(rotMat,index(2,0)) * -1);
         let roll = atan2(subset(rotMat,index(2,1)),subset(rotMat,index(2,2)));
         yaw = Number(yaw * 180 / 3.14);
