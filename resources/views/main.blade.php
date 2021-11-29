@@ -22,7 +22,7 @@
     <input id="userName" type="hidden" value={{$users}}>
     <form method="POST" action="../AR" >
         @csrf
-        <div id="mainPage"></div>
+        <div id="mainPage2"></div>
     </form>
 </body>
 </html>

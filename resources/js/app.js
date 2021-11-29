@@ -17,3 +17,4 @@ require('./components/Example');
 require('./components/PublicContent');
 require('./components/UserContent');
 require('./components/WebAR');
+require('./components/UserRouter');

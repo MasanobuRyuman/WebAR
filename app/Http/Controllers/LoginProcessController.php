@@ -25,8 +25,8 @@ class LoginProcessController extends Controller
                 $_SESSION['userName']=$name;
                 $request->session()->put('userName',$name );
 
-                $main= app()->make('App\Http\Controllers\MainController');
-                return $main->show();
+                header("location: /main");
+                exit();
             }else{
                 return view('login');
             }
