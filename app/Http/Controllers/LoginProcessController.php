@@ -20,13 +20,13 @@ class LoginProcessController extends Controller
             $existence = $userInfo ->loginCheck($name,$password);
             if ($existence == 1)
             {
-                session(['UserName' => $name]);
+            
 
                 $_SESSION['userName']=$name;
                 $request->session()->put('userName',$name );
 
-                $main= app()->make('App\Http\Controllers\MainController');
-                return $main->show();
+                header("location: /main");
+                exit();
             }else{
                 return view('login');
             }

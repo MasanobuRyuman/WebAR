@@ -18,54 +18,7 @@ function WebAR() {
         getrotationVectorData();
     },[]);
 
-    function upRotation(){
-        let move = vector[0]-10.0;
-        console.log(move);
-        setVector([move,vector[1],vector[2]]);
-        setVectorData(move+" "+vector[1]+" "+vector[2]);
-        console.log("leftMove");
-        console.log(move+" "+vector[1]+" "+vector[2]);
-    }
-
-    function downRotation(){
-        let move = Number(vector[0])+Number(10.0);
-        console.log(move);
-        setVector([move,vector[1],vector[2]]);
-        setVector([move,vector[1],vector[2]]);
-        setVectorData(move+" "+vector[1]+" "+vector[2]);
-        console.log("leftMove");
-        console.log(move+" "+vector[1]+" "+vector[2]);
-    }
-
-    function leftTilt(){
-        let move = vector[1]-10.0;
-        console.log(vector[0]+" "+move+" "+vector[2]);
-        setVector([vector[0],move,vector[2]]);
-        setVectorData(vector[0]+" "+move+" "+vector[2]);
-    }
-
-    function rightTile(){
-        let move = Number(vector[1])+Number(10.0);
-        console.log(vector[0]+" "+move+" "+vector[2]);
-        setVector([vector[0],move,vector[2]]);
-        setVectorData(vector[0]+" "+move+" "+vector[2]);
-    }
-
-    function leftRotation(){
-        let move = vector[2]-10;
-        console.log("leftRotation");
-        console.log(vector[0]+" "+vector[1]+" "+move);
-        setVector([vector[0],vector[1],move]);
-        setVectorData(vector[0]+" "+vector[1]+" "+move);
-    }
-
-    function rightRotation(){
-        let move = Number(vector[2])+Number(10);
-        console.log(vector[0]+" "+vector[1]+" "+move);
-        setVector([vector[0],vector[1],move]);
-        setVectorData(vector[0]+" "+vector[1]+" "+move);
-    }
-
+    
     function rotation(move){
         //let xpMat = matrix([[1,0,0],[0,0.7,-0.7],[0,0.7,0.7]]);
         //let xmMat = matrix([[1,0,0],[0,0.7,0.7],[0,-0.7,0.7]]);

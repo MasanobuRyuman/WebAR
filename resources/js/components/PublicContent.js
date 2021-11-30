@@ -1,6 +1,6 @@
 import React, {useEffect,useState} from 'react';
 import ReactDOM from 'react-dom';
-
+import { BrowserRouter, Route, Switch , Link ,withRouter} from 'react-router-dom';
 
 function PublicContent() {
     const [publicContent, setUserContent] = useState([]);
@@ -94,9 +94,11 @@ function PublicContent() {
     return (
         <div>
             <h1>Userペ-ジ</h1>
+            <Link to={'./LoginPage'}>ログイン</Link>
             <form method="POST" action="/AR">
             {publicContent?.data?.data?.map((data,index)=>(
                 <div key={index}>
+                    <p>{data.name}</p>
                     <p>{data.contentName}</p>
                     <input type="submit" onClick={() => arLink(data.name,data.saveName)} value="AR"></input>
                 </div>
@@ -114,7 +116,3 @@ function PublicContent() {
 }
 
 export default PublicContent;
-
-if (document.getElementById('PublicContent')) {
-ReactDOM.render(<PublicContent />, document.getElementById('PublicContent'));
-}

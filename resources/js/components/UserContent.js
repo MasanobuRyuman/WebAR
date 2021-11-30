@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch , Link } from 'react-router-dom';
+import { BrowserRouter, Route, Switch , Link ,withRouter} from 'react-router-dom';
+
 
 function UserContent() {
     const [userContent, setUserContent] = useState([]);
@@ -99,9 +100,18 @@ function UserContent() {
         return <h1>編集</h1>;
     }
 
+    function moveAddPage(){
+        return <h1>ファイル追加</h1>;
+    }
+
     return (
         <div>
+
+            <Link to={`/AddFile`} >コンテンツ追加</Link>
+
+            <a href="addFile">ファイルの追加</a>
             <h1>Userペ-ジ</h1>
+            <a href="/">トップページに戻る</a>
 
             {userContent?.data?.data?.map((data,index)=>(
                 <div key={index}>
@@ -110,15 +120,9 @@ function UserContent() {
                     <input type="submit" onClick={() => arLink(data.saveName)} value="AR"></input>
                     <BrowserRouter>
                         <Route>
-                            <Link to="/contentEdit">Home</Link>
+                            <Link to="/home">Home</Link>
                         </Route>
-                        <Switch>
-                            <Route path="/contentEdit">
-                                <ContentEdit />
-                            </Route>
-                        </Switch>
                     </BrowserRouter>
-
                 </div>
             ))}
             <a onClick={prev_current_page}>前</a>
@@ -128,10 +132,7 @@ function UserContent() {
             <a onClick={add_current_page}>次</a>
             <input name="saveName" type="hidden" value={saveName}></input>
         </div>
-    );
-}
+    )
 
-export default UserContent;
-if (document.getElementById('mainPage')) {
-    ReactDOM.render(<UserContent />, document.getElementById('mainPage'));
 }
+export default withRouter(UserContent);
