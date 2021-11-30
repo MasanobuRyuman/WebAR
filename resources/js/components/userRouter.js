@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch , Link } from 'react-router-dom';
 import UserContent from './UserContent.js';
@@ -24,7 +23,6 @@ export default function UserRouter() {
         </BrowserRouter>
     )
 }
-
 
 if (document.getElementById('mainPage2')) {
     console.log("userRouter");

@@ -20,7 +20,7 @@ class LoginProcessController extends Controller
             $existence = $userInfo ->loginCheck($name,$password);
             if ($existence == 1)
             {
-                session(['UserName' => $name]);
+            
 
                 $_SESSION['userName']=$name;
                 $request->session()->put('userName',$name );

@@ -111,6 +111,7 @@ function UserContent() {
 
             <a href="addFile">ファイルの追加</a>
             <h1>Userペ-ジ</h1>
+            <a href="/">トップページに戻る</a>
 
             {userContent?.data?.data?.map((data,index)=>(
                 <div key={index}>
