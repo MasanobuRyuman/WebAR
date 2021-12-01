@@ -120,7 +120,7 @@ function UserContent() {
                     <input type="submit" onClick={() => arLink(data.saveName)} value="AR"></input>
                     <BrowserRouter>
                         <Route>
-                            <Link to="/home">Home</Link>
+                            <Link to={'/UserContentEdit'}>編集</Link>
                         </Route>
                     </BrowserRouter>
                 </div>

@@ -38,9 +38,9 @@
         console.log("高さ変更");
     }
     </script>
-
-    <div id="WebAR"></div>
     <input type="hidden" id="saveName" value={{$saveName}}>
-
+    <form method="GET" action="rotationDataController">
+        <div id="WebAR"></div>
+    </form>
   </body>
 </html>
