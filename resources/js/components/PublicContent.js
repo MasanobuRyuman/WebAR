@@ -9,6 +9,8 @@ function PublicContent() {
     const [firstUseEffect,setFirstUseEffect] = useState(true);
     const [userName,setUserName] = useState("");
     const [saveName,setSaveName] = useState("");
+    const [csrfToken,setCsrfToken] = useState("");
+
     useEffect(() => {
         getUsers();
     },[nowPage]);
@@ -22,7 +24,6 @@ function PublicContent() {
             buttonSet();
         }
     },[publicContent]);
-
     const getUsers = async () => {
         const response = await axios.get(`/api/publicContentAPI?page=${nowPage}`);
         setUserContent(response);
@@ -89,27 +90,30 @@ function PublicContent() {
     function arLink(name,saveName){
         setUserName(name);
         setSaveName(saveName);
+        let csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
+        setCsrfToken(csrf_token);
     }
 
     return (
         <div>
-            <h1>Userペ-ジ</h1>
+            <h1>Publicペ-ジ</h1>
             <Link to={'./LoginPage'}>ログイン</Link>
             <form method="POST" action="/AR">
-            {publicContent?.data?.data?.map((data,index)=>(
-                <div key={index}>
-                    <p>{data.name}</p>
-                    <p>{data.contentName}</p>
-                    <input type="submit" onClick={() => arLink(data.name,data.saveName)} value="AR"></input>
-                </div>
-            ))}
-            <a onClick={prev_current_page}>前</a>
-            {paging.map((data)=>(
-                <a key={data} onClick={() => move_page(data)}>{data}</a>
-            ))}
-            <a onClick={add_current_page}　>次</a>
-            <input type="hidden" value={userName}></input>
-            <input type="hidden" value={saveName}></input>
+                <input type="hidden" name="_token" value={csrfToken} />
+                {publicContent?.data?.data?.map((data,index)=>(
+                    <div key={index}>
+                        <p>{data.name}</p>
+                        <p>{data.contentName}</p>
+                        <input type="submit" onClick={() => arLink(data.name,data.saveName)} value="AR"></input>
+                    </div>
+                ))}
+                <a onClick={prev_current_page}>前</a>
+                {paging.map((data)=>(
+                    <a key={data} onClick={() => move_page(data)}>{data}</a>
+                ))}
+                <a onClick={add_current_page}>次</a>
+                <input type="hidden" value={userName}></input>
+                <input type="hidden" name="saveName" value={saveName}></input>
             </form>
         </div>
     );
