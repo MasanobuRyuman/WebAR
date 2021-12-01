@@ -15,12 +15,6 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <a href="/sign">login</a>
-    <form method="POST" action="../AR">
-        @csrf
-        <div id="PublicContent"></div>
-    </form>
-
-
+    <div id="PublicContent"></div>
 </body>
 </html>

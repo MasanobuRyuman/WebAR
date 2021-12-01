@@ -50,7 +50,7 @@ function AddFile() {
             <label >public</label>
             <input type="radio" id="private" name="releaseSetting" name="private" />
             <label >private</label>
-            <a onClick={upload}>送信</a>
+            <Link to={'main'} onClick={upload}>送信</Link>
         </div>
     )
 }
