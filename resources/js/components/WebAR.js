@@ -94,14 +94,17 @@ function WebAR() {
             </a-scene>
             <a id="vecter" >座標</a>
             <input type="submit" id="arEnd" onClick={backPage} value="戻る" />
-            <input type="submit" onClick={rotation} id="left" value="test"/>
-            <input type="submit" onClick={() => rotation("yp")} id="left" value="下"/>
-            <input type="submit" onClick={() => rotation("ym")} id="left" value="上"/>
-            <input type="submit" onClick={() => rotation("zp")} id="left" value="左に傾く"/>
-            <input type="submit" onClick={() => rotation("zm")} id="left" value="右に傾く"/>
-            <input type="submit" onClick={() => rotation("xp")} id="left" value="左"/>
-            <input type="submit" onClick={() => rotation("xm")} id="left" value="右"/>
-        </div>
+            <input type="button" onClick={rotation} id="left" value="test"/>
+            <input type="button" onClick={() => rotation("yp")} id="left" value="下"/>
+            <input type="button" onClick={() => rotation("ym")} id="left" value="上"/>
+            <input type="button" onClick={() => rotation("zp")} id="left" value="左に傾く"/>
+            <input type="button" onClick={() => rotation("zm")} id="left" value="右に傾く"/>
+            <input type="button" onClick={() => rotation("xp")} id="left" value="左"/>
+            <input type="button" onClick={() => rotation("xm")} id="left" value="右"/>
+            <input type="hidden" id="xRotationData" value={rotationData[0]} />
+            <input type="hidden" id="yRotationData" value={rotationData[1]} />
+            <input type="hidden" id="zRotationData" value={rotationData[2]} />
+         </div>
     );
 }
 

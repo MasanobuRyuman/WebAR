@@ -29,6 +29,9 @@
     #left {
         margin-top:20px;
     }
+    #form {
+        height: 80%;
+    }
     </style>
   </head>
   <body style="margin:0px; overflow:hidden;">
@@ -38,8 +41,9 @@
         console.log("高さ変更");
     }
     </script>
-    <input type="hidden" id="saveName" value={{$saveName}}>
-    <form method="GET" action="rotationDataController">
+
+    <form id="form" method="GET" action="setRotationData">
+        <input type="hidden" id="saveName" value={{$saveName}}>
         <div id="WebAR"></div>
     </form>
   </body>

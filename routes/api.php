@@ -22,3 +22,5 @@ Route::get('/userContentAPI',[App\Http\Controllers\api\userContentAPI::class, 's
 Route::get('/publicContentAPI',[App\Http\Controllers\api\publicContentAPI::class, 'show']);
 Route::get('/rotationVectorDataAPI',[App\Http\Controllers\api\rotationVectorDataAPI::class, 'show']);
 Route::post('/UploadController',[App\Http\Controllers\UploadController::class, 'upload']);
+Route::post('/contentDeleteAPI',[App\Http\Controllers\api\contentDeleteAPI::class, 'delete']);
+Route::post('/contentEditAPI',[App\Http\Controllers\api\contentEditAPI::class, 'edit']);

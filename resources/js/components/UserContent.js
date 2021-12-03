@@ -100,8 +100,17 @@ function UserContent() {
         return <h1>編集</h1>;
     }
 
-    function moveAddPage(){
+    function moveAddPage(contentInfo){
         return <h1>ファイル追加</h1>;
+    }
+
+    function recordContent(saveName,contentName){
+        document.getElementById('saveName').value = saveName;
+        document.getElementById('contentName').value = contentName;
+    }
+
+    function saveNameKeep(saveName){
+        document.getElementById('saveNameKeep').value = saveNameKeep;
     }
 
     return (
@@ -118,11 +127,8 @@ function UserContent() {
                     <p>{data.name}</p>
                     <p>{data.contentName}</p>
                     <input type="submit" onClick={() => arLink(data.saveName)} value="AR"></input>
-                    <BrowserRouter>
-                        <Route>
-                            <Link to={'/UserContentEdit'}>編集</Link>
-                        </Route>
-                    </BrowserRouter>
+                    <Link to={'/UserContentEdit'} onClick={() => recordContent(data.saveName,data.contentName)}>編集</Link>
+                    <Link to={'/userContentIntroduction'} onClick={() => saveNameKeep(data.saveName)}>作品ページ</Link>
                 </div>
             ))}
             <a onClick={prev_current_page}>前</a>

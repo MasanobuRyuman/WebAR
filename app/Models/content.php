@@ -30,4 +30,14 @@ class content extends Model
             logger("入ったか確認",['foo' => 'haitta']);
         }
     }
+
+    public function deleteContent($saveName)
+    {
+        DB::table('content')->where('saveName',$saveName)->delete();
+    }
+
+    public function editContent($saveName,$newContentName)
+    {
+        DB::table('content')->where('saveName',$saveName)->update(['contentName'=>$newContentName]);
+    }
 }

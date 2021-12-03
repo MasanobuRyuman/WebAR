@@ -4,6 +4,8 @@ import { BrowserRouter, Route, Switch , Link } from 'react-router-dom';
 import UserContent from './UserContent.js';
 import AddFile from './AddFile.js';
 import UserContentEdit from './UserContentEdit.js';
+import UserContentIntroduction from './UserContentIntroduction.js';
+
 export default function UserRouter() {
     function HomePage(){
         return <h1>homePage</h1>
@@ -20,6 +22,9 @@ export default function UserRouter() {
                 </Route>
                 <Route path="/UserContentEdit">
                     <UserContentEdit />
+                </Route>
+                <Route path="/userContentIntroduction">
+                    <UserContentIntroduction />
                 </Route>
             </Switch>
         </BrowserRouter>
