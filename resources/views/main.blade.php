@@ -16,6 +16,9 @@
 </head>
 <body>
     <input id="userName" type="hidden" value={{$users}}>
+    <input id="saveName" type="hidden">
+    <input id="contentName" type="hidden">
+    <input id="saveNameKeep" type="hidden">
     <form method="POST" action="../AR" >
         @csrf
         <div id="mainPage2"></div>

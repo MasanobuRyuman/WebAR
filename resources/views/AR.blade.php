@@ -29,6 +29,9 @@
     #left {
         margin-top:20px;
     }
+    #form {
+        height: 80%;
+    }
     </style>
   </head>
   <body style="margin:0px; overflow:hidden;">
@@ -39,8 +42,9 @@
     }
     </script>
 
-    <div id="WebAR"></div>
-    <input type="hidden" id="saveName" value={{$saveName}}>
-
+    <form id="form" method="GET" action="setRotationData">
+        <input type="hidden" id="saveName" value={{$saveName}}>
+        <div id="WebAR"></div>
+    </form>
   </body>
 </html>
