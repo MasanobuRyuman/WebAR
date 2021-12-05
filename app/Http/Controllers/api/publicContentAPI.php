@@ -8,8 +8,6 @@ class publicContentAPI extends Controller
     public function show(){
         $content = new content;
         $users = $content->publicContent();
-
         return \Response::json($users);
-
     }
 }

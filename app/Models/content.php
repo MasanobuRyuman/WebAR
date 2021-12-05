@@ -40,4 +40,16 @@ class content extends Model
     {
         DB::table('content')->where('saveName',$saveName)->update(['contentName'=>$newContentName]);
     }
+
+    public function getContentInfo($saveName)
+    {
+        $contentInfo = DB::table('contentInfo')->select('contentInfo')->where('saveName',$saveName);
+        return $contentInfo;
+    }
+
+    public function getContentPhoto($saveName)
+    {
+        $contentPhoto = DB::table('contentPhoto')->select('contentPhoto')->where('saveName',$saveName);
+        return $contentPhoto;
+    }
 }
