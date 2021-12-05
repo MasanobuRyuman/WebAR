@@ -24,3 +24,5 @@ Route::get('/rotationVectorDataAPI',[App\Http\Controllers\api\rotationVectorData
 Route::post('/UploadController',[App\Http\Controllers\UploadController::class, 'upload']);
 Route::post('/contentDeleteAPI',[App\Http\Controllers\api\contentDeleteAPI::class, 'delete']);
 Route::post('/contentEditAPI',[App\Http\Controllers\api\contentEditAPI::class, 'edit']);
+Route::post('/contentInfoAPI',[App\Http\Controllers\api\contentInfoAPI::class, 'search']);
+Route::post('/editContentInfoAPI',[App\Http\Controllers\api\editContentInfoAPI::class, 'edit']);

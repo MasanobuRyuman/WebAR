@@ -110,7 +110,7 @@ function UserContent() {
     }
 
     function saveNameKeep(saveName){
-        document.getElementById('saveNameKeep').value = saveNameKeep;
+        document.getElementById('saveNameKeep').value = saveName;
     }
 
     return (

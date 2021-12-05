@@ -4,14 +4,49 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch , Link } from 'react-router-dom';
 
 export default function UserContentIntroduction() {
+    const [contentInfo, setContentInfo] = useState('');
     console.log('userContentIntroduction');
     let saveName = document.getElementById("saveNameKeep").value;
-    
+    console.log(saveName);
+    useEffect(
+        async ()=>{
+            console.log("contentInfo");
+            const formData = new FormData();
+            formData.append('saveName',saveName);
+            let request = await axios.post('/api/contentInfoAPI',formData);
+            console.log(request);
+            console.log(request.data.contentInfo);
+            setContentInfo(request.data.contentInfo);
+            document.getElementById('decisionButton').style.display = "none";
+        }
+
+    ,[])
+
+    function editInfo(){
+        document.getElementById('infoArea').readOnly = false;
+        document.getElementById('decisionButton').style.display = "";
+    }
+
+    function decision(){
+        document.getElementById('infoArea').readOnly = true;
+        document.getElementById('decisionButton').style.display = "none";
+        console.log("dddddecision");
+        async ()=>{
+            console.log("decision");
+            let newInfo = document.getElementById('infoArea').value;
+            const formData = new FormData();
+            formData.append('saveName',saveName);
+            formData.append('newInfo',newInfo);
+            let request = await axios.post('/api/editContentInfoAPI',formData);
+        }
+    }
     return(
         <div>
             <h1>紹介ページ</h1>
             <p>説明</p>
-            <input />
+            <input type="button" onClick={editInfo} defaultValue="編集" />
+            <input type="button" id="decisionButton" onClick={decision} defaultValue="決定" />
+            <textarea id="infoArea" defaultValue={contentInfo} readOnly></textarea>
             <input type="submit" value="AR" />
         </div>
     )
