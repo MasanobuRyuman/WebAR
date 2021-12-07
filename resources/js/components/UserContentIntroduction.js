@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Switch , Link } from 'react-router-dom';
 export default function UserContentIntroduction() {
     const [contentInfo, setContentInfo] = useState('');
     console.log('userContentIntroduction');
-    let saveName = document.getElementById("saveNameKeep").value;
+    let saveName = localStorage.getItem("saveName");
     console.log(saveName);
     useEffect(
         async ()=>{
@@ -47,6 +47,8 @@ export default function UserContentIntroduction() {
             <input type="button" onClick={editInfo} defaultValue="編集" />
             <input type="button" id="decisionButton" onClick={decision} defaultValue="決定" />
             <textarea id="infoArea" defaultValue={contentInfo} readOnly></textarea>
+            <p>コンテンツ写真</p>
+            <Link to="EditPhoto"><input type="button" defaultValue="編集" /></Link>
             <input type="submit" value="AR" />
         </div>
     )

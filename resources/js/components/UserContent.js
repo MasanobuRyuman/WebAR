@@ -11,6 +11,11 @@ function UserContent() {
     const [firstUseEffect,setFirstUseEffect] = useState(true);
     const [saveName,setSaveName] = useState("");
     const getUserName = document.getElementById('userName').value;
+
+    function addSaveName(saveNameTemp){
+        localStorage.setItem('saveName', saveNameTemp);
+    }
+
     useEffect(() => {
         getUsers();
     },[nowPage]);
@@ -110,7 +115,7 @@ function UserContent() {
     }
 
     function saveNameKeep(saveName){
-        document.getElementById('saveNameKeep').value = saveName;
+        setSaveName(saveName);
     }
 
     return (
@@ -128,7 +133,7 @@ function UserContent() {
                     <p>{data.contentName}</p>
                     <input type="submit" onClick={() => arLink(data.saveName)} value="AR"></input>
                     <Link to={'/UserContentEdit'} onClick={() => recordContent(data.saveName,data.contentName)}>編集</Link>
-                    <Link to={'/userContentIntroduction'} onClick={() => saveNameKeep(data.saveName)}>作品ページ</Link>
+                    <Link to={'/userContentIntroduction'} onClick={() => addSaveName(data.saveName)}>作品ページ</Link>
                 </div>
             ))}
             <a onClick={prev_current_page}>前</a>
@@ -141,4 +146,8 @@ function UserContent() {
     )
 
 }
+
+export function getSaveName(saveName){
+    return saveName;
+};
 export default withRouter(UserContent);
