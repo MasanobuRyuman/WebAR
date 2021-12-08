@@ -11,6 +11,7 @@ function EditPhoto() {
         let saveName = localStorage.getItem('saveName');
         console.log("getSaveName");
         console.log(saveName);
+        console.log(photoInfo);
         const formData = new FormData();
         formData.append("saveName",saveName);
         formData.append("photoData",photoInfo);

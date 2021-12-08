@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch , Link } from 'react-router-dom';
 
 export default function UserContentIntroduction() {
     const [contentInfo, setContentInfo] = useState('');
+    const [photoData,setPhotoData] = useState([]);
     console.log('userContentIntroduction');
     let saveName = localStorage.getItem("saveName");
     console.log(saveName);
@@ -18,8 +19,12 @@ export default function UserContentIntroduction() {
             console.log(request.data.contentInfo);
             setContentInfo(request.data.contentInfo);
             document.getElementById('decisionButton').style.display = "none";
+            let photoArray = []
+            request.data.contentPhoto.forEach(function(element){
+                photoArray.push(element);
+            })
+            setPhotoData(photoArray);
         }
-
     ,[])
 
     function editInfo(){
@@ -45,6 +50,13 @@ export default function UserContentIntroduction() {
             <input type="button" id="decisionButton" onClick={decision} defaultValue="決定" />
             <textarea id="infoArea" defaultValue={contentInfo} readOnly></textarea>
             <p>コンテンツ写真</p>
+            {photoData.map((data,index)=>(
+                <div key={index}>
+                    <img src={"storage/" + data} alt="海の写真" title="空と海" />
+                </div>
+            ))
+
+            }
             <Link to="EditPhoto"><input type="button" defaultValue="編集" /></Link>
             <input type="submit" value="AR" />
         </div>

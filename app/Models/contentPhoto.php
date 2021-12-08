@@ -11,7 +11,7 @@ class contentPhoto extends Model
     use HasFactory;
     public function getContentPhoto($saveName)
     {
-        $contentPhoto = DB::table('contentPhoto')->select('contentPhoto')->where('saveName',$saveName)->first();
+        $contentPhoto = DB::table('contentPhoto')->select('contentPhoto')->where('saveName',$saveName)->get();
         return $contentPhoto;
     }
     public function addPhotoData($saveName,$photoData)
