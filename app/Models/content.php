@@ -33,12 +33,12 @@ class content extends Model
 
     public function deleteContent($saveName)
     {
-        DB::table('content')->where('saveName',$saveName)->delete();
+        DB::table('content')->where('saveName',$saveName)->delete()->first();
     }
 
     public function editContent($saveName,$newContentName)
     {
-        DB::table('content')->where('saveName',$saveName)->update(['contentName'=>$newContentName]);
+        DB::table('content')->where('saveName',$saveName)->update(['contentName'=>$newContentName])->first();
     }
 
     public function getContentInfo($saveName)

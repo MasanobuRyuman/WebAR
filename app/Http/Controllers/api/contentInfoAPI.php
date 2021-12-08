@@ -10,10 +10,8 @@ class contentInfoAPI extends Controller
         $saveName = $_POST['saveName'];
         $contentInfo = new contentInfo;
         $contentPhoto = new contentPhoto;
-        logger('serch',['jjj' => "jjjjjjj"]);
         $info = $contentInfo -> getContentInfo($saveName);
         $photo = $contentPhoto -> getContentPhoto($saveName);
-        logger('testSerch', ['foo' => $info]);
         $infoData = "";
         $photoData = "";
         if ($info != ""){

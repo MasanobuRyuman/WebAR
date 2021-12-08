@@ -27,18 +27,15 @@ export default function UserContentIntroduction() {
         document.getElementById('decisionButton').style.display = "";
     }
 
-    function decision(){
-        document.getElementById('infoArea').readOnly = true;
-        document.getElementById('decisionButton').style.display = "none";
-        console.log("dddddecision");
-        async ()=>{
+    const decision = async ()=>{
             console.log("decision");
+            document.getElementById('infoArea').readOnly = true;
+            document.getElementById('decisionButton').style.display = "none";
             let newInfo = document.getElementById('infoArea').value;
             const formData = new FormData();
             formData.append('saveName',saveName);
             formData.append('newInfo',newInfo);
-            let request = await axios.post('/api/editContentInfoAPI',formData);
-        }
+            axios.post('/api/editContentInfoAPI',formData);
     }
     return(
         <div>
