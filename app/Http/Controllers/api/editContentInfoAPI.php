@@ -7,7 +7,6 @@ use App\Models\contentPhoto;
 class editContentInfoAPI extends Controller
 {
     public function edit(){
-        logger('contentInfoEdit', ['foo' => $info]);
         $saveName = $_POST['saveName'];
         $newInfo = $_POST['newInfo'];
         $contentInfo = new contentInfo;

@@ -14,4 +14,8 @@ class contentPhoto extends Model
         $contentPhoto = DB::table('contentPhoto')->select('contentPhoto')->where('saveName',$saveName)->first();
         return $contentPhoto;
     }
+    public function addPhotoData($saveName,$photoData)
+    {
+        DB::table('contentPhoto')->insert(['saveName' => $saveName,'contentPhoto' => $photoData]);
+    }
 }

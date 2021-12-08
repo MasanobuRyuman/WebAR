@@ -8,10 +8,9 @@ export default function UserContentEdit() {
     let saveName = document.getElementById('saveName').value;
     let contentName = document.getElementById('contentName').value;
     const deleteContent = async () => {
-        console.log("delete");
         const formData = new FormData();
         formData.append('saveName',saveName);
-        const res = await axios.post(`/api/contentDeleteAPI`,formData);
+        axios.post(`/api/contentDeleteAPI`,formData);
     }
 
     const editContent = async () => {
@@ -19,7 +18,12 @@ export default function UserContentEdit() {
         const formData = new FormData();
         formData.append('newContentName',newContentName);
         formData.append('saveName',saveName);
-        await axios.post('/api/contentEditAPI',formData);
+        axios.post('/api/contentEditAPI',formData)
+        .catch(
+            (e)=>{
+                console.log("API通信失敗",e);
+            }
+        );
     }
 
     return(

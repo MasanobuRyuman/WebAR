@@ -26,3 +26,4 @@ Route::post('/contentDeleteAPI',[App\Http\Controllers\api\contentDeleteAPI::clas
 Route::post('/contentEditAPI',[App\Http\Controllers\api\contentEditAPI::class, 'edit']);
 Route::post('/contentInfoAPI',[App\Http\Controllers\api\contentInfoAPI::class, 'search']);
 Route::post('/editContentInfoAPI',[App\Http\Controllers\api\editContentInfoAPI::class, 'edit']);
+Route::post('/addPhotoDataAPI',[App\Http\Controllers\api\addPhotoDataAPI::class,'add']);
