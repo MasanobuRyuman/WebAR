@@ -19,11 +19,19 @@ class contentInfoAPI extends Controller
                 $infoData = $temp;
             };
         }
+        $photoData = array();
+        logger("コンテント名",['contentInfoAPI' => "入りました"]);
         if ($photo != ""){
             foreach ($photo as $temp){
-                $photoData = $temp;
+                foreach($temp as $temp2){
+                    logger("コンテント名",['photo配列' => $temp2]);
+                    $photoData[] = $temp2;
+                }
+
             };
         }
+        logger("写真データ",['photoData' => $photoData]);
+
 
         $array = array(
             "contentInfo" => $infoData,
