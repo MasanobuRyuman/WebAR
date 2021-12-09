@@ -52,10 +52,9 @@ export default function UserContentIntroduction() {
             <p>コンテンツ写真</p>
             {photoData.map((data,index)=>(
                 <div key={index}>
-                    <img src={"storage/" + data} alt="海の写真" title="空と海" />
+                    <img src={"storage/" + data} alt="not image" title="image" />
                 </div>
             ))
-
             }
             <Link to="EditPhoto"><input type="button" defaultValue="編集" /></Link>
             <input type="submit" value="AR" />
