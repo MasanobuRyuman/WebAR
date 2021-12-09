@@ -22,6 +22,8 @@ class UploadController extends Controller
         $mtlFile = $request->file('mtl');
         logger('objFile',['foo' => $objFile]);
         logger('mtlFile',['foo' => $mtlFile]);
+        $temp = $request->get("selectTagData");
+        logger("tagdata",['tag'=>$temp]);
         $contentName = $request->get('contentName');
         if (!is_null($objFile) and !is_null($mtlFile)) {
             date_default_timezone_set('Asia/Tokyo');

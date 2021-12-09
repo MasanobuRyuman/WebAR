@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch , Link ,withRouter} from 'react-router-dom';
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
 import UserContent from './UserContent.js';
 
 function AddFile() {
     const [objData,setObjData] = useState("");
     const [mtlData,setMtlData] = useState("");
+    const [selectTagData,setSelectTagData] = useState([])
     const upload = async () =>{
         let saveName = document.getElementById('contentName').value;
         let release = document.getElementById('public').checked;
@@ -16,11 +19,7 @@ function AddFile() {
         formData.append('mtl', mtlData);
         formData.append('contentName',saveName);
         formData.append('releaseSetting',release);
-        console.log("release");
-        console.log(release);
-
-        console.log(objData);
-        console.log(mtlData);
+        formData.append('selectTagData',selectTagData);
         console.log(formData);
         const res = await axios.post(`/api/UploadController`, formData, {
             headers: {
@@ -36,6 +35,21 @@ function AddFile() {
     function mtlDataUpdate(e){
         setMtlData(e.target.files[0]);
     }
+    const options = [
+       { value: 'chocolate', label: 'Chocolate' },
+       { value: 'strawberry', label: 'Strawberry' },
+       { value: 'vanilla', label: 'Vanilla' }
+    ]
+    const animatedComponents = makeAnimated();
+    function addTagInfo(e){
+        let tagList = [];
+        e.forEach(i => {
+            console.log(i.value);
+            tagList.push(i.value);
+        });
+        setSelectTagData(tagList);
+
+    }
 
 
     return(
@@ -50,6 +64,14 @@ function AddFile() {
             <label >public</label>
             <input type="radio" id="private" name="releaseSetting" name="private" />
             <label >private</label>
+            <Select
+                id="tagSelect"
+                onChange={addTagInfo}
+                closeMenuOnSelect={false}
+                components={animatedComponents}
+                isMulti
+                options={options}
+            />
             <Link to={'main'} onClick={upload}>送信</Link>
         </div>
     )
