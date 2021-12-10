@@ -15,12 +15,7 @@ class tagList extends Model
     }
     public function getTagId($tagName){
         logger("tagName",["tag"=>$tagName]);
-        $conditionList = array();
-        foreach($tagName as $tag){
-            $conditionList[] = $tag;
-        }
-        logger("tagList",["tagList" => $conditionList]);
-        $tagId = DB::table('tagList')->select('tagId')->whereIn('tagName', $conditionList)->get();
+        $tagId = DB::table('tagList')->select('tagId')->whereIn('tagName', $tagName)->get();
         return $tagId;
     }
 }

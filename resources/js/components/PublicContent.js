@@ -13,7 +13,7 @@ function PublicContent() {
     const [userName,setUserName] = useState("");
     const [saveName,setSaveName] = useState("");
     const [csrfToken,setCsrfToken] = useState("");
-    const [selectBasedTagData,setSelectTagData] = useState([]);
+    const [searchBasedTagData,setSelectTagData] = useState([]);
     const [tagDataList,setTagDataList] = useState([]);
 
     useEffect(()=>{
@@ -126,7 +126,15 @@ function PublicContent() {
     }
 
     function setSearchBasedTag(){
-        localStorage.setItem('searchBasedTag',selectBasedTagData);
+        console.log("searchbased");
+        console.log(searchBasedTagData);
+        var searchBasedTagList = [];
+        searchBasedTagData.forEach(i=>{
+            searchBasedTagList.push({tagName:i})
+        });
+
+
+        localStorage.setItem('searchBasedTag', JSON.stringify(searchBasedTagList));
     }
     const animatedComponents = makeAnimated();
 

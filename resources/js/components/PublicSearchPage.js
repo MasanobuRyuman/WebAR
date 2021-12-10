@@ -10,9 +10,16 @@ export default function PublicSerchPage() {
     },[])
     const getContent = async ()=>{
         let searchBasedTagList = localStorage.getItem("searchBasedTag");
+        searchBasedTagList = JSON.parse(searchBasedTagList);
+
+        console.log(searchBasedTagList);
         let formData = new FormData();
-        formData.append("searchBasedTagList",searchBasedTagList);
+        searchBasedTagList.forEach(i=>{
+            formData.append("searchBasedTagList[]",i.tagName);
+        })
+
         let request = await axios.post("./api/getSearchContentAPI",formData);
+        console.log(request);
         setsearchContent(request);
     }
     return(

@@ -52,4 +52,11 @@ class content extends Model
         $contentPhoto = DB::table('contentPhoto')->select('contentPhoto')->where('saveName',$saveName);
         return $contentPhoto;
     }
+
+    public function getConditionsPublicContent($saveName)
+    {
+        logger("tagName",["tagName"=>$saveName]);
+        $conditionsPublicContent = DB::table('content')->select('name','contentName','saveName')->whereIn("saveName",$saveName)->paginate(3);
+        return $conditionsPublicContent;
+    }
 }
