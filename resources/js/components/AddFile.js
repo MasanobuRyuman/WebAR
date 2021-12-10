@@ -9,7 +9,23 @@ import UserContent from './UserContent.js';
 function AddFile() {
     const [objData,setObjData] = useState("");
     const [mtlData,setMtlData] = useState("");
-    const [selectTagData,setSelectTagData] = useState([])
+    const [selectTagData,setSelectTagData] = useState([]);
+    const [tagDataList,setTagDataList] = useState([]);
+    useEffect(()=>{
+        getTagList();
+    },[])
+    const options = []
+    const getTagList = async ()=>{
+        const res = await axios.get('/api/getTagAPI');
+        console.log(res.data);
+        res.data.forEach(e => {
+            console.log(e.tagName);
+            options.push({value:e.tagName,label:e.tagName});
+        })
+        setTagDataList(options);
+        console.log(options);
+
+    }
     const upload = async () =>{
         let saveName = document.getElementById('contentName').value;
         let release = document.getElementById('public').checked;
@@ -19,7 +35,10 @@ function AddFile() {
         formData.append('mtl', mtlData);
         formData.append('contentName',saveName);
         formData.append('releaseSetting',release);
-        formData.append('selectTagData',selectTagData);
+        selectTagData.forEach(i=>{
+            formData.append("selectTagData[]",i);
+        })
+
         console.log(formData);
         const res = await axios.post(`/api/UploadController`, formData, {
             headers: {
@@ -35,11 +54,7 @@ function AddFile() {
     function mtlDataUpdate(e){
         setMtlData(e.target.files[0]);
     }
-    const options = [
-       { value: 'chocolate', label: 'Chocolate' },
-       { value: 'strawberry', label: 'Strawberry' },
-       { value: 'vanilla', label: 'Vanilla' }
-    ]
+
     const animatedComponents = makeAnimated();
     function addTagInfo(e){
         let tagList = [];
@@ -48,7 +63,6 @@ function AddFile() {
             tagList.push(i.value);
         });
         setSelectTagData(tagList);
-
     }
 
 
@@ -65,12 +79,12 @@ function AddFile() {
             <input type="radio" id="private" name="releaseSetting" name="private" />
             <label >private</label>
             <Select
+                isMulti
                 id="tagSelect"
                 onChange={addTagInfo}
                 closeMenuOnSelect={false}
                 components={animatedComponents}
-                isMulti
-                options={options}
+                options={tagDataList}
             />
             <Link to={'main'} onClick={upload}>送信</Link>
         </div>

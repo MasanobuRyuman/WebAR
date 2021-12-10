@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\userInfo;
 use App\Models\content;
 use App\Models\rotationVectorData;
+use App\Models\tagList;
+use App\Models\contentAndTag;
 
 class UploadController extends Controller
 {
@@ -22,8 +24,7 @@ class UploadController extends Controller
         $mtlFile = $request->file('mtl');
         logger('objFile',['foo' => $objFile]);
         logger('mtlFile',['foo' => $mtlFile]);
-        $temp = $request->get("selectTagData");
-        logger("tagdata",['tag'=>$temp]);
+        $selectTagData = $request->get("selectTagData");
         $contentName = $request->get('contentName');
         if (!is_null($objFile) and !is_null($mtlFile)) {
             date_default_timezone_set('Asia/Tokyo');
@@ -52,6 +53,19 @@ class UploadController extends Controller
             }
             $rotationVectorData = new rotationVectorData;
             $rotationVectorData->addRotationVector($uniqName);
+            $tagList = new tagList;
+            $tagId = $tagList -> getTagId($selectTagData);
+            logger("タグIDリスト",["list" => $tagId]);
+            $tagIdList=array();
+            foreach($tagId as $Id){
+                foreach($Id as $tag){
+                    logger("きた",["kkk" => $tag]);
+                    $tagIdList[]=(int)$tag;
+                }
+            }
+            logger("taguIDrisuto",["list" => $tagIdList]);
+            $contentAndTag = new contentAndTag;
+            $contentAndTag->addContentAndTag($uniqName,$tagIdList);
         }
     }
 }

@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch , Link } from 'react-router-dom';
 import PublicContent from './PublicContent.js';
 import LoginPage from './LoginPage.js';
+import PublicSearchPage from './PublicSearchPage'
 
 export default function PublicPageRouter() {
     function HomePage(){
@@ -17,6 +18,9 @@ export default function PublicPageRouter() {
                 </Route>
                 <Route path="/LoginPage">
                     <LoginPage />
+                </Route>
+                <Route path="/publicSearchPage">
+                    <PublicSearchPage />
                 </Route>
             </Switch>
         </BrowserRouter>

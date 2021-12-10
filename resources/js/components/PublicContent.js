@@ -1,6 +1,9 @@
 import React, {useEffect,useState} from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch , Link ,withRouter} from 'react-router-dom';
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
+
 
 function PublicContent() {
     const [publicContent, setUserContent] = useState([]);
@@ -10,6 +13,25 @@ function PublicContent() {
     const [userName,setUserName] = useState("");
     const [saveName,setSaveName] = useState("");
     const [csrfToken,setCsrfToken] = useState("");
+    const [searchBasedTagData,setSelectTagData] = useState([]);
+    const [tagDataList,setTagDataList] = useState([]);
+
+    useEffect(()=>{
+        getTagList();
+    },[])
+
+    const options = []
+    const getTagList = async ()=>{
+        const res = await axios.get('/api/getTagAPI');
+        console.log(res.data);
+        res.data.forEach(e => {
+            console.log(e.tagName);
+            options.push({value:e.tagName,label:e.tagName});
+        })
+        setTagDataList(options);
+        console.log(options);
+
+    }
 
     useEffect(() => {
         getUsers();
@@ -94,10 +116,42 @@ function PublicContent() {
         setCsrfToken(csrf_token);
     }
 
+    function addTagInfo(e){
+        let tagList = [];
+        e.forEach(i => {
+            console.log(i.value);
+            tagList.push(i.value);
+        });
+        setSelectTagData(tagList);
+    }
+
+    function setSearchBasedTag(){
+        console.log("searchbased");
+        console.log(searchBasedTagData);
+        var searchBasedTagList = [];
+        searchBasedTagData.forEach(i=>{
+            searchBasedTagList.push({tagName:i})
+        });
+
+
+        localStorage.setItem('searchBasedTag', JSON.stringify(searchBasedTagList));
+    }
+    const animatedComponents = makeAnimated();
+
     return (
         <div>
             <h1>Publicペ-ジ</h1>
             <Link to={'./LoginPage'}>ログイン</Link>
+            <p>検索</p>
+            <Select
+                isMulti
+                id="tagSelect"
+                onChange={addTagInfo}
+                closeMenuOnSelect={false}
+                components={animatedComponents}
+                options={tagDataList}
+            />
+            <Link to={'./publicSearchPage'} onClick={setSearchBasedTag}>検索</Link>
             <form method="POST" action="/AR">
                 <input type="hidden" name="_token" value={csrfToken} />
                 {publicContent?.data?.data?.map((data,index)=>(
