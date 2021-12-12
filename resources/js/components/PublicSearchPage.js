@@ -37,7 +37,15 @@ export default function PublicSerchPage() {
         console.log(PageButton(nowPage,lastPage));
     }
     return(
-        <h1>検索画面</h1>
-
+        <div>
+            <h1>検索画面</h1>
+            {searchContent?.data?.data?.map((data,index)=>(
+                <div key={index}>
+                    <p>{data.name}</p>
+                    <p>{data.contentName}</p>
+                    <input type="submit" onClick={() => arLink(data.name,data.saveName)} value="AR"></input>
+                </div>
+            ))}
+        </div>
     )
 }
