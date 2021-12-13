@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\contentInfo;
 use App\Models\contentPhoto;
+use App\Models\content;
 class contentInfoAPI extends Controller
 {
     public function search(){
@@ -31,6 +32,8 @@ class contentInfoAPI extends Controller
             };
         }
         logger("写真データ",['photoData' => $photoData]);
+        $content = new content;
+
 
 
         $array = array(
