@@ -2,7 +2,8 @@ import React, {useEffect,useState} from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch , Link ,withRouter} from 'react-router-dom';
 
-function PageButton(nawPage,lastPage){
+export default function PageButton(nowPage,lastPage){
+
     let prev = true;
     let outputPage = nowPage;
     let list = [nowPage];
@@ -25,6 +26,7 @@ function PageButton(nawPage,lastPage){
             pageCount += 1;
             list.unshift(outputPage);
         }else if (outputPage == lastPage){
+            console.log("ビルド成功");
             break;
         }else if (pageCount == 10){
             break;
@@ -34,7 +36,7 @@ function PageButton(nawPage,lastPage){
             console.log("add");
             list.push(outputPage);
         }
+
     }
     return list;
 }
-export default PageButton;

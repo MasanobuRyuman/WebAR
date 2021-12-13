@@ -2,20 +2,23 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch , Link } from 'react-router-dom';
-import {PageButton} from './PageButton.js';
+import PageButton from './PageButton.js';
 
 export default function PublicSerchPage() {
     const [searchContent, setsearchContent] = useState([]);
     const [nowPage,setNowPage] = useState(1);
-    let first = true;
+    const [paging,setPaging] = useState([]);
+    const [first,setFirst] = useState(true);
     useEffect(()=>{
         getContent()
     },[])
     useEffect(()=>{
         if (first == true){
-            first = false;
+            console.log("fast");
+            setFirst(false);
         }else{
             setPageButton()
+            console.log("second");
         }
     },[searchContent])
     const getContent = async ()=>{
@@ -34,7 +37,14 @@ export default function PublicSerchPage() {
     }
     function setPageButton(){
         let lastPage = searchContent.data.last_page;
+        console.log("pageButton");
+        console.log(nowPage);
+        console.log(lastPage);
         console.log(PageButton(nowPage,lastPage));
+        setPaging(PageButton(nowPage,lastPage));
+    }
+    function move_page(pageNumber){
+        setNowPage(pageNumber);
     }
     return(
         <div>
@@ -45,6 +55,9 @@ export default function PublicSerchPage() {
                     <p>{data.contentName}</p>
                     <input type="submit" onClick={() => arLink(data.name,data.saveName)} value="AR"></input>
                 </div>
+            ))}
+            {paging.map((data)=>(
+                <a key={data} onClick={() => move_page(data)}>{data}</a>
             ))}
         </div>
     )

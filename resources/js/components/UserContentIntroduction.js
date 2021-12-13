@@ -45,6 +45,8 @@ export default function UserContentIntroduction() {
     return(
         <div>
             <h1>紹介ページ</h1>
+            <p>コンテンツ名</p>
+            <textarea id="introductionContentName" defauleValue={contentName} readOnly>
             <p>説明</p>
             <input type="button" onClick={editInfo} defaultValue="編集" />
             <input type="button" id="decisionButton" onClick={decision} defaultValue="決定" />
