@@ -31,6 +31,12 @@ class content extends Model
         }
     }
 
+    public function getContentName($saveName)
+    {
+        $contentName = DB::table('content')->select('contentName')->where('saveName',$saveName)->get()->first();
+        return $contentName;
+    }
+
     public function deleteContent($saveName)
     {
         DB::table('content')->where('saveName',$saveName)->delete()->first();

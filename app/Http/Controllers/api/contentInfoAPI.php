@@ -33,12 +33,12 @@ class contentInfoAPI extends Controller
         }
         logger("写真データ",['photoData' => $photoData]);
         $content = new content;
-
-
-
+        $contentName = $content -> getContentName($saveName);
+        logger("コンテント名",['contentName'=>$contentName]);
         $array = array(
             "contentInfo" => $infoData,
             "contentPhoto" => $photoData,
+            "contentName" => $contentName,
         );
         $json = json_encode($array);
         return $json;
