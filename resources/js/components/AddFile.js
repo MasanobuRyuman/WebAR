@@ -14,17 +14,14 @@ function AddFile() {
     useEffect(()=>{
         getTagList();
     },[])
-    const options = []
     const getTagList = async ()=>{
         const res = await axios.get('/api/getTagAPI');
-        console.log(res.data);
+        let options = [];
         res.data.forEach(e => {
             console.log(e.tagName);
             options.push({value:e.tagName,label:e.tagName});
         })
         setTagDataList(options);
-        console.log(options);
-
     }
     const upload = async () =>{
         let saveName = document.getElementById('contentName').value;
@@ -55,7 +52,6 @@ function AddFile() {
         setMtlData(e.target.files[0]);
     }
 
-    const animatedComponents = makeAnimated();
     function addTagInfo(e){
         let tagList = [];
         e.forEach(i => {
@@ -83,7 +79,7 @@ function AddFile() {
                 id="tagSelect"
                 onChange={addTagInfo}
                 closeMenuOnSelect={false}
-                components={animatedComponents}
+                components={makeAnimated}
                 options={tagDataList}
             />
             <Link to={'main'} onClick={upload}>送信</Link>
