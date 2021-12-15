@@ -44,7 +44,7 @@ class content extends Model
 
     public function editContent($saveName,$newContentName)
     {
-        DB::table('content')->where('saveName',$saveName)->update(['contentName'=>$newContentName])->first();
+        DB::table('content')->where('saveName',$saveName)->update(['contentName'=>$newContentName]);
     }
 
     public function getContentInfo($saveName)

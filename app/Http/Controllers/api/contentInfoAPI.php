@@ -47,7 +47,8 @@ class contentInfoAPI extends Controller
             }
         }
         $tagList = new tagList;
-        $tagName = $tagList -> getTagName($tagIdList);
+        $tagName = $tagList -> getConditionsTagName($tagIdList);
+        logger("タグ名",["タグ名"=>$tagName]);
         $tagNameList = array();
         if ($tagName !=""){
             foreach ($tagName as $temp){
@@ -60,7 +61,7 @@ class contentInfoAPI extends Controller
             "contentInfo" => $infoData,
             "contentPhoto" => $photoData,
             "contentName" => $contentName,
-            "tagNameList" => $tagNameList, 
+            "tagNameList" => $tagNameList,
         );
         $json = json_encode($array);
         return $json;
