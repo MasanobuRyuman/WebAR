@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch , Link } from 'react-router-dom';
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
 
 export default function UserContentIntroduction() {
     const [contentInfo, setContentInfo] = useState('');
     const [photoData,setPhotoData] = useState([]);
     const [contentName,setContentName] = useState('');
+    const [tagDataList,setTagDataList] = useState([]);
     console.log('userContentIntroduction');
     let saveName = localStorage.getItem("saveName");
     console.log(saveName);
@@ -67,6 +70,8 @@ export default function UserContentIntroduction() {
         );
     }
 
+    const animatedComponents = makeAnimated();
+
     return(
         <div>
             <h1>紹介ページ</h1>
@@ -75,6 +80,14 @@ export default function UserContentIntroduction() {
             <textarea id="introductionContentNameArea" value={contentName} readOnly />
             <input type="button" onClick={editContentName} defaultValue="編集" />
             <input id="contentNameDecisionButton" type="button" onClick={changeContentName} defaultValue="決定" />
+            <p>タグ</p>
+            <Select
+                isMulti
+                id = 'userContentTagData'
+                closeMenuOnSelect={false}
+                components = {animatedComponents}
+                options={tagDataList}
+            />
             <p>説明</p>
             <input type="button" onClick={editInfo} defaultValue="編集" />
             <input type="button" id="decisionButton" onClick={decision} defaultValue="決定" />
@@ -84,8 +97,7 @@ export default function UserContentIntroduction() {
                 <div key={data}>
                     <img src={"storage/" + data} alt="not image" title="image" />
                 </div>
-            ))
-            }
+            ))}
             <Link to="EditPhoto"><input type="button" defaultValue="編集" /></Link>
             <input type="submit" value="AR" />
         </div>

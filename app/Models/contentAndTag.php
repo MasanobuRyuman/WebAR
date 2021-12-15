@@ -23,4 +23,11 @@ class contentAndTag extends Model
         $saveNameList = DB::table('contentAndTag')->select("saveName")->whereIn("tagId",$tagId)->get();
         return $saveNameList ;
     }
+
+    public function getTagId($saveName)
+    {
+        $tagIdList = DB::table('contentAndTag')->select("tagId")->where('saveName',$saveName)->get();
+        return $tagIdList;
+    }
+
 }
