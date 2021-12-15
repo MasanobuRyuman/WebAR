@@ -150,6 +150,7 @@ function PublicContent() {
                 closeMenuOnSelect={false}
                 components={animatedComponents}
                 options={tagDataList}
+                defalutValue={tagDataList}
             />
             <Link to={'./publicSearchPage'} onClick={setSearchBasedTag}>検索</Link>
             <form method="POST" action="/AR">

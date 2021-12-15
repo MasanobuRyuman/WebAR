@@ -9,11 +9,18 @@ use Illuminate\Support\Facades\DB;
 class tagList extends Model
 {
     use HasFactory;
-    public function getTagName(){
+    public function getTagName()
+    {
         $tagNameList = DB::table('tagList')->select('tagName')->get();
         return $tagNameList;
     }
-    public function getTagId($tagName){
+    public function getConditionsTagName($tagIdList)
+    {
+        $tagNameList = DB::table('tagList')->select('tagName')->whereIn('tagId',$tagIdList)->get();
+        return $tagNameList;
+    }
+    public function getTagId($tagName)
+    {
         logger("tagName",["tag"=>$tagName]);
         $tagId = DB::table('tagList')->select('tagId')->whereIn('tagName', $tagName)->get();
         return $tagId;

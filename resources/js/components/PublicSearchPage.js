@@ -49,6 +49,7 @@ export default function PublicSerchPage() {
     return(
         <div>
             <h1>検索画面</h1>
+            <Link to='/'>戻る</Link>
             {searchContent?.data?.data?.map((data,index)=>(
                 <div key={index}>
                     <p>{data.name}</p>
