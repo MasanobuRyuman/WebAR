@@ -12,10 +12,13 @@ export default function UserContentIntroduction() {
     const [tagDataList,setTagDataList] = useState([]);
     const [attachedTagList,setAttachedTagList] = useState([]);
     const [editTagData,setEditTagData] = useState([]);
-    const [first,setFirst] = useState(true);
     console.log('userContentIntroduction');
     let saveName = localStorage.getItem("saveName");
     console.log(saveName);
+    let defaultTag = localStorage.getItem("defaultTagData");
+    defaultTag = JSON.parse(defaultTag);
+    console.log("defalutTag");
+    console.log(defaultTag);
     useEffect(
         async ()=>{
             console.log("contentInfo");
@@ -52,15 +55,6 @@ export default function UserContentIntroduction() {
             console.log(options);
         }
     ,[])
-    useEffect(()=>{
-        if (first==true ){
-            setFirst(false);
-        }else{
-            console.log("kitttttta");
-            console.log(tagDataList[0]);
-            document.getElementById('userContentTagData').defaultValue = [tagDataList[0]];
-        }
-    },[tagDataList])
 
     function editInfo(){
         document.getElementById('infoArea').readOnly = false;
@@ -125,11 +119,12 @@ export default function UserContentIntroduction() {
             <input id="contentNameDecisionButton" type="button" onClick={changeContentName} defaultValue="決定" />
             <p>タグ</p>
             <Select
-                isMulti
                 id = 'userContentTagData'
-                options={tagDataList}
                 closeMenuOnSelect={false}
                 components = {animatedComponents}
+                defaultValue = {defaultTag}
+                isMulti
+                options={tagDataList}
                 onChange = {addTagInfo}
             />
             <input type="button" onClick={editTag} defaultValue="編集" />

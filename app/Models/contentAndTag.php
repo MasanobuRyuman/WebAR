@@ -30,4 +30,14 @@ class contentAndTag extends Model
         return $tagIdList;
     }
 
+    public function getManyTagId($saveNameList)
+    {
+        $tagIdList = array();
+        foreach($saveNameList as $saveName){
+            $tagId = DB::table("contentAndTag")->select("tagId")->where('saveName',$saveName)->get();
+            $tagIdList[]=[$tagId];
+        }
+        return $tagIdList;
+    }
+
 }
