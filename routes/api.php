@@ -32,3 +32,4 @@ Route::post('/getSearchContentAPI',[App\Http\Controllers\api\getSearchContentAPI
 
 Route::post('/getSaveNameRelationTagNameAPI',[App\Http\Controllers\api\getSaveNameRelationTagNameAPI::class,'get']);
 Route::post('/editContentAndTagAPI',[App\Http\Controllers\api\editContentAndTagAPI::class,'edit']);
+Route::post('/addContentInfoAPI',[App\Http\Controllers\api\addContentInfoAPI::class,'add']);
