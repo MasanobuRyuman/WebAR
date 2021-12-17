@@ -18,4 +18,7 @@ class contentInfo extends Model
     public function editContentInfo($saveName,$newInfo){
         DB::table('contentInfo')->where('saveName',$saveName)->update(['contentInfo'=>$newInfo]);
     }
+    public function addContentInfo($saveName,$newInfo){
+        DB::table('contentInfo')->insert(["saveName"=>$saveName,"contentInfo"=>$newInfo]);
+    }
 }

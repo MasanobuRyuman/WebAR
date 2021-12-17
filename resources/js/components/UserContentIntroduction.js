@@ -22,7 +22,7 @@ export default function UserContentIntroduction() {
             const formData = new FormData();
             formData.append('saveName',saveName);
             let request = await axios.post('/api/contentInfoAPI',formData);
-            //console.log(request);
+            console.log(request);
             //console.log(request.data.contentInfo);
             setContentInfo(request.data.contentInfo);
             //console.log("コンテント");
@@ -58,15 +58,19 @@ export default function UserContentIntroduction() {
         document.getElementById('decisionButton').style.display = "";
     }
 
-    const decision = async ()=>{
-            console.log("decision");
+    const decisionExplanation = async ()=>{
+            console.log("decisionExplanation");
             document.getElementById('infoArea').readOnly = true;
             document.getElementById('decisionButton').style.display = "none";
             let newInfo = document.getElementById('infoArea').value;
             const formData = new FormData();
             formData.append('saveName',saveName);
             formData.append('newInfo',newInfo);
-            axios.post('/api/editContentInfoAPI',formData);
+            if (contentInfo == ""){
+                axios.post('/api/addContentInfoAPI',formData);
+            }else{
+                axios.post('/api/editContentInfoAPI',formData);
+            }
     }
     function editContentName(){
         console.log("attachedTagList");
@@ -151,7 +155,7 @@ export default function UserContentIntroduction() {
             <input type="button" onClick={editTag} defaultValue="編集" />
             <p>説明</p>
             <input type="button" onClick={editExplanation} defaultValue="編集" />
-            <input type="button" id="decisionButton" onClick={decision} defaultValue="決定" />
+            <input type="button" id="decisionButton" onClick={decisionExplanation} defaultValue="決定" />
             <textarea id="infoArea" defaultValue={contentInfo} readOnly></textarea>
             <p>コンテンツ写真</p>
             {photoData.map((data,index)=>(
