@@ -26,7 +26,8 @@ function AddFile() {
     const upload = async () =>{
         let saveName = document.getElementById('contentName').value;
         let release = document.getElementById('public').checked;
-
+        console.log("kitakitakita");
+        console.log(saveName);
         const formData = new FormData();
         formData.append('obj', objData);
         formData.append('mtl', mtlData);

@@ -29,3 +29,6 @@ Route::post('/editContentInfoAPI',[App\Http\Controllers\api\editContentInfoAPI::
 Route::post('/addPhotoDataAPI',[App\Http\Controllers\api\addPhotoDataAPI::class,'add']);
 Route::get('/getTagAPI',[App\Http\Controllers\api\getTagAPI::class,'get']);
 Route::post('/getSearchContentAPI',[App\Http\Controllers\api\getSearchContentAPI::class,'get']);
+
+Route::post('/getSaveNameRelationTagNameAPI',[App\Http\Controllers\api\getSaveNameRelationTagNameAPI::class,'get']);
+Route::post('/editContentAndTagAPI',[App\Http\Controllers\api\editContentAndTagAPI::class,'edit']);

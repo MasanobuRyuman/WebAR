@@ -38,14 +38,16 @@ class contentInfoAPI extends Controller
         logger("コンテント名",['contentName'=>$contentName]);
         $contentAndTag = new contentAndTag;
         $tagId = $contentAndTag -> getTagId($saveName);
+        logger("tagId",["tagId"=>$tagId]);
         $tagIdList = array();
-        if ($tagId = ""){
-            foreach($tagid as $temp){
+        if ($tagId != ""){
+            foreach($tagId as $temp){
                 foreach($temp as $temp2){
                     $tagIdList[]=$temp2;
                 }
             }
         }
+        logger("タグID",["タグID"=>$tagIdList]);
         $tagList = new tagList;
         $tagName = $tagList -> getConditionsTagName($tagIdList);
         logger("タグ名",["タグ名"=>$tagName]);
