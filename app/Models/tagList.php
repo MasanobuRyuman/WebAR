@@ -22,7 +22,8 @@ class tagList extends Model
     public function getTagId($tagName)
     {
         logger("tagName",["tag"=>$tagName]);
-        $tagId = DB::table('tagList')->select('tagId')->whereIn('tagName', $tagName)->get();
+        //whereInの第二引数を直接[]で括っているのでエラーがでる可能性がある。
+        $tagId = DB::table('tagList')->select('tagId')->whereIn('tagName', [$tagName])->get();
         return $tagId;
     }
 }

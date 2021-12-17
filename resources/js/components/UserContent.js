@@ -13,21 +13,7 @@ function UserContent() {
     const getUserName = document.getElementById('userName').value;
 
     const addLocalStorageData = async(saveName,contentName) =>{
-        const formData = new FormData;
-        formData.append("saveName",saveName);
-        let tagName = await axios.post('/api/getSaveNameRelationTagNameAPI',formData);
-        console.log("tagName");
-        console.log(tagName);
-        let defaultTagData = []
-        tagName.data.tagNameList.forEach(temp=>{
-            console.log(temp);
-            defaultTagData.push({value:temp,label:temp})
-        })
-        console.log(defaultTagData);
-        localStorage.setItem('defaultTagData',JSON.stringify(defaultTagData));
         localStorage.setItem('saveName', saveName);
-        localStorage.setItem('contentName',contentName);
-
     }
 
     useEffect(() => {

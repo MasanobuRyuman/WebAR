@@ -15,10 +15,7 @@ export default function UserContentIntroduction() {
     console.log('userContentIntroduction');
     let saveName = localStorage.getItem("saveName");
     console.log(saveName);
-    let defaultTag = localStorage.getItem("defaultTagData");
-    defaultTag = JSON.parse(defaultTag);
-    console.log("defalutTag");
-    console.log(defaultTag);
+
     useEffect(
         async ()=>{
             console.log("contentInfo");
@@ -40,7 +37,7 @@ export default function UserContentIntroduction() {
             setContentName(request.data.contentName.contentName);
             let attachedTag = []
             request.data.tagNameList.forEach(function(element){
-                attachedTag.push(element);
+                attachedTag.push({value:element,label:element});
             })
             console.log("attachedTag");
             console.log(attachedTag);
@@ -56,7 +53,7 @@ export default function UserContentIntroduction() {
         }
     ,[])
 
-    function editInfo(){
+    function editExplanation(){
         document.getElementById('infoArea').readOnly = false;
         document.getElementById('decisionButton').style.display = "";
     }
@@ -89,7 +86,29 @@ export default function UserContentIntroduction() {
 
     const editTag = async()=>{
         console.log("editTag");
-
+        let tagData = editTagData;
+        const formData = new FormData;
+        let deleteTag = [];
+        let addTag = [];
+        let defalutTagList = []
+        attachedTagList.forEach(e=>{
+            console.log(e.value);
+            defalutTagList.push(e.value);
+            if (!editTagData.includes(e.value)){
+                deleteTag.push(e.value);
+            }
+        })
+        editTagData.forEach(e=>{
+            if (!defalutTagList.includes(e)){
+                addTag.push(e);
+            }
+        })
+        console.log(deleteTag);
+        console.log(addTag);
+        formData.append("saveName",saveName);
+        formData.append("deleteTag",deleteTag);
+        formData.append("addTag",addTag);
+        axios.post('/api/editContentAndTagAPI',formData);
     }
 
     const changeContentName = async ()=>{
@@ -118,18 +137,20 @@ export default function UserContentIntroduction() {
             <input type="button" onClick={editContentName} defaultValue="編集" />
             <input id="contentNameDecisionButton" type="button" onClick={changeContentName} defaultValue="決定" />
             <p>タグ</p>
-            <Select
-                id = 'userContentTagData'
-                closeMenuOnSelect={false}
-                components = {animatedComponents}
-                defaultValue = {defaultTag}
-                isMulti
-                options={tagDataList}
-                onChange = {addTagInfo}
-            />
+            <div key={attachedTagList}>
+                <Select
+                    id = 'userContentTagData'
+                    closeMenuOnSelect={false}
+                    components = {animatedComponents}
+                    defaultValue = {attachedTagList}
+                    isMulti
+                    options={tagDataList}
+                    onChange = {addTagInfo}
+                />
+            </div>
             <input type="button" onClick={editTag} defaultValue="編集" />
             <p>説明</p>
-            <input type="button" onClick={editInfo} defaultValue="編集" />
+            <input type="button" onClick={editExplanation} defaultValue="編集" />
             <input type="button" id="decisionButton" onClick={decision} defaultValue="決定" />
             <textarea id="infoArea" defaultValue={contentInfo} readOnly></textarea>
             <p>コンテンツ写真</p>

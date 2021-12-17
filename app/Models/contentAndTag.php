@@ -27,6 +27,7 @@ class contentAndTag extends Model
     public function getTagId($saveName)
     {
         $tagIdList = DB::table('contentAndTag')->select("tagId")->where('saveName',$saveName)->get();
+        logger("getTagId",["getTagId"=>$tagIdList]);
         return $tagIdList;
     }
 
@@ -38,6 +39,18 @@ class contentAndTag extends Model
             $tagIdList[]=[$tagId];
         }
         return $tagIdList;
+    }
+
+    public function deleteConditionOfTagId($saveName,$tagIdList)
+    {
+        DB::table("contentAndTag")->where("saveName",$saveName)->whereIn("tagId",$tagIdList)->delete();
+    }
+
+    public function addConditionOfTagId($saveName,$tagIdList)
+    {
+        foreach($tagIdList as $tagId){
+            DB::table("contentAndTag")->insert(["saveNmae"=>$saveName,"tagId"=>$tagId]);
+        }
     }
 
 }
