@@ -19,7 +19,6 @@ function WebAR() {
         getrotationVectorData();
     },[]);
 
-
     function rotation(move){
         //let xpMat = matrix([[1,0,0],[0,0.7,-0.7],[0,0.7,0.7]]);
         //let xmMat = matrix([[1,0,0],[0,0.7,0.7],[0,-0.7,0.7]]);
@@ -84,12 +83,15 @@ function WebAR() {
     return (
         <div id="a-frame">
             <a-scene embedded arjs="debugUIEnabled:false;" loaded="setHeight()">
+
                 <a-assets>
                     <a-asset-item id="cow" src={obj}></a-asset-item>
                     <a-asset-item id="mtl" src={mtl}></a-asset-item>
                 </a-assets>
+
+                <a-obj-model src="#cow" position="0 0 -15" mtl="#mtl" scale=".5 .5 .5" rotation={vectorData}></a-obj-model>
                 <a-marker preset="hiro">
-                     <a-obj-model src="#cow" mtl="#mtl" scale=".5 .5 .5" rotation={vectorData}></a-obj-model>
+                    <a-obj-model src="#cow" mtl="#mtl" scale=".5 .5 .5" rotation={vectorData}></a-obj-model>
                 </a-marker>
             </a-scene>
             <a id="vecter" >座標</a>

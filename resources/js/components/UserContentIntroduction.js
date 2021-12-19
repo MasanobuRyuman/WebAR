@@ -165,6 +165,7 @@ export default function UserContentIntroduction() {
             ))}
             <Link to="EditPhoto"><input type="button" defaultValue="編集" /></Link>
             <input type="submit" value="AR" />
+            <input type="submit" value="オブジェクト" />
         </div>
     )
 }

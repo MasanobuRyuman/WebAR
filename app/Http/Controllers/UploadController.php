@@ -54,7 +54,9 @@ class UploadController extends Controller
             $rotationVectorData = new rotationVectorData;
             $rotationVectorData->addRotationVector($uniqName);
             $tagList = new tagList;
+
             $tagId = $tagList -> getTagId($selectTagData);
+
             logger("タグIDリスト",["list" => $tagId]);
             $tagIdList=array();
             foreach($tagId as $Id){
@@ -63,9 +65,11 @@ class UploadController extends Controller
                     $tagIdList[]=(int)$tag;
                 }
             }
+
             logger("taguIDrisuto",["list" => $tagIdList]);
             $contentAndTag = new contentAndTag;
             $contentAndTag->addContentAndTag($uniqName,$tagIdList);
+            
         }
     }
 }
