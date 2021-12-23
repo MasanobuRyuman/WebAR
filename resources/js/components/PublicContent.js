@@ -42,7 +42,6 @@ function PublicContent() {
             console.log("kita");
             setFirstUseEffect(false);
         }else{
-
             buttonSet();
         }
     },[publicContent]);
@@ -136,6 +135,11 @@ function PublicContent() {
 
         localStorage.setItem('searchBasedTag', JSON.stringify(searchBasedTagList));
     }
+    function setSearchBasedName(){
+        let searchName = document.getElementByid("seachName").value;
+        localStorage.setItem("searchName",serchName);
+    }
+
     const animatedComponents = makeAnimated();
 
     return (
@@ -153,6 +157,8 @@ function PublicContent() {
                 defalutValue={tagDataList}
             />
             <Link to={'./publicSearchPage'} onClick={setSearchBasedTag}>検索</Link>
+            <input id="searchName" />
+            <Link to={'./publicSearchNamePage'} onClick={setSearchBasedName}>検索</Link>
             <form method="POST" action="/AR">
                 <input type="hidden" name="_token" value={csrfToken} />
                 {publicContent?.data?.data?.map((data,index)=>(
