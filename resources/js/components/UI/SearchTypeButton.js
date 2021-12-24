@@ -2,35 +2,19 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch , Link ,withRouter} from 'react-router-dom';
 import {Select,Input,Box,MenuItem,InputLabel,FormControl,TextField} from '@mui/material';
+import TagSearchInput from './TagSearchInput.js';
 export default function SearchTypeButton(props){
     const [searchType, setSearchType] = useState("");
     const [selectTag, setSelectTag] = useState("");
     function InputType(){
         console.log("inputType")
         console.log(selectTag)
+        console.log(props.tagList)
         if(searchType == "タグ"){
-            return <FormControl>
-                <InputLabel id="tagSelectLabel">タグ選択</InputLabel>
-                <Select
-                    labelId="tagSelectLabel"
-                    id="tagSelect"
-                    value={selectTag}
-                    onChange={tagInput}
-                    label="selectTagName"
-                >
-                    {
-                        props?.tagList?.map((data,index)=>(
-                            <div key={index}>
-                                <MenuItem key={index} onClick={()=>addTagData(data)} value={data}>{data}</MenuItem>
-                            </div>
-                        ))
-                    }
-                </Select>
-            </FormControl>
+            return <TagSearchInput tagList={props.tagList} />;
         }else{
             return <TextField id="outlined-basic" label="Outlined" variant="outlined" />;
         }
-
     }
     function tagInput(e){
         console.log("tagInput");
