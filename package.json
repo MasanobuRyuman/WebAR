@@ -31,5 +31,6 @@
         "@mui/material": "^5.2.5",
         "mathjs": "^10.0.0",
         "react-select": "^5.2.1"
-    }
+    },
+    "build": "webpack --mode production"
 }

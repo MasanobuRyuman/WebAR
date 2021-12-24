@@ -1,8 +1,8 @@
 import React, {useEffect,useState} from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch , Link ,withRouter} from 'react-router-dom';
-import Select from 'react-select';
-import makeAnimated from 'react-select/animated';
+import {Select,Input, Box,MenuItem,InputLabel,FormControl} from '@mui/material';
+import SearchTypeButton from './UI/searchTypeButton.js';
 
 
 function PublicContent() {
@@ -15,7 +15,11 @@ function PublicContent() {
     const [csrfToken,setCsrfToken] = useState("");
     const [searchBasedTagData,setSelectTagData] = useState([]);
     const [tagDataList,setTagDataList] = useState([]);
+    const [searchType,setSearchType] = useState('');
 
+    const handleChange = (event) => {
+        setAge(event.target.value);
+    };
     useEffect(()=>{
         getTagList();
     },[])
@@ -26,11 +30,10 @@ function PublicContent() {
         console.log(res.data);
         res.data.forEach(e => {
             console.log(e.tagName);
-            options.push({value:e.tagName,label:e.tagName});
+            options.push(e.tagName);
         })
         setTagDataList(options);
         console.log(options);
-
     }
 
     useEffect(() => {
@@ -140,22 +143,16 @@ function PublicContent() {
         localStorage.setItem("searchName",serchName);
     }
 
-    const animatedComponents = makeAnimated();
+    function searchInput(e){
+        console.log(e);
+    }
 
     return (
         <div>
             <h1>Publicペ-ジ</h1>
             <Link to={'./LoginPage'}>ログイン</Link>
             <p>検索</p>
-            <Select
-                isMulti
-                id="tagSelect"
-                onChange={addTagInfo}
-                closeMenuOnSelect={false}
-                components={animatedComponents}
-                options={tagDataList}
-                defalutValue={tagDataList}
-            />
+            <SearchTypeButton tagList={tagDataList} />
             <Link to={'./publicSearchPage'} onClick={setSearchBasedTag}>検索</Link>
             <input id="searchName" />
             <Link to={'./publicSearchNamePage'} onClick={setSearchBasedName}>検索</Link>
