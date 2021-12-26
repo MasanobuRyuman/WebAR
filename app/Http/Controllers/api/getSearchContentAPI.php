@@ -10,6 +10,7 @@ use App\Models\contentAndTag;
 class getSearchContentAPI extends Controller
 {
     public function get(Request $request){
+        logger("getSearchContentAPIに入りました",["入った"=>"hiattaa"]);
         $searchBasedTag = $request -> get("searchBasedTagList");
         logger("serchBasedTag",["serch"=>$searchBasedTag]);
         $tagList = new TagList;
@@ -31,7 +32,7 @@ class getSearchContentAPI extends Controller
         }
         $content = new content;
         $conditionsPublicContent = $content->getConditionsPublicContent($saveNameList);
-        
+
         return \Response::json($conditionsPublicContent);
     }
 }

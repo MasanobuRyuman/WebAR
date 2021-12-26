@@ -22,44 +22,45 @@ const MenuProps = {
 
 
 export default function TagSearchInput(props) {
-  const [personName, setPersonName] = React.useState([]);
-  const [allTagData, setAllTagData] = React.useState([]);
-  useEffect(()=>{
-      console.log(props);
-  },[])
 
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
+    const [allTagData, setAllTagData] = React.useState([]);
+    
+
+    const handleChange = (event) => {
+      const {
+        target: { value },
+      } = event;
+      props.setSelectedTag(
+        // On autofill we get a stringified value.
+        typeof value === 'string' ? value.split(',') : value,
+      );
+    };
+    function getSelectedList(){
+        return props.selectedTag;
+    }
+
+    return (
+        <div>
+            <FormControl sx={{ m: 1, width: 300 }}>
+                <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
+                <Select
+                    labelId="demo-multiple-checkbox-label"
+                    id="demo-multiple-checkbox"
+                    multiple
+                    value={props.selectedTag}
+                    onChange={handleChange}
+                    input={<OutlinedInput label="Tag" />}
+                    renderValue={(selected) => selected.join(', ')}
+                    MenuProps={MenuProps}
+                >
+                    {props.tagList.map((name) => (
+                      <MenuItem key={name} value={name}>
+                        <Checkbox checked={props.selectedTag.some((tag) => tag === name)} />
+                        <ListItemText primary={name} />
+                      </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
+        </div>
     );
-  };
-
-  return (
-    <div>
-      <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
-        <Select
-          labelId="demo-multiple-checkbox-label"
-          id="demo-multiple-checkbox"
-          multiple
-          value={personName}
-          onChange={handleChange}
-          input={<OutlinedInput label="Tag" />}
-          renderValue={(selected) => selected.join(', ')}
-          MenuProps={MenuProps}
-        >
-          {props.tagList.map((name) => (
-            <MenuItem key={name} value={name}>
-              <Checkbox checked={personName.indexOf(name) > -1} />
-              <ListItemText primary={name} />
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </div>
-  );
 }

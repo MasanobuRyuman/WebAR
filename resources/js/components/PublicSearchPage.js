@@ -22,18 +22,25 @@ export default function PublicSerchPage() {
         }
     },[searchContent])
     const getContent = async ()=>{
-        let searchBasedTagList = localStorage.getItem("searchBasedTag");
-        searchBasedTagList = JSON.parse(searchBasedTagList);
+        console.log("getContent");
+        let searchType = localStorage.getItem('searchType');
+        console.log(searchType);
+        if (searchType == "タグ"){
+            console.log("getContentのタグに入った");
+            let searchBasedTagList = localStorage.getItem("selectedTagList");
+            searchBasedTagList = JSON.parse(searchBasedTagList);
+            console.log(searchBasedTagList);
+            let formData = new FormData();
+            searchBasedTagList.forEach(i=>{
+                formData.append("searchBasedTagList[]",i.tagName);
+            })
 
-        console.log(searchBasedTagList);
-        let formData = new FormData();
-        searchBasedTagList.forEach(i=>{
-            formData.append("searchBasedTagList[]",i.tagName);
-        })
+            let request = await axios.post(`./api/getSearchContentAPI?page=${nowPage}`,formData);
+            console.log(request.data.last_page);
+            console.log(request);
+            setsearchContent(request);
+        }
 
-        let request = await axios.post(`./api/getSearchContentAPI?page=${nowPage}`,formData);
-        console.log(request.data.last_page);
-        setsearchContent(request);
     }
     function setPageButton(){
         let lastPage = searchContent.data.last_page;

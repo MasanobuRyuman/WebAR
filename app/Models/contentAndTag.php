@@ -48,8 +48,11 @@ class contentAndTag extends Model
 
     public function addConditionOfTagId($saveName,$tagIdList)
     {
+        logger("addConditionOfTagId",["hiatta"=>"hitta"]);
+        logger("addConditionOfTagId",["saveName"=>$saveName]);
+        logger("addContentonOfTagId",["tagIdList"=>$tagIdList]);
         foreach($tagIdList as $tagId){
-            DB::table("contentAndTag")->insert(["saveNmae"=>$saveName,"tagId"=>$tagId]);
+            DB::table("contentAndTag")->insert(["saveName"=>$saveName,"tagId"=>$tagId]);
         }
     }
 
