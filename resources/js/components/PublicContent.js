@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Switch , Link ,withRouter} from 'react-router-dom
 import {Select,Input, Box,MenuItem,InputLabel,FormControl} from '@mui/material';
 import SearchTypeButton from './UI/searchTypeButton.js';
 
-
 function PublicContent() {
     const [publicContent, setUserContent] = useState([]);
     const [nowPage,setNowPage] = useState(1);
@@ -153,9 +152,6 @@ function PublicContent() {
             <Link to={'./LoginPage'}>ログイン</Link>
             <p>検索</p>
             <SearchTypeButton tagList={tagDataList} />
-            <Link to={'./publicSearchPage'} onClick={setSearchBasedTag}>検索</Link>
-            <input id="searchName" />
-            <Link to={'./publicSearchNamePage'} onClick={setSearchBasedName}>検索</Link>
             <form method="POST" action="/AR">
                 <input type="hidden" name="_token" value={csrfToken} />
                 {publicContent?.data?.data?.map((data,index)=>(

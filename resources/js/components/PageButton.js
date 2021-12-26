@@ -26,7 +26,6 @@ export default function PageButton(nowPage,lastPage){
             pageCount += 1;
             list.unshift(outputPage);
         }else if (outputPage == lastPage){
-            console.log("ビルド成功");
             break;
         }else if (pageCount == 10){
             break;

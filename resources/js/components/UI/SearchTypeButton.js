@@ -5,23 +5,13 @@ import {Select,Input,Box,MenuItem,InputLabel,FormControl,TextField} from '@mui/m
 import TagSearchInput from './TagSearchInput.js';
 export default function SearchTypeButton(props){
     const [searchType, setSearchType] = useState("");
-    const [selectTag, setSelectTag] = useState("");
-    function InputType(){
-        console.log("inputType")
-        console.log(selectTag)
-        console.log(props.tagList)
-        if(searchType == "タグ"){
-            return <TagSearchInput tagList={props.tagList} />;
-        }else{
-            return <TextField id="outlined-basic" label="Outlined" variant="outlined" />;
-        }
-    }
+    const [selectTag, setSelectTag] = useState("default");
+    const [selectedTagList, setSelectedTagList] = React.useState([]);
     function tagInput(e){
         console.log("tagInput");
         console.log(e.target.Value);
         setSelectTag(e.target.Value);
     }
-
     function addTagData(data){
         console.log("addTagData");
         console.log(data);
@@ -34,7 +24,26 @@ export default function SearchTypeButton(props){
     }
     function searchData(){
         console.log("searchData");
+        console.log(searchType);
+        console.log(selectedTagList);
         localStorage.setItem("searchType",searchType);
+        if (searchType == "タグ"){
+            console.log("searchDataのタグに入った");
+            localStorage.setItem("selectedTagList",JSON.stringify(selectedTagList))
+        }else{
+            let searchCharacter = document.getElementByid("searchCharacter").value;
+            localStorage.setItem("searchCharacter",searchCharacter);
+        }
+    }
+    function InputType(){
+        console.log("inputType")
+        console.log(selectTag)
+        console.log(props.tagList)
+        if(searchType == "タグ"){
+            return <TagSearchInput tagList={props.tagList} selectedTag={selectedTagList} setSelectedTag={setSelectedTagList} />;
+        }else{
+            return <TextField id="searchCharacter" label="Outlined" variant="outlined" />;
+        }
     }
     return(
         <div>
