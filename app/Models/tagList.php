@@ -19,12 +19,17 @@ class tagList extends Model
         $tagNameList = DB::table('tagList')->select('tagName')->whereIn('tagId',$tagIdList)->get();
         return $tagNameList;
     }
-    public function getTagId($tagName)
+    public function getTagId($tagNameList)
     {
-        logger("tagName",["tagName"=>$tagName]);
+        logger("getTagId",["tagName"=>$tagNameList]);
         //whereInの第二引数を直接[]で括っているのでエラーがでる可能性がある。
-        $tagId = DB::table('tagList')->select('tagId')->whereIn('tagName', [$tagName])->get();
-        logger("getTagId",["getTagId"=>$tagId]);
-        return $tagId;
+        $tagIdList = array();
+        foreach($tagNameList as $tag){
+            $tagId = DB::table('tagList')->select('tagId')->where('tagName',$tag)->get();
+            $tagIdList[] = $tagId;
+        }
+
+        logger("tagIdList",["tagIdList"=>$tagIdList]);
+        return $tagIdList;
     }
 }
