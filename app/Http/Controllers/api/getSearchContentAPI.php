@@ -18,11 +18,13 @@ class getSearchContentAPI extends Controller
         $tagIdList = array();
         foreach ($tagId as $temp){
             foreach($temp as $temp2){
-                logger("コンテント名",['photo配列' => $temp2]);
-                $tagIdList[] = $temp2;
+                foreach($temp2 as $temp3){
+                    $tagIdList[] = $temp3;
+                }
             }
         };
         $contentAndTag = new contentAndTag;
+        logger("ここまで来ている",["ここまで来ている"=>$tagIdList]);
         $saveName = $contentAndTag->getSaveName($tagIdList);
         $saveNameList = array();
         foreach($saveName as $temp){

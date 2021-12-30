@@ -28,13 +28,13 @@ export default function PublicSerchPage() {
         if (searchType == "タグ"){
             console.log("getContentのタグに入った");
             let searchBasedTagList = localStorage.getItem("selectedTagList");
+
             searchBasedTagList = JSON.parse(searchBasedTagList);
             console.log(searchBasedTagList);
             let formData = new FormData();
             searchBasedTagList.forEach(i=>{
-                formData.append("searchBasedTagList[]",i.tagName);
+                formData.append("searchBasedTagList[]",i);
             })
-
             let request = await axios.post(`./api/getSearchContentAPI?page=${nowPage}`,formData);
             console.log(request.data.last_page);
             console.log(request);
