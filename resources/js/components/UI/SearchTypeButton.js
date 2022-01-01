@@ -29,9 +29,9 @@ export default function SearchTypeButton(props){
         localStorage.setItem("searchType",searchType);
         if (searchType == "タグ"){
             console.log("searchDataのタグに入った");
-            localStorage.setItem("selectedTagList",JSON.stringify(selectedTagList))
+            localStorage.setItem("selectedTagList",JSON.stringify(selectedTagList));
         }else{
-            let searchCharacter = document.getElementByid("searchCharacter").value;
+            let searchCharacter = document.getElementById("searchCharacter").value;
             localStorage.setItem("searchCharacter",searchCharacter);
         }
     }

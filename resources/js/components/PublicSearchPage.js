@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Switch , Link } from 'react-router-dom';
 import PageButton from './PageButton.js';
 
 export default function PublicSerchPage() {
-    const [searchContent, setsearchContent] = useState([]);
+    const [searchContent, setSearchContent] = useState([]);
     const [nowPage,setNowPage] = useState(1);
     const [paging,setPaging] = useState([]);
     const [first,setFirst] = useState(true);
@@ -38,7 +38,23 @@ export default function PublicSerchPage() {
             let request = await axios.post(`./api/getSearchContentAPI?page=${nowPage}`,formData);
             console.log(request.data.last_page);
             console.log(request);
-            setsearchContent(request);
+            setSearchContent(request);
+        } else if (searchType == "コンテンツ名"){
+            console.log("コンテンツ名に入った");
+            let searchContentName = localStorage.getItem("searchCharacter");
+            let formData = new FormData();
+            formData.append("searchContentName",searchContentName);
+            let gotContent = await axios.post('./api/getContentByContentAPI',formData);
+            console.log(gotContent);
+            setSearchContent(gotContent);
+        } else if (searchType == "ユーザー名"){
+            console.log("ユーザー名に入った");
+            let searchUserName = localStorage.getItem("searchCharacter");
+            const formData = new FormData;
+            formData.append("searchUserName",searchUserName);
+            let gotContent = await axios.post('./api/getContentByUserAPI',formData);
+            console.log(gotContent);
+            setSearchContent(gotContent);
         }
 
     }

@@ -65,4 +65,14 @@ class content extends Model
         $conditionsPublicContent = DB::table('content')->select('name','contentName','saveName')->whereIn("saveName",$saveName)->paginate(3);
         return $conditionsPublicContent;
     }
+
+    public function getContentByContent($contentName){
+        $gotContentList = DB::table('content')->select('name','contentName','saveName')->where("contentName",$contentName)->paginate(3);
+        return $gotContentList;
+    }
+
+    public function getContentByUser($UserName){
+        $gotContentList = DB::table('content')->select('name','contentName','saveName')->where("name",$UserName)->paginate(3);
+        return $gotContentList;
+    }
 }
