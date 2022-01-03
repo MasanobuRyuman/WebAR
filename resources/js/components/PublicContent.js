@@ -10,7 +10,7 @@ function PublicContent() {
     const [paging,setPaging] = useState([]);
     const [firstUseEffect,setFirstUseEffect] = useState(true);
     const [userName,setUserName] = useState("");
-    const [saveName,setSaveName] = useState("");
+    const [saveName,setSaveName] = useState("temp");
     const [csrfToken,setCsrfToken] = useState("");
     const [searchBasedTagData,setSelectTagData] = useState([]);
     const [tagDataList,setTagDataList] = useState([]);
@@ -146,19 +146,24 @@ function PublicContent() {
         console.log(e);
     }
 
+    const addLocalStorageData = async(saveName,contentName) =>{
+        localStorage.setItem('saveName', saveName);
+    }
+
     return (
         <div>
             <h1>Publicペ-ジ</h1>
             <Link to={'./LoginPage'}>ログイン</Link>
             <p>検索</p>
             <SearchTypeButton tagList={tagDataList} />
-            <form method="POST" action="/AR">
+            <form method="GET" action={`ContentIntroduction/${saveName}`}>
                 <input type="hidden" name="_token" value={csrfToken} />
                 {publicContent?.data?.data?.map((data,index)=>(
                     <div key={index}>
                         <p>{data.name}</p>
                         <p>{data.contentName}</p>
                         <input type="submit" onClick={() => arLink(data.name,data.saveName)} value="AR"></input>
+                        <input type="submit" onClick={() => addLocalStorageData(data.saveName,data.contentName)} value="作品ページ" />
                     </div>
                 ))}
                 <a onClick={prev_current_page}>前</a>

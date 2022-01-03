@@ -29,3 +29,4 @@ Route::get('/users', function (Request $request) {
     return $users;
 });
 Route::get('/setRotationData',[App\Http\Controllers\setRotationDataController::class, 'show']);
+Route::get('/ContentIntroduction/{saveName}',[App\Http\Controllers\ContentIntroductionController::class, 'show']);
