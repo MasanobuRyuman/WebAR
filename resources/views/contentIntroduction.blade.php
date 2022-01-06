@@ -15,9 +15,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <form method="POST" action="../AR" >
-        @csrf
-        <h1>ContentIntroduction</h1>
-    </form>
+    <input type="hidden" id="saveName" value={{$saveName}}>
+    <div id="contentIntroduction"></div>
 </body>
 </html>
