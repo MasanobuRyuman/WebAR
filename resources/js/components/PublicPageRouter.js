@@ -6,7 +6,6 @@ import PublicContent from './PublicContent.js';
 import LoginPage from './LoginPage.js';
 import PublicSearchPage from './PublicSearchPage.js';
 import PublicSearchNamePage from './publicSearchNamePage.js';
-import ContentIntroduction from './ContentIntroduction.js';
 
 export default function PublicPageRouter() {
     function HomePage(){
@@ -27,9 +26,6 @@ export default function PublicPageRouter() {
                 <Route path="/publicSearchNamePage">
                     <PublicSearchNamePage />
                 </Route>
-                <Route path="/contentIntroduction">
-                    <ContentIntroduction />
-                </Route>
             </Switch>
         </BrowserRouter>
     )
@@ -37,6 +33,5 @@ export default function PublicPageRouter() {
 
 
 if (document.getElementById('PublicContent')) {
-    console.log("publicRouter");
     ReactDOM.render(<PublicPageRouter />, document.getElementById('PublicContent'));
 }

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class ContentIntroductionController extends Controller
 {
     function show(){
-
-        return view('ContentIntroduction');
+        $saveName = $_GET["saveName"];
+        return view('ContentIntroduction',['saveName' => $saveName]);
     }
 }

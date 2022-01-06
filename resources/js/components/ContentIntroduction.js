@@ -12,9 +12,7 @@ export default function ContentIntroduction() {
     const [tagDataList,setTagDataList] = useState([]);
     const [attachedTagList,setAttachedTagList] = useState([]);
     const [editTagData,setEditTagData] = useState([]);
-    console.log('userContentIntroduction');
-    let saveName = localStorage.getItem("saveName");
-    console.log(saveName);
+    let saveName = document.getElementById('saveName').value;
 
     useEffect(
         async ()=>{
@@ -113,4 +111,7 @@ export default function ContentIntroduction() {
             <a href="javascript:window.open('http://line.me/R/msg/text/?'+encodeURIComponent(document.title)+'%20'+encodeURIComponent(location.href),'sharewindow','width=550, height=450, personalbar=0, toolbar=0, scrollbars=1, resizable=!');">LINE</a>
         </div>
     )
+}
+if (document.getElementById('contentIntroduction')) {
+    ReactDOM.render(<ContentIntroduction />, document.getElementById('contentIntroduction'));
 }
