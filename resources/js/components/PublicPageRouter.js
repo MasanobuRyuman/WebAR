@@ -6,6 +6,7 @@ import PublicContent from './PublicContent.js';
 import LoginPage from './LoginPage.js';
 import PublicSearchPage from './PublicSearchPage.js';
 import PublicSearchNamePage from './publicSearchNamePage.js';
+import WebAR from './WebAR.js';
 
 export default function PublicPageRouter() {
     function HomePage(){
@@ -25,6 +26,9 @@ export default function PublicPageRouter() {
                 </Route>
                 <Route path="/publicSearchNamePage">
                     <PublicSearchNamePage />
+                </Route>
+                <Route path="/webAR">
+                    <WebAR />
                 </Route>
             </Switch>
         </BrowserRouter>

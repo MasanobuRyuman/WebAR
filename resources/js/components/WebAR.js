@@ -111,7 +111,9 @@ function WebAR() {
 }
 
 export default WebAR;
+/*
 if (document.getElementById('WebAR')) {
 
     ReactDOM.render(<WebAR />, document.getElementById('WebAR'));
 }
+*/
