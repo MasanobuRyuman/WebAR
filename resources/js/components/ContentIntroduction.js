@@ -12,6 +12,8 @@ export default function ContentIntroduction() {
     const [tagDataList,setTagDataList] = useState([]);
     const [attachedTagList,setAttachedTagList] = useState([]);
     const [editTagData,setEditTagData] = useState([]);
+    const [csrfToken,setCsrfToken] = useState("");
+    const [userName,setUserName] = useState("");
     let saveName = document.getElementById('saveName').value;
 
     useEffect(
@@ -71,44 +73,50 @@ export default function ContentIntroduction() {
         });
         setEditTagData(tagList);
     }
-
-
-
+    function arLink(){
+        let csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
+        setCsrfToken(csrf_token);
+    }
 
     const animatedComponents = makeAnimated();
 
     return(
         <div>
-            <h1>紹介ページ</h1>
-            <p>コンテンツ名</p>
-            <p>{contentName}</p>
-            <textarea id="introductionContentNameArea" defaultValue={contentName} readOnly />
-            <p>タグ</p>
-            <div key={attachedTagList}>
-                <Select
-                    id = 'userContentTagData'
-                    closeMenuOnSelect={false}
-                    components = {animatedComponents}
-                    defaultValue = {attachedTagList}
-                    isMulti
-                    options={tagDataList}
-                    onChange = {addTagInfo}
-                />
-            </div>
-
-            <p>説明</p>
-            <textarea id="infoArea" defaultValue={contentInfo} readOnly></textarea>
-            <p>コンテンツ写真</p>
-            {photoData.map((data,index)=>(
-                <div key={data}>
-                    <img src={"storage/" + data} alt="not image" title="image" />
+            <form method="POST" action={`./../AR`}>
+                <input type="hidden" name="_token" value={csrfToken} />
+                <h1>紹介ページ</h1>
+                <p>コンテンツ名</p>
+                <p>{contentName}</p>
+                <textarea id="introductionContentNameArea" defaultValue={contentName} readOnly />
+                <p>タグ</p>
+                <div key={attachedTagList}>
+                    <Select
+                        id = 'userContentTagData'
+                        closeMenuOnSelect={false}
+                        components = {animatedComponents}
+                        defaultValue = {attachedTagList}
+                        isMulti
+                        options={tagDataList}
+                        onChange = {addTagInfo}
+                    />
                 </div>
-            ))}
 
-            <input type="submit" value="AR" />
-            <input type="submit" value="オブジェクト" />
-            <a href="javascript:window.open('http://twitter.com/share?text='+encodeURIComponent(document.title)+'&url='+encodeURIComponent(location.href),'sharewindow','width=550, height=450, personalbar=0, toolbar=0, scrollbars=1, resizable=!');">Tweet</a>
-            <a href="javascript:window.open('http://line.me/R/msg/text/?'+encodeURIComponent(document.title)+'%20'+encodeURIComponent(location.href),'sharewindow','width=550, height=450, personalbar=0, toolbar=0, scrollbars=1, resizable=!');">LINE</a>
+                <p>説明</p>
+                <textarea id="infoArea" defaultValue={contentInfo} readOnly></textarea>
+                <p>コンテンツ写真</p>
+                {photoData.map((data,index)=>(
+                    <div key={data}>
+                        <img src={"storage/" + data} alt="not image" title="image" />
+                    </div>
+                ))}
+
+                <input type="submit" value="AR" onClick={arLink} />
+                <input type="submit" value="オブジェクト" />
+                <input type="hidden" value={userName}></input>
+                <input type="hidden" name="saveName" value={saveName}></input>
+                <a href="javascript:window.open('http://twitter.com/share?text='+encodeURIComponent(document.title)+'&url='+encodeURIComponent(location.href),'sharewindow','width=550, height=450, personalbar=0, toolbar=0, scrollbars=1, resizable=!');">Tweet</a>
+                <a href="javascript:window.open('http://line.me/R/msg/text/?'+encodeURIComponent(document.title)+'%20'+encodeURIComponent(location.href),'sharewindow','width=550, height=450, personalbar=0, toolbar=0, scrollbars=1, resizable=!');">LINE</a>
+            </form>
         </div>
     )
 }
