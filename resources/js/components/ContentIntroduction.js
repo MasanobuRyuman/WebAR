@@ -73,9 +73,7 @@ export default function ContentIntroduction() {
         });
         setEditTagData(tagList);
     }
-    function arLink(name,saveName){
-        setUserName(name);
-        setSaveName(saveName);
+    function arLink(){
         let csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
         setCsrfToken(csrf_token);
     }
