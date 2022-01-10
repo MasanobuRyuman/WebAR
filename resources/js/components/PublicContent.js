@@ -10,7 +10,7 @@ function PublicContent() {
     const [paging,setPaging] = useState([]);
     const [firstUseEffect,setFirstUseEffect] = useState(true);
     const [userName,setUserName] = useState("");
-    const [saveName,setSaveName] = useState("temp");
+    const [saveName,setSaveName] = useState("");
     const [csrfToken,setCsrfToken] = useState("");
     const [searchBasedTagData,setSelectTagData] = useState([]);
     const [tagDataList,setTagDataList] = useState([]);
@@ -146,8 +146,9 @@ function PublicContent() {
         console.log(e);
     }
 
-    const addLocalStorageData = async(saveName,contentName) =>{
+    function addLocalStorageData(saveName){
         localStorage.setItem('saveName', saveName);
+        setSaveName(saveName);
     }
 
     return (
@@ -163,7 +164,7 @@ function PublicContent() {
                         <p>{data.name}</p>
                         <p>{data.contentName}</p>
                         <input type="submit" onClick={() => arLink(data.name,data.saveName)} value="AR"></input>
-                        <input type="submit" onClick={() => addLocalStorageData(data.saveName,data.contentName)} value="作品ページ" />
+                        <input type="submit" onClick={() => addLocalStorageData(data.saveName)} value="作品ページ" />
                     </div>
                 ))}
                 <a onClick={prev_current_page}>前</a>

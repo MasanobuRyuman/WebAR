@@ -26,7 +26,7 @@ export default function ContentIntroduction() {
             //console.log(request.data.contentInfo);
             setContentInfo(request.data.contentInfo);
             //console.log("コンテント");
-            //console.log(request.data.contentName.contentName);
+            console.log(request.data.contentName.contentName);
             document.getElementById('contentNameDecisionButton').style.display = "none";
             document.getElementById('decisionButton').style.display = "none";
             let photoArray = []
