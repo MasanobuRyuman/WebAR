@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch , Link ,withRouter} from 'react-router-dom';
 import {Select,Input, Box,MenuItem,InputLabel,FormControl} from '@mui/material';
 import SearchTypeButton from './UI/searchTypeButton.js';
+import PageButton from './UI/PageButton.js';
 
 function PublicContent() {
     const [publicContent, setUserContent] = useState([]);
@@ -16,9 +17,7 @@ function PublicContent() {
     const [tagDataList,setTagDataList] = useState([]);
     const [searchType,setSearchType] = useState('');
 
-    const handleChange = (event) => {
-        setAge(event.target.value);
-    };
+
     useEffect(()=>{
         getTagList();
     },[])
@@ -26,13 +25,10 @@ function PublicContent() {
     const options = []
     const getTagList = async ()=>{
         const res = await axios.get('/api/getTagAPI');
-        console.log(res.data);
         res.data.forEach(e => {
-            console.log(e.tagName);
             options.push(e.tagName);
         })
         setTagDataList(options);
-        console.log(options);
     }
 
     useEffect(() => {
@@ -41,7 +37,7 @@ function PublicContent() {
 
     useEffect(()=>{
         if (firstUseEffect == true){
-            console.log("kita");
+
             setFirstUseEffect(false);
         }else{
             buttonSet();
@@ -49,10 +45,8 @@ function PublicContent() {
     },[publicContent]);
     const getUsers = async () => {
         const response = await axios.get(`/api/publicContentAPI?page=${nowPage}`);
-        setUserContent(response);
-        console.log("中身表示");
         console.log(response);
-        console.log(response.data.last_page);
+        setUserContent(response);
     }
 
     function add_current_page()
@@ -75,39 +69,10 @@ function PublicContent() {
 
     function buttonSet()
     {
-        let prev = true;
-        let outputPage = nowPage;
-        let list = [nowPage];
-        let pageCount = 0;
-        let addprevpage = publicContent.data.last_page - outputPage;
-        console.log("pageCount");
-        while (true){
-            console.log(outputPage);
-            if (outputPage == 1){
-                prev = false;
-                outputPage = nowPage;
-            } else if(prev == true && pageCount == 5 + (5-addprevpage)){
-                prev = false;
-                outputPage = nowPage;
-            }
-
-            if (prev == true){
-                console.log("prevTrue");
-                outputPage -= 1;
-                pageCount += 1;
-                list.unshift(outputPage);
-            }else if (outputPage == publicContent.data.last_page){
-                break;
-            }else if (pageCount == 10){
-                break;
-            }else{
-                outputPage += 1;
-                pageCount += 1;
-                console.log("add");
-                list.push(outputPage);
-            }
-        }
-        setPaging(list)
+        let lastPage = publicContent.data.last_page;
+        console.log("lastPage");
+        console.log(lastPage);
+        setPaging(PageButton(nowPage,lastPage));
     }
 
     function arLink(name,saveName){
@@ -120,15 +85,12 @@ function PublicContent() {
     function addTagInfo(e){
         let tagList = [];
         e.forEach(i => {
-            console.log(i.value);
             tagList.push(i.value);
         });
         setSelectTagData(tagList);
     }
 
     function setSearchBasedTag(){
-        console.log("searchbased");
-        console.log(searchBasedTagData);
         var searchBasedTagList = [];
         searchBasedTagData.forEach(i=>{
             searchBasedTagList.push({tagName:i})
@@ -142,9 +104,7 @@ function PublicContent() {
         localStorage.setItem("searchName",serchName);
     }
 
-    function searchInput(e){
-        console.log(e);
-    }
+
 
     function addLocalStorageData(saveName){
         localStorage.setItem('saveName', saveName);
@@ -163,7 +123,6 @@ function PublicContent() {
                     <div key={index}>
                         <p>{data.name}</p>
                         <p>{data.contentName}</p>
-                        <input type="submit" onClick={() => arLink(data.name,data.saveName)} value="AR"></input>
                         <input type="submit" onClick={() => addLocalStorageData(data.saveName)} value="作品ページ" />
                     </div>
                 ))}

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch , Link } from 'react-router-dom';
-import PageButton from './PageButton.js';
+import PageButton from './UI/PageButton.js';
 
 export default function PublicSerchPage() {
     const [searchContent, setSearchContent] = useState([]);
@@ -56,7 +56,6 @@ export default function PublicSerchPage() {
             console.log(gotContent);
             setSearchContent(gotContent);
         }
-
     }
     function setPageButton(){
         let lastPage = searchContent.data.last_page;

@@ -27,12 +27,13 @@ export default function PageButton(nowPage,lastPage){
             list.unshift(outputPage);
         }else if (outputPage == lastPage){
             break;
-        }else if (pageCount == 10){
+        }else if (pageCount >= 10){
             break;
         }else{
             outputPage += 1;
             pageCount += 1;
             console.log("add");
+            console.log(pageCount);
             list.push(outputPage);
         }
 
