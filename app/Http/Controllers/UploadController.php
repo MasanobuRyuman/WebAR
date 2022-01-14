@@ -61,15 +61,18 @@ class UploadController extends Controller
             $tagIdList=array();
             foreach($tagId as $Id){
                 foreach($Id as $tag){
-                    logger("きた",["kkk" => $tag]);
-                    $tagIdList[]=(int)$tag;
+                    foreach ($tag as $temp){
+                        logger("きた",["kkk" => $temp]);
+                        $tagIdList[]=(int)$temp;
+                    }
+
                 }
             }
 
             logger("taguIDrisuto",["list" => $tagIdList]);
             $contentAndTag = new contentAndTag;
             $contentAndTag->addContentAndTag($uniqName,$tagIdList);
-            
+
         }
     }
 }

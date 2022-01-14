@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch , Link ,withRouter} from 'react-router-dom
 import {Select,Input,Box,MenuItem,InputLabel,FormControl,TextField} from '@mui/material';
 import TagSearchInput from './TagSearchInput.js';
 export default function SearchTypeButton(props){
-    const [searchType, setSearchType] = useState("");
+    const [searchType, setSearchType] = useState("タグ");
     const [selectTag, setSelectTag] = useState("default");
     const [selectedTagList, setSelectedTagList] = React.useState([]);
     function tagInput(e){
@@ -49,10 +49,10 @@ export default function SearchTypeButton(props){
         <div>
             <Box sx={{ minWidth: 100 }}>
                 <FormControl>
-                    <InputLabel id="demo-simple-select-label">検索選択</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
+                        defaultValue = 'タグ'
                         value={searchType}
                         label="serchType"
                         onChange={searchInput}

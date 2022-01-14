@@ -91,11 +91,9 @@ function UserContent() {
     return (
         <div>
             <Link to={`/AddFile`} >コンテンツ追加</Link>
-
             <a href="addFile">ファイルの追加</a>
             <h1>Userペ-ジ</h1>
             <a href="/">トップページに戻る</a>
-
             {userContent?.data?.data?.map((data,index)=>(
                 <div key={index}>
                     <p>{data.name}</p>
@@ -113,6 +111,5 @@ function UserContent() {
             <input name="saveName" type="hidden" value={saveName}></input>
         </div>
     )
-
 }
 export default withRouter(UserContent);
