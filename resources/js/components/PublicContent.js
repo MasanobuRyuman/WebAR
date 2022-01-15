@@ -125,10 +125,16 @@ function PublicContent() {
             <SearchTypeButton tagList={tagDataList} />
             <form method="GET" action={`ContentIntroduction/${saveName}`}>
                 <input type="hidden" name="_token" value={csrfToken} />
-                <Grid container spacing={2}>
+                <Grid container spacing={2} alignItems="center" justify="center">
                 {publicContent?.data?.data?.map((data,index)=>(
-                    <Grid item xs={4}>
-                    <Box key={index} id="contentFrame" sx={{ border: 1,borderRadius:2 }}>
+                    <Grid item xs={4} >
+                    <Box key={index} id="contentFrame" sx={{
+                        border: 1,
+                        borderRadius:2,
+                        height: 250,
+                        width: 250,
+                        mx:"auto",
+                    }}>
                         <Typography>{data.name}</Typography>
                         <Input type="submit" onClick={() => addLocalStorageData(data.saveName)} value={data.contentName} />
                     </Box>
@@ -143,7 +149,7 @@ function PublicContent() {
                 <input type="hidden" value={userName}></input>
                 <input type="hidden" name="saveName" value={saveName}></input>
             </form>
-            <DeleteIcon />
+
         </div>
     );
 }
