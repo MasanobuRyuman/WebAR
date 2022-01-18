@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch , Link } from 'react-router-dom';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
+import {Input, Box,MenuItem,InputLabel,FormControl,Grid,Typography} from '@mui/material';
 
 export default function ContentIntroduction() {
     const [contentInfo, setContentInfo] = useState('');
@@ -84,7 +85,7 @@ export default function ContentIntroduction() {
         <div>
             <form method="POST" action={`./../AR`}>
                 <input type="hidden" name="_token" value={csrfToken} />
-                <h1>紹介ページ</h1>
+                <Typography>紹介ページ</Typography>
                 <p>コンテンツ名</p>
                 <p>{contentName}</p>
                 <textarea id="introductionContentNameArea" defaultValue={contentName} readOnly />

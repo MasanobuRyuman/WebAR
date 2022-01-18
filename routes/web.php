@@ -24,7 +24,7 @@ Route::get('/main', [App\Http\Controllers\MainController::class, 'show']);
 Route::post('/upload', [App\Http\Controllers\UploadController::class, 'upload']);
 Route::post('/AR',[App\Http\Controllers\ARController::class, 'show']);
 Route::get('/addFile', [App\Http\Controllers\addFileController::class, 'show']);
-Route::get('/users', function (Request $request) {
+Route::get('/users', function (Request $request){
     $users = User::paginate(10);
     return $users;
 });

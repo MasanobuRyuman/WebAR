@@ -9,6 +9,9 @@ export default function PublicSerchPage() {
     const [nowPage,setNowPage] = useState(1);
     const [paging,setPaging] = useState([]);
     const [first,setFirst] = useState(true);
+    const [saveName,setSaveName] = useState('');
+    const [csrfToken,setCsrfToken] = useState("");
+
     useEffect(()=>{
         getContent()
     },[])
@@ -68,20 +71,31 @@ export default function PublicSerchPage() {
     function move_page(pageNumber){
         setNowPage(pageNumber);
     }
+    function addLocalStorageData(saveName){
+        localStorage.setItem('saveName', saveName);
+        let csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
+        console.log(saveName);
+        setCsrfToken(csrf_token);
+        setSaveName(saveName);
+    }
     return(
         <div>
             <h1>検索画面</h1>
             <Link to='/'>戻る</Link>
-            {searchContent?.data?.data?.map((data,index)=>(
-                <div key={index}>
-                    <p>{data.name}</p>
-                    <p>{data.contentName}</p>
-                    <input type="submit" onClick={() => arLink(data.name,data.saveName)} value="AR"></input>
-                </div>
-            ))}
-            {paging.map((data)=>(
-                <a key={data} onClick={() => move_page(data)}>{data}</a>
-            ))}
+            <form method="GET" action={`ContentIntroduction/${saveName}`}>
+                <input type="hidden" name="_token" value={csrfToken} />
+                {searchContent?.data?.data?.map((data,index)=>(
+                    <div key={index}>
+                        <p>{data.name}</p>
+                        <p>{data.contentName}</p>
+                        <input type="submit" onClick={() => addLocalStorageData(data.saveName)} value="作品ページ" />
+                    </div>
+                ))}
+                {paging.map((data)=>(
+                    <a key={data} onClick={() => move_page(data)}>{data}</a>
+                ))}
+                <input type="hidden" name="saveName" value={saveName}></input>v
+            </form>
         </div>
     )
 }

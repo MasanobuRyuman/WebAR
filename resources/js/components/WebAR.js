@@ -106,14 +106,12 @@ function WebAR() {
             <input type="hidden" id="xRotationData" value={rotationData[0]} />
             <input type="hidden" id="yRotationData" value={rotationData[1]} />
             <input type="hidden" id="zRotationData" value={rotationData[2]} />
-         </div>
+        </div>
     );
 }
 
 export default WebAR;
-/*
-if (document.getElementById('WebAR')) {
 
+if (document.getElementById('WebAR')) {
     ReactDOM.render(<WebAR />, document.getElementById('WebAR'));
 }
-*/

@@ -8,14 +8,22 @@ export default function PageButton(nowPage,lastPage){
     let outputPage = nowPage;
     let list = [nowPage];
     let pageCount = 0;
-    let addprevpage = lastPage - outputPage;
+    let deistanceEnd = lastPage - outputPage;
+    let addPrev = 0
+    if (deistanceEnd >= 5){
+        addPrev = 5
+    }else{
+        addPrev = deistanceEnd
+    }
+    console.log(addPrev);
     console.log("pageCount");
     while (true){
         console.log(outputPage);
         if (outputPage == 1){
             prev = false;
             outputPage = nowPage;
-        } else if(prev == true && pageCount == 5 + (5-addprevpage)){
+        } else if(prev == true && pageCount == 5 + (5-addPrev)){
+            console.log("5以上前に行った");
             prev = false;
             outputPage = nowPage;
         }

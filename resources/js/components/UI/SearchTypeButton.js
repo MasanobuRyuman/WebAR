@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch , Link ,withRouter} from 'react-router-dom
 import {Select,Input,Box,MenuItem,InputLabel,FormControl,TextField} from '@mui/material';
 import TagSearchInput from './TagSearchInput.js';
 export default function SearchTypeButton(props){
-    const [searchType, setSearchType] = useState("");
+    const [searchType, setSearchType] = useState(" ");
     const [selectTag, setSelectTag] = useState("default");
     const [selectedTagList, setSelectedTagList] = React.useState([]);
     function tagInput(e){
@@ -40,19 +40,23 @@ export default function SearchTypeButton(props){
         console.log(selectTag)
         console.log(props.tagList)
         if(searchType == "タグ"){
-            return <TagSearchInput tagList={props.tagList} selectedTag={selectedTagList} setSelectedTag={setSelectedTagList} />;
+            return <TagSearchInput tagList={props.tagList} selectedTag={selectedTagList} setSelectedTag={setSelectedTagList} sx={{mr:1}}/>;
         }else{
             return <TextField id="searchCharacter" label="Outlined" variant="outlined" />;
         }
     }
     return(
         <div>
-            <Box sx={{ minWidth: 100 }}>
+            <Box key="serchFunction" sx={{
+                minWidth: 100,
+                display : 'flex',
+            }}>
                 <FormControl>
                     <InputLabel id="demo-simple-select-label">検索選択</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
+                        defaultValue = 'タグ'
                         value={searchType}
                         label="serchType"
                         onChange={searchInput}
@@ -62,8 +66,9 @@ export default function SearchTypeButton(props){
                         <MenuItem value={"ユーザー名"}>ユーザー名</MenuItem>
                     </Select>
                 </FormControl>
+                <InputType />
             </Box>
-            <InputType />
+
             <Link to='./publicSearchPage' onClick={searchData}>検索</Link>
         </div>
     )
