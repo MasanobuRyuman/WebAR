@@ -40,14 +40,17 @@ export default function SearchTypeButton(props){
         console.log(selectTag)
         console.log(props.tagList)
         if(searchType == "タグ"){
-            return <TagSearchInput tagList={props.tagList} selectedTag={selectedTagList} setSelectedTag={setSelectedTagList} />;
+            return <TagSearchInput tagList={props.tagList} selectedTag={selectedTagList} setSelectedTag={setSelectedTagList} sx={{mr:1}}/>;
         }else{
             return <TextField id="searchCharacter" label="Outlined" variant="outlined" />;
         }
     }
     return(
         <div>
-            <Box sx={{ minWidth: 100 }}>
+            <Box key="serchFunction" sx={{
+                minWidth: 100,
+                display : 'flex',
+            }}>
                 <FormControl>
                     <InputLabel id="demo-simple-select-label">検索選択</InputLabel>
                     <Select
@@ -63,8 +66,9 @@ export default function SearchTypeButton(props){
                         <MenuItem value={"ユーザー名"}>ユーザー名</MenuItem>
                     </Select>
                 </FormControl>
+                <InputType />
             </Box>
-            <InputType />
+
             <Link to='./publicSearchPage' onClick={searchData}>検索</Link>
         </div>
     )
