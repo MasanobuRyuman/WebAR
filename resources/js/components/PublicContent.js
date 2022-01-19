@@ -14,6 +14,7 @@ function PublicContent() {
     const [firstUseEffect,setFirstUseEffect] = useState(true);
     const [userName,setUserName] = useState("");
     const [saveName,setSaveName] = useState("");
+    const [contentName,setContentName] = useState("");
     const [csrfToken,setCsrfToken] = useState("");
     const [searchBasedTagData,setSelectTagData] = useState([]);
     const [tagDataList,setTagDataList] = useState([]);
@@ -108,11 +109,12 @@ function PublicContent() {
 
 
 
-    function addLocalStorageData(saveName){
+    function insertData(saveName,contentName){
         localStorage.setItem('saveName', saveName);
         let csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
         setCsrfToken(csrf_token);
         setSaveName(saveName);
+        setContentName(contentName);
     }
 
     return (
@@ -136,7 +138,7 @@ function PublicContent() {
                         mx          :"auto",
                     }}>
                         <Typography>{data.name}</Typography>
-                        <Input type="submit" onClick={() => addLocalStorageData(data.saveName)} value={data.contentName} />
+                        <Input type="submit" onClick={() => insertData(data.saveName,data.contentName)} value={data.contentName} />
                     </Box>
                     </Grid>
                 ))}
@@ -148,6 +150,7 @@ function PublicContent() {
                 <Input type="button" onClick={add_current_page} value="次" />
                 <input type="hidden" value={userName}></input>
                 <input type="hidden" name="saveName" value={saveName}></input>
+                <input type="hidden" name="contentName" value={contentName}></input>
             </form>
         </div>
     );

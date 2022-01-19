@@ -8,6 +8,7 @@ class ContentIntroductionController extends Controller
 {
     function show(){
         $saveName = $_GET["saveName"];
-        return view('ContentIntroduction',['saveName' => $saveName]);
+        $contentName = $_GET["contentName"];
+        return view('ContentIntroduction',['saveName' => $saveName,'contentName'=>$contentName]);
     }
 }
