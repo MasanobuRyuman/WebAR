@@ -4,18 +4,18 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch , Link } from 'react-router-dom';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
-import {Input, Box,MenuItem,InputLabel,FormControl,Grid,Typography} from '@mui/material';
+import {Input, Box,MenuItem,InputLabel,FormControl,Grid,Typography,Button,TextField} from '@mui/material';
 
 export default function ContentIntroduction() {
     const [contentInfo, setContentInfo] = useState('');
     const [photoData,setPhotoData] = useState([]);
-    const [contentName,setContentName] = useState('');
     const [tagDataList,setTagDataList] = useState([]);
     const [attachedTagList,setAttachedTagList] = useState([]);
     const [editTagData,setEditTagData] = useState([]);
     const [csrfToken,setCsrfToken] = useState("");
     const [userName,setUserName] = useState("");
     let saveName = document.getElementById('saveName').value;
+    let contentName = document.getElementById('contentName').value;
 
     useEffect(
         async ()=>{
@@ -27,7 +27,7 @@ export default function ContentIntroduction() {
             //console.log(request.data.contentInfo);
             setContentInfo(request.data.contentInfo);
             //console.log("コンテント");
-            console.log(request.data.contentName.contentName);
+
             document.getElementById('contentNameDecisionButton').style.display = "none";
             document.getElementById('decisionButton').style.display = "none";
             let photoArray = []
@@ -35,7 +35,7 @@ export default function ContentIntroduction() {
                 photoArray.push(element);
             })
             setPhotoData(photoArray);
-            setContentName(request.data.contentName.contentName);
+
             let attachedTag = []
             request.data.tagNameList.forEach(function(element){
                 attachedTag.push({value:element,label:element});
@@ -84,12 +84,12 @@ export default function ContentIntroduction() {
     return(
         <div>
             <form method="POST" action={`./../AR`}>
-                <input type="hidden" name="_token" value={csrfToken} />
+                <Input type="hidden" name="_token" value={csrfToken} />
                 <Typography>紹介ページ</Typography>
-                <p>コンテンツ名</p>
-                <p>{contentName}</p>
-                <textarea id="introductionContentNameArea" defaultValue={contentName} readOnly />
-                <p>タグ</p>
+                <Typography>コンテンツ名</Typography>
+                <Typography>{contentName}</Typography>
+                <Typography id="introductionContentNameArea" defaultValue={contentName} />
+                <Typography>タグ</Typography>
                 <div key={attachedTagList}>
                     <Select
                         id = 'userContentTagData'
@@ -102,19 +102,19 @@ export default function ContentIntroduction() {
                     />
                 </div>
 
-                <p>説明</p>
+                <Typography>説明</Typography>
                 <textarea id="infoArea" defaultValue={contentInfo} readOnly></textarea>
-                <p>コンテンツ写真</p>
+                <Typography>コンテンツ写真</Typography>
                 {photoData.map((data,index)=>(
                     <div key={data}>
                         <img src={"storage/" + data} alt="not image" title="image" />
                     </div>
                 ))}
 
-                <input type="submit" value="AR" onClick={arLink} />
-                <input type="submit" value="オブジェクト" />
-                <input type="hidden" value={userName}></input>
-                <input type="hidden" name="saveName" value={saveName}></input>
+                <Button type="submit" onClick={arLink} variant="contained">AR</Button>
+                <Button type="submit" variant="contained">オブジェクト</Button>
+                <Input type="hidden" value={userName}></Input>
+                <Input type="hidden" name="saveName" value={saveName}></Input>
                 <a href="javascript:window.open('http://twitter.com/share?text='+encodeURIComponent(document.title)+'&url='+encodeURIComponent(location.href),'sharewindow','width=550, height=450, personalbar=0, toolbar=0, scrollbars=1, resizable=!');">Tweet</a>
                 <a href="javascript:window.open('http://line.me/R/msg/text/?'+encodeURIComponent(document.title)+'%20'+encodeURIComponent(location.href),'sharewindow','width=550, height=450, personalbar=0, toolbar=0, scrollbars=1, resizable=!');">LINE</a>
             </form>

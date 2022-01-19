@@ -12,7 +12,7 @@ class content extends Model
     use HasFactory;
     public function publicContent()
     {
-        $publicContent = DB::table('content')->select('name','contentName','saveName')->where('public',1)->paginate(9);
+        $publicContent = DB::table('content')->select('name','contentName','saveName')->paginate(9);
         return $publicContent;
     }
     public function userContent($name)

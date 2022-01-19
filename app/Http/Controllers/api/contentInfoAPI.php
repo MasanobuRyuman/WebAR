@@ -23,19 +23,15 @@ class contentInfoAPI extends Controller
             };
         }
         $photoData = array();
-        logger("コンテント名",['contentInfoAPI' => "入りました"]);
         if ($photo != ""){
             foreach ($photo as $temp){
                 foreach($temp as $temp2){
-                    logger("コンテント名",['photo配列' => $temp2]);
                     $photoData[] = $temp2;
                 }
             };
         }
         logger("写真データ",['photoData' => $photoData]);
-        $content = new content;
-        $contentName = $content -> getContentName($saveName);
-        logger("コンテント名",['contentName'=>$contentName]);
+
         $contentAndTag = new contentAndTag;
         $tagId = $contentAndTag -> getTagId($saveName);
         logger("tagId",["tagId"=>$tagId]);
@@ -62,7 +58,6 @@ class contentInfoAPI extends Controller
         $array = array(
             "contentInfo" => $infoData,
             "contentPhoto" => $photoData,
-            "contentName" => $contentName,
             "tagNameList" => $tagNameList,
         );
         $json = json_encode($array);

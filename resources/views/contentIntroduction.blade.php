@@ -16,6 +16,7 @@
 </head>
 <body>
     <input type="hidden" id="saveName" value={{$saveName}}>
+    <input type="hidden" id="contentName" value={{$contentName}}>
     <div id="contentIntroduction"></div>
 </body>
 </html>
