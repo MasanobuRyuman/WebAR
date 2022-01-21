@@ -6,6 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import SearchIcon from '@mui/icons-material/Search';
 import SearchTypeButton from './UI/searchTypeButton.js';
 import PageButton from './UI/PageButton.js';
+import Header from './UI/Header.js';
 
 function PublicContent() {
     const [publicContent,setUserContent] = useState([]);
@@ -119,9 +120,7 @@ function PublicContent() {
 
     return (
         <div>
-
-            <Typography>Publicペ-ジ</Typography>
-            <Link to={'./LoginPage'}>ログイン</Link>
+            <Header />
             <SearchIcon />
             <Typography>検索</Typography>
             <SearchTypeButton tagList={tagDataList}/>
