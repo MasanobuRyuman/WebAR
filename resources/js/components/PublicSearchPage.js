@@ -94,7 +94,7 @@ export default function PublicSerchPage() {
                 {paging.map((data)=>(
                     <a key={data} onClick={() => move_page(data)}>{data}</a>
                 ))}
-                <input type="hidden" name="saveName" value={saveName}></input>v
+                <input type="hidden" name="saveName" value={saveName}></input>
             </form>
         </div>
     )

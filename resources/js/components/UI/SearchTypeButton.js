@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch , Link ,withRouter} from 'react-router-dom';
-import {Select,Input,Box,MenuItem,InputLabel,FormControl,TextField} from '@mui/material';
+import {Select,Input,Box,MenuItem,InputLabel,FormControl,TextField,spacing} from '@mui/material';
 import TagSearchInput from './TagSearchInput.js';
 export default function SearchTypeButton(props){
     const [searchType, setSearchType] = useState(" ");
@@ -48,11 +48,14 @@ export default function SearchTypeButton(props){
     return(
         <div>
             <Box key="serchFunction" sx={{
-                minWidth: 100,
+                width   : 1,
                 display : 'flex',
+                m       :"auto",
             }}>
                 <FormControl>
-                    <InputLabel id="demo-simple-select-label">検索選択</InputLabel>
+                    <InputLabel id="demo-simple-select-label" sx={{
+                        m:"auto",
+                    }}>検索選択</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
