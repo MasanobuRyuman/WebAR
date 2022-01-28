@@ -121,8 +121,6 @@ function PublicContent() {
     return (
         <div>
             <Header />
-            <SearchIcon />
-            <Typography>検索</Typography>
             <SearchTypeButton tagList={tagDataList}/>
             <form method="GET" action={`ContentIntroduction/${saveName}`}>
                 <input type="hidden" name="_token" value={csrfToken} />
