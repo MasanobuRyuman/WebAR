@@ -64,7 +64,7 @@ function AddFile() {
         });
         setSelectTagData(tagList);
     }
-    function setMainPhoto(e){
+    function addMainPhoto(e){
         setMainPhoto(e.target.files[0]);
     }
 
@@ -89,7 +89,7 @@ function AddFile() {
                 components={makeAnimated}
                 options={tagDataList}
             />
-            <input type="file" id="photoInfo" onChange={setMainPhoto} />
+            <input type="file" id="photoInfo" onChange={addMainPhoto} />
             <Link to={'main'} onClick={upload}>送信</Link>
         </div>
     )
