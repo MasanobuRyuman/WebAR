@@ -52,11 +52,11 @@ export default function SearchTypeButton(props){
     return(
         <div>
             <Box key="serchFunction" sx={{
-                width   : 1,
-                display : 'flex',
+                width         : 1,
+                display       : 'flex',
                 justifyContent: "center",
-                alignItems: "center",
-                mt:5,
+                alignItems    : "center",
+                mt            :5,
             }}>
                 <FormControl sx={{
                     width:150,
@@ -78,9 +78,9 @@ export default function SearchTypeButton(props){
                 </FormControl>
                 <InputType />
                 <Link to='./publicSearchPage' onClick={searchData}><Button variant="outlined" size="large" sx={{
-                    height:55,
+                    height     :55,
                     borderColor:"grey.500",
-                    color:"black",
+                    color      :"black",
                 }}>検索</Button></Link>
             </Box>
         </div>

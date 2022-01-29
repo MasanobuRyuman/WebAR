@@ -31,7 +31,7 @@ function EditPhoto() {
             <h1>写真編集</h1>
             <input type="button" onClick={addPhoto} defaultValue="写真追加" />
             <input type="file" id="photoInfo" onChange={setPhoto} />
-         </div>
+        </div>
     )
 }
 export default withRouter(EditPhoto);

@@ -11,6 +11,7 @@ function AddFile() {
     const [mtlData,setMtlData] = useState("");
     const [selectTagData,setSelectTagData] = useState([]);
     const [tagDataList,setTagDataList] = useState([]);
+    const [mainPhoto,setMainPhoto] = useState([]);
     useEffect(()=>{
         getTagList();
     },[])
@@ -26,6 +27,7 @@ function AddFile() {
     const upload = async () =>{
         let saveName = document.getElementById('contentName').value;
         let release = document.getElementById('public').checked;
+        let contentMainPhoto = document.getElementById('contentMainPhoto').value;
         console.log("kitakitakita");
         console.log(saveName);
         const formData = new FormData();
@@ -33,6 +35,7 @@ function AddFile() {
         formData.append('mtl', mtlData);
         formData.append('contentName',saveName);
         formData.append('releaseSetting',release);
+        formData.append('mainPhoto',mainPhoto);
         selectTagData.forEach(i=>{
             formData.append("selectTagData[]",i);
         })
@@ -61,6 +64,9 @@ function AddFile() {
         });
         setSelectTagData(tagList);
     }
+    function setMainPhoto(e){
+        setMainPhoto(e.target.files[0]);
+    }
 
 
     return(
@@ -83,6 +89,7 @@ function AddFile() {
                 components={makeAnimated}
                 options={tagDataList}
             />
+            <input type="file" id="photoInfo" onChange={setMainPhoto} />
             <Link to={'main'} onClick={upload}>送信</Link>
         </div>
     )

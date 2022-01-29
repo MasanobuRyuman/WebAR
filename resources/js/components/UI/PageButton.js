@@ -45,8 +45,5 @@ export default function PageButton(nowPage,lastPage){
             list.push(outputPage);
         }
     }
-    if (list[0] != 1){
-        list.unshift(1);
-    }
     return list;
 }

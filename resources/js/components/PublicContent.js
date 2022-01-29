@@ -1,7 +1,7 @@
 import React, {useEffect,useState} from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch , Link ,withRouter} from 'react-router-dom';
-import {Select,Input, Box,MenuItem,InputLabel,FormControl,Grid,Typography} from '@mui/material';
+import {Select,Input, Box,MenuItem,InputLabel,FormControl,Grid,Typography,Button} from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SearchIcon from '@mui/icons-material/Search';
 import SearchTypeButton from './UI/searchTypeButton.js';
@@ -122,33 +122,49 @@ function PublicContent() {
         <div>
             <Header />
             <SearchTypeButton tagList={tagDataList}/>
-            <form method="GET" action={`ContentIntroduction/${saveName}`}>
-                <input type="hidden" name="_token" value={csrfToken} />
-                <Grid container spacing={2} alignItems="center" justify="center">
-                {publicContent?.data?.data?.map((data,index)=>(
-                    <Grid item xs={4} >
-                    <Box key={index} id="contentFrame" sx={{
-                        border      : 1,
-                        borderRadius: 2,
-                        height      : 250,
-                        width       : 250,
-                        mx          :"auto",
-                    }}>
-                        <Typography>{data.name}</Typography>
-                        <Input type="submit" onClick={() => insertData(data.saveName,data.contentName)} value={data.contentName} />
-                    </Box>
+            <Box sx={{
+                mt:3,
+            }}>
+                <form method="GET" action={`ContentIntroduction/${saveName}`}>
+                    <input type="hidden" name="_token" value={csrfToken} />
+                    <Grid container spacing={2} alignItems="center" justify="center">
+                    {publicContent?.data?.data?.map((data,index)=>(
+                        <Grid item xs={4} >
+                        <Box key={index} id="contentFrame" sx={{
+                            border      : 1,
+                            borderRadius: 2,
+                            height      : 250,
+                            width       : 250,
+                            mx          :"auto",
+                        }}>
+                            <Input type="submit" onClick={() => insertData(data.saveName,data.contentName)} value={data.contentName} />
+                            <Typography>{data.name}</Typography>
+                        </Box>
+                        </Grid>
+                    ))}
                     </Grid>
-                ))}
-                </Grid>
-                <Input type="button" onClick={prev_current_page} value="前" />
-                {paging.map((data)=>(
-                    <a key={data} onClick={() => move_page(data)}>{data}</a>
-                ))}
-                <Input type="button" onClick={add_current_page} value="次" />
-                <input type="hidden" value={userName}></input>
-                <input type="hidden" name="saveName" value={saveName}></input>
-                <input type="hidden" name="contentName" value={contentName}></input>
-            </form>
+                    <Box sx={{
+                        width         : 1,
+                        display       : 'flex',
+                        justifyContent: "center",
+                        alignItems    : "center",
+                        mt            :3,
+                    }}>
+                        <Button type="button" onClick={prev_current_page}>前</Button>
+                        {paging.map((data)=>(
+                            <Button key={data} onClick={() => move_page(data)} sx={{
+                                widht:2,
+                            }}>{data}</Button>
+                        ))}
+                        <Button type="button" onClick={add_current_page}>次</Button>
+                    </Box>
+                    <input type="hidden" value={userName}></input>
+                    <input type="hidden" name="saveName" value={saveName}></input>
+                    <input type="hidden" name="contentName" value={contentName}></input>
+                </form>
+            </Box>
+
+
         </div>
     );
 }

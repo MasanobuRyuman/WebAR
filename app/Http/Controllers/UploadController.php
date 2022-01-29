@@ -22,6 +22,7 @@ class UploadController extends Controller
         echo '</script>';
         $objFile = $request->file('obj');
         $mtlFile = $request->file('mtl');
+        $mainPhotoFile = $request->file('mainFile');
         logger('objFile',['foo' => $objFile]);
         logger('mtlFile',['foo' => $mtlFile]);
         $selectTagData = $request->get("selectTagData");
@@ -39,8 +40,12 @@ class UploadController extends Controller
             $objFileName = $uniqName . "." . $objFileType;
             $mtlFileName = $uniqName . "." . $mtlFileType;
             $dir = 'public';
+            $mainPhotoType = pathinfo($mainPhotoFlie, PATHINFO_EXTENSION);
+            $uniqNameForMainPhoto = uniqid();
+            $mainPhotoName = $uniqNameForMainPhoto . "." .$mainPhotoType;
             $objFile->storeAs($dir, $objFileName, ['disk' => 'local']);
             $mtlFile->storeAs($dir, $mtlFileName, ['disk' => 'local']);
+            $mainPhotoFile->storeAs($dir,$mainPhotoName,['disk' => 'local']);
             $content = new content;
             if ($request->get('releaseSetting') == false)
             {
