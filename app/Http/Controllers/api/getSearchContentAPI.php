@@ -10,9 +10,9 @@ use App\Models\contentAndTag;
 class getSearchContentAPI extends Controller
 {
     public function get(Request $request){
-        logger("getSearchContentAPIに入りました",["入った"=>"hiattaa"]);
+
         $searchBasedTag = $request -> get("searchBasedTagList");
-        logger("serchBasedTag",["serch"=>$searchBasedTag]);
+
         $tagList = new TagList;
         $tagId = $tagList->getTagId($searchBasedTag);
         $tagIdList = array();
@@ -24,7 +24,7 @@ class getSearchContentAPI extends Controller
             }
         };
         $contentAndTag = new contentAndTag;
-        logger("ここまで来ている",["ここまで来ている"=>$tagIdList]);
+        
         $saveName = $contentAndTag->getSaveName($tagIdList);
         $saveNameList = array();
         foreach($saveName as $temp){

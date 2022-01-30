@@ -25,9 +25,7 @@ class content extends Model
         if ($relese == "public"){
             DB::table('content')->insert(["name"=> $name,"contentName"=>$contentName,"saveName"=>$saveName,"public"=>1]);
         }else{
-            logger("入ったか確認",['foo' => 'addContent']);
             DB::table('content')->insert(["name"=> $name,"contentName"=>$contentName,"saveName"=>$saveName,"public"=>0]);
-            logger("入ったか確認",['foo' => 'haitta']);
         }
     }
 
@@ -61,7 +59,6 @@ class content extends Model
 
     public function getConditionsPublicContent($saveName)
     {
-        logger("tagName",["tagName"=>$saveName]);
         $conditionsPublicContent = DB::table('content')->select('name','contentName','saveName')->whereIn("saveName",$saveName)->paginate(9);
         return $conditionsPublicContent;
     }

@@ -12,7 +12,6 @@ class contentInfo extends Model
     public function getContentInfo($saveName)
     {
         $contentInfo = DB::table('contentInfo')->select('contentInfo')->where('saveName',$saveName)->get()->first();
-        logger('contentInfo', ['foo' => $contentInfo]);
         return $contentInfo;
     }
     public function editContentInfo($saveName,$newInfo){

@@ -10,7 +10,7 @@ class getContentByUserAPI extends Controller
         $searchName = $_POST["searchUserName"];
         $content = new content;
         $gotContent = $content->getContentByUser($searchName);
-        logger("gotContent",["gotContent"=>$gotContent]);
+        
         return \Response::json($gotContent);
     }
 }

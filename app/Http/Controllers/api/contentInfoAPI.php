@@ -30,11 +30,10 @@ class contentInfoAPI extends Controller
                 }
             };
         }
-        logger("写真データ",['photoData' => $photoData]);
 
         $contentAndTag = new contentAndTag;
         $tagId = $contentAndTag -> getTagId($saveName);
-        logger("tagId",["tagId"=>$tagId]);
+
         $tagIdList = array();
         if ($tagId != ""){
             foreach($tagId as $temp){
@@ -43,10 +42,10 @@ class contentInfoAPI extends Controller
                 }
             }
         }
-        logger("タグID",["タグID"=>$tagIdList]);
+
         $tagList = new tagList;
         $tagName = $tagList -> getConditionsTagName($tagIdList);
-        logger("タグ名",["タグ名"=>$tagName]);
+    
         $tagNameList = array();
         if ($tagName !=""){
             foreach ($tagName as $temp){

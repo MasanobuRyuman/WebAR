@@ -25,28 +25,27 @@ function AddFile() {
         setTagDataList(options);
     }
     const upload = async () =>{
+        console.log("こおここ");
         let saveName = document.getElementById('contentName').value;
         let release = document.getElementById('public').checked;
-        let contentMainPhoto = document.getElementById('contentMainPhoto').value;
-        console.log("kitakitakita");
-        console.log(saveName);
         const formData = new FormData();
+        console.log("ここはいる");
         formData.append('obj', objData);
         formData.append('mtl', mtlData);
         formData.append('contentName',saveName);
         formData.append('releaseSetting',release);
+        console.log(mainPhoto);
         formData.append('mainPhoto',mainPhoto);
         selectTagData.forEach(i=>{
             formData.append("selectTagData[]",i);
         })
-
-        console.log(formData);
+        console.log("ここまでまで");
         const res = await axios.post(`/api/UploadController`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
         });
-        console.log("きた");
+        console.log("聞いいいいいい");
     }
 
     function objDataUpdate(e){
@@ -90,7 +89,7 @@ function AddFile() {
                 options={tagDataList}
             />
             <input type="file" id="photoInfo" onChange={addMainPhoto} />
-            <Link to={'main'} onClick={upload}>送信</Link>
+            <Link onClick={upload}>送信</Link>
         </div>
     )
 }

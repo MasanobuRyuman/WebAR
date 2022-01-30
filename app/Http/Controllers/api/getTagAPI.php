@@ -10,7 +10,7 @@ class getTagAPI extends Controller
     public function get(){
         $tagList = new tagList;
         $tagName = $tagList -> getTagName();
-        logger("tagName",["タグ名"=>$tagName]);
+        
         $tagNameList = [];
         foreach($tagName as $tag){
             $tagNameList[]=$tag;

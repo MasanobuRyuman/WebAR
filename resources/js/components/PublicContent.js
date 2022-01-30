@@ -49,7 +49,6 @@ function PublicContent() {
     },[publicContent]);
     const getUsers = async () => {
         const response = await axios.get(`/api/publicContentAPI?page=${nowPage}`);
-        console.log(response);
         setUserContent(response);
     }
 
@@ -74,8 +73,6 @@ function PublicContent() {
     function buttonSet()
     {
         let lastPage = publicContent.data.last_page;
-        console.log("lastPage");
-        console.log(lastPage);
         setPaging(PageButton(nowPage,lastPage));
     }
 

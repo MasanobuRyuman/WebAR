@@ -3,6 +3,7 @@ import axios from 'axios';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch , Link } from 'react-router-dom';
 import PageButton from './UI/PageButton.js';
+import SearchTypeButton from './UI/searchTypeButton.js';
 
 export default function PublicSerchPage() {
     const [searchContent, setSearchContent] = useState([]);
@@ -80,6 +81,7 @@ export default function PublicSerchPage() {
     }
     return(
         <div>
+            <SearchTypeButton tagList={tagDataList}/>
             <h1>検索画面</h1>
             <Link to='/'>戻る</Link>
             <form method="GET" action={`ContentIntroduction/${saveName}`}>
