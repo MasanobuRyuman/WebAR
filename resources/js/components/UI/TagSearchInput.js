@@ -22,9 +22,23 @@ const MenuProps = {
 
 
 export default function TagSearchInput(props) {
+    const [allTagData, setAllTagData] = useState([]);
+    const [tagList,setTagList] = useState([]);
+    useEffect(()=>{
+        getTagList();
+    },[])
 
-    const [allTagData, setAllTagData] = React.useState([]);
-
+    const options = []
+    const getTagList = async ()=>{
+        const res = await axios.get('/api/getTagAPI');
+        res.data.forEach(e => {
+            options.push(e.tagName);
+        })
+        setTagList(options);
+        console.log(options);
+    }
+    console.log("タグリストtagserchInput");
+    console.log(tagList);
 
     const handleChange = (event) => {
       const {
@@ -41,7 +55,7 @@ export default function TagSearchInput(props) {
 
     return (
         <div>
-            <FormControl sx={{ m: 1, width: 300 }}>
+            <FormControl sx={{ width: 300 }}>
                 <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
                 <Select
                     labelId="demo-multiple-checkbox-label"
@@ -53,7 +67,7 @@ export default function TagSearchInput(props) {
                     renderValue={(selected) => selected.join(', ')}
                     MenuProps={MenuProps}
                 >
-                    {props.tagList.map((name) => (
+                    {tagList.map((name) => (
                       <MenuItem key={name} value={name}>
                         <Checkbox checked={props.selectedTag.some((tag) => tag === name)} />
                         <ListItemText primary={name} />

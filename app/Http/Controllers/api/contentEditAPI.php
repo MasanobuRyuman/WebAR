@@ -10,7 +10,6 @@ use App\Models\content;
 class contentEditAPI extends Controller
 {
     public function edit(){
-        logger('test', ['foo' => 'editAPI']);
         $saveName = $_POST["saveName"];
         $newContentName = $_POST["newContentName"];
         $content = new content;

@@ -12,18 +12,13 @@ class addPhotoDataAPI extends Controller
     public function add(Request $request){
         $saveName = $request->get('saveName');
         $photoData = $request->file('photoData');
-        logger("入ったか確認",['foo' => 'haitta']);
-        logger("入ったか確認",['foo' => $saveName]);
-        logger("入ったか確認",['kita' => $photoData]);
+
         if (!is_null($photoData)) {
             date_default_timezone_set('Asia/Tokyo');
-
-            logger("コンテント名",['foo' => "kannsuu"]);
             $uniqName = uniqid();
 
             $photoDataName = $photoData->getClientOriginalName();
             $photoDataType = pathinfo($photoDataName, PATHINFO_EXTENSION);
-            logger("入ったか確認",['foo' => $photoDataType]);
             $photoDataFileName = $uniqName . "." . $photoDataType;
             $dir = 'public';
             $photoData->storeAs($dir, $photoDataFileName, ['disk' => 'local']);

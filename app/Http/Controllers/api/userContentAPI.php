@@ -12,8 +12,7 @@ class userContentAPI extends Controller
 
         $userName = $_GET['userName'];
         $users = $content->userContent($userName);
-        logger('users',["users"=>$users]);
-        
+
         return \Response::json($users);
 
     }

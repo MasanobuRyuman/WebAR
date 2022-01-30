@@ -6,19 +6,21 @@ import {Select,Input, Box,MenuItem,InputLabel,FormControl,Grid,Typography} from 
 export default function Header(){
     return(
         <Box sx={{
-            display: 'flex',
+            display        : 'flex',
             backgroundColor: "#81c784",
         }}>
             <Typography variant="h2" sx={{
                 fontSize:40,
-                display: 'inline',
-                m: 'auto',
+                display : 'inline',
+                m       : 'auto',
             }}>ARShare</Typography>
             <Typography sx={{
                 fontSize:20,
+                m       :2,
             }}>初めての人</Typography>
             <Typography sx={{
                 fontSize:20,
+                m       :2,
             }}><Link to={'./LoginPage'}>ログイン</Link></Typography>
         </Box>
     )

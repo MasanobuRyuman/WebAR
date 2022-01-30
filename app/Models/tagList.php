@@ -21,15 +21,12 @@ class tagList extends Model
     }
     public function getTagId($tagNameList)
     {
-        logger("getTagId",["tagName"=>$tagNameList]);
         //whereInの第二引数を直接[]で括っているのでエラーがでる可能性がある。
         $tagIdList = array();
         foreach($tagNameList as $tag){
             $tagId = DB::table('tagList')->select('tagId')->where('tagName',$tag)->get();
             $tagIdList[] = $tagId;
         }
-
-        logger("tagIdList",["tagIdList"=>$tagIdList]);
         return $tagIdList;
     }
 }

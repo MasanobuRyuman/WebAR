@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch , Link ,withRouter} from 'react-router-dom';
-import {Select,Input,Box,MenuItem,InputLabel,FormControl,TextField} from '@mui/material';
+import {Select,Input,Box,MenuItem,InputLabel,FormControl,TextField,Button} from '@mui/material';
 import TagSearchInput from './TagSearchInput.js';
 export default function SearchTypeButton(props){
-    const [searchType, setSearchType] = useState(" ");
+    const [searchType, setSearchType] = useState("タグ");
     const [selectTag, setSelectTag] = useState("default");
     const [selectedTagList, setSelectedTagList] = React.useState([]);
     function tagInput(e){
@@ -40,18 +40,28 @@ export default function SearchTypeButton(props){
         console.log(selectTag)
         console.log(props.tagList)
         if(searchType == "タグ"){
-            return <TagSearchInput tagList={props.tagList} selectedTag={selectedTagList} setSelectedTag={setSelectedTagList} sx={{mr:1}}/>;
+            return <TagSearchInput tagList={props.tagList} selectedTag={selectedTagList} setSelectedTag={setSelectedTagList} sx={{
+                width:300,
+            }}/>;
         }else{
-            return <TextField id="searchCharacter" label="Outlined" variant="outlined" />;
+            return <TextField id="searchCharacter" label="Outlined" variant="outlined" sx={{
+                width:300,
+            }} />;
         }
     }
     return(
         <div>
             <Box key="serchFunction" sx={{
-                minWidth: 100,
-                display : 'flex',
+                width         : 1,
+                display       : 'flex',
+                justifyContent: "center",
+                alignItems    : "center",
+                mt            :5,
             }}>
-                <FormControl>
+                <FormControl sx={{
+                    width:150,
+
+                }}>
                     <InputLabel id="demo-simple-select-label">検索選択</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
@@ -67,9 +77,12 @@ export default function SearchTypeButton(props){
                     </Select>
                 </FormControl>
                 <InputType />
+                <Link to='./publicSearchPage' onClick={searchData}><Button variant="outlined" size="large" sx={{
+                    height     :55,
+                    borderColor:"grey.500",
+                    color      :"black",
+                }}>検索</Button></Link>
             </Box>
-
-            <Link to='./publicSearchPage' onClick={searchData}>検索</Link>
         </div>
     )
 }

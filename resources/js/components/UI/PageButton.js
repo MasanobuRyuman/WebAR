@@ -44,7 +44,6 @@ export default function PageButton(nowPage,lastPage){
             console.log(pageCount);
             list.push(outputPage);
         }
-
     }
     return list;
 }
