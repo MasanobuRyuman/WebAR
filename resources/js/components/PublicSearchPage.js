@@ -16,10 +16,11 @@ export default function PublicSerchPage() {
     const [saveName,setSaveName] = useState('');
     const [csrfToken,setCsrfToken] = useState("");
     const [tagDataList,setTagDataList] = useState([]);
+    const [searchValue,setSearchValue] = useState("");
 
     useEffect(()=>{
         getContent()
-    },[])
+    },[searchValue])
     useEffect(()=>{
         getTagList();
     },[])
@@ -84,7 +85,7 @@ export default function PublicSerchPage() {
     return(
         <div>
             <Header />
-            <SearchTypeButton tagList={tagDataList}/>
+            <SearchTypeButton tagList={tagDataList} setSearchValue={setSearchValue}/>
             <h1>検索画面</h1>
             <Link to='/'>戻る</Link>
             <ContentCatalog contentData={searchContent} nowPage={nowPage} setNowPage={setNowPage}/>
