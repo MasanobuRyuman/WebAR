@@ -27,12 +27,19 @@ export default function SearchTypeButton(props){
         console.log(searchType);
         console.log(selectedTagList);
         localStorage.setItem("searchType",searchType);
+        let searchValue = "";
         if (searchType == "タグ"){
             console.log("searchDataのタグに入った");
             localStorage.setItem("selectedTagList",JSON.stringify(selectedTagList));
+            searchValue = selectedTagList;
         }else{
             let searchCharacter = document.getElementById("searchCharacter").value;
             localStorage.setItem("searchCharacter",searchCharacter);
+            searchValue = searchCharacter;
+        }
+
+        if (props.setSearchValue != undefined){
+            props.setSearchValue(searchValue);
         }
     }
     function InputType(){
