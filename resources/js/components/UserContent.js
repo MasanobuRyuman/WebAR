@@ -3,6 +3,7 @@ import axios from 'axios';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch , Link ,withRouter} from 'react-router-dom';
 import PageButton from './UI/PageButton.js';
+import ContentCatalog from './UI/ContentCatalog.js';
 
 function UserContent() {
     const [userContent, setUserContent] = useState([]);
@@ -94,21 +95,8 @@ function UserContent() {
             <a href="addFile">ファイルの追加</a>
             <h1>Userペ-ジ</h1>
             <a href="/">トップページに戻る</a>
-            {userContent?.data?.data?.map((data,index)=>(
-                <div key={index}>
-                    <p>{data.name}</p>
-                    <p>{data.contentName}</p>
-                    <input type="submit" onClick={() => arLink(data.saveName)} value="AR"></input>
-                    <Link to={'/UserContentEdit'} onClick={() => recordContent(data.saveName,data.contentName)}>編集</Link>
-                    <Link to={'/userContentIntroduction'} onClick={() => addLocalStorageData(data.saveName,data.contentName)}>作品ページ</Link>
-                </div>
-            ))}
-            <a onClick={prev_current_page}>前</a>
-            {paging.map((data)=>(
-                <a key={data} onClick={() => move_page(data)}>{data}</a>
-            ))}
-            <a onClick={add_current_page}>次</a>
-            <input name="saveName" type="hidden" value={saveName}></input>
+            <ContentCatalog contentData={userContent} nowPage={nowPage} setNowPage={setNowPage} />
+
         </div>
     )
 }
