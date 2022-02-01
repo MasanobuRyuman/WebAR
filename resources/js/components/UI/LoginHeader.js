@@ -18,10 +18,6 @@ export default function LoginHeader(){
                 fontSize:20,
                 m       :2,
             }}>初めての人</Typography>
-            <Typography sx={{
-                fontSize:20,
-                m       :2,
-            }}><Link to={'./LoginPage'}>ログイン</Link></Typography>
         </Box>
     )
 }

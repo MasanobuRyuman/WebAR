@@ -1,9 +1,9 @@
 import React, {useEffect,useState} from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch , Link ,withRouter} from 'react-router-dom';
+import {Select,Input, Box,MenuItem,InputLabel,FormControl,Grid,Typography,Button} from '@mui/material';
 
 export default function PageButton(nowPage,lastPage){
-
     let prev = true;
     let outputPage = nowPage;
     let list = [nowPage];

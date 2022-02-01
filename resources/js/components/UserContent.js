@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch , Link ,withRouter} from 'react-router-dom';
 import PageButton from './UI/PageButton.js';
 import ContentCatalog from './UI/ContentCatalog.js';
+import LoginHeader from './UI/LoginHeader.js';
 
 function UserContent() {
     const [userContent, setUserContent] = useState([]);
@@ -91,11 +92,11 @@ function UserContent() {
 
     return (
         <div>
+            <LoginHeader />
             <Link to={`/AddFile`} >コンテンツ追加</Link>
-            <a href="addFile">ファイルの追加</a>
             <h1>Userペ-ジ</h1>
             <a href="/">トップページに戻る</a>
-            <ContentCatalog contentData={userContent} nowPage={nowPage} setNowPage={setNowPage} />
+            <ContentCatalog contentData={userContent} nowPage={nowPage} setNowPage={setNowPage} userContentFlag="True"/>
 
         </div>
     )

@@ -22,14 +22,6 @@ export default function ContentCatalog(props){
         }
     },[props.contentData]);
 
-    function insertData(saveName,contentName){
-        localStorage.setItem('saveName', saveName);
-        let csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
-        setCsrfToken(csrf_token);
-        setSaveName(saveName);
-        setContentName(contentName);
-    }
-
     function arLink(name,saveName){
         setUserName(name);
         setSaveName(saveName);
@@ -60,15 +52,41 @@ export default function ContentCatalog(props){
     function move_page(pageNumber){
         props.setNowPage(pageNumber);
     }
+
+    function insertData(saveName,contentName){
+        localStorage.setItem('saveName', saveName);
+        let csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
+        setCsrfToken(csrf_token);
+        setSaveName(saveName);
+        setContentName(contentName);
+    }
+
+    function userInsertData(saveName){
+        localStorage.setItem('saveName',saveName);
+    }
+
+    function IntroductionButton(prop){
+        if (props.userContentFlag != undefined){
+            return(
+                <Link to={`/userContentIntroduction`} onClick={() => userInsertData(prop.saveName)}>{prop.contentName}</Link>
+            )
+        }else{
+            return(
+                <Input type="submit" onClick={() => insertData(prop.saveName,prop.contentName)} value={prop.contentName} />
+            )
+        }
+
+
+    }
     return(
         <Box sx={{
-                mt:3,
-            }}>
-                <form method="GET" action={`ContentIntroduction/${saveName}`}>
-                    <input type="hidden" name="_token" value={csrfToken} />
-                    <Grid container spacing={2} alignItems="center" justify="center">
-                    {props.contentData?.data?.data?.map((data,index)=>(
-                        <Grid item xs={4} >
+            mt:3,
+        }}>
+            <form method="GET" action={`ContentIntroduction/${saveName}`}>
+                <input type="hidden" name="_token" value={csrfToken} />
+                <Grid container spacing={2} alignItems="center" justify="center">
+                {props.contentData?.data?.data?.map((data,index)=>(
+                    <Grid item xs={4} >
                         <Box key={index} id="contentFrame" sx={{
                             border      : 1,
                             borderRadius: 2,
@@ -76,31 +94,33 @@ export default function ContentCatalog(props){
                             width       : 250,
                             mx          :"auto",
                         }}>
-                            <Input type="submit" onClick={() => insertData(data.saveName,data.contentName)} value={data.contentName} />
+                            <IntroductionButton saveName={data.saveName} contentName={data.contentName} />
                             <Typography>{data.name}</Typography>
                         </Box>
-                        </Grid>
-                    ))}
                     </Grid>
-                    <Box sx={{
-                        width         : 1,
-                        display       : 'flex',
-                        justifyContent: "center",
-                        alignItems    : "center",
-                        mt            :3,
-                    }}>
-                        <Button type="button" onClick={prev_current_page}>前</Button>
-                        {paging.map((data)=>(
-                            <Button key={data} onClick={() => move_page(data)} sx={{
-                                widht:2,
-                            }}>{data}</Button>
-                        ))}
-                        <Button type="button" onClick={add_current_page}>次</Button>
-                    </Box>
-                    <input type="hidden" value={userName}></input>
-                    <input type="hidden" name="saveName" value={saveName}></input>
-                    <input type="hidden" name="contentName" value={contentName}></input>
-                </form>
+                ))}
+                </Grid>
+
+                <input type="hidden" value={userName}></input>
+                <input type="hidden" name="saveName" value={saveName}></input>
+                <input type="hidden" name="contentName" value={contentName}></input>
+            </form>
+            <Box sx={{
+                width         : 1,
+                display       : 'flex',
+                justifyContent: "center",
+                alignItems    : "center",
+                mt            :3,
+            }}>
+                <Button type="button" onClick={prev_current_page}>前</Button>
+                {paging.map((data)=>(
+                    <Button key={data} onClick={() => move_page(data)} sx={{
+                        widht:2,
+                    }}>{data}</Button>
+                ))}
+                <Button type="button" onClick={add_current_page}>次</Button>
             </Box>
+        </Box>
+
     )
 }
