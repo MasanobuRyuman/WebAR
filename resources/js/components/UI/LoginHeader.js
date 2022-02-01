@@ -1,7 +1,7 @@
 import React, {useEffect,useState} from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch , Link ,withRouter} from 'react-router-dom';
-import {Select,Input, Box,MenuItem,InputLabel,FormControl,Grid,Typography} from '@mui/material';
+import {Select,Input, Box,MenuItem,InputLabel,FormControl,Grid,Typography,Button} from '@mui/material';
 
 export default function LoginHeader(){
     return(
@@ -18,6 +18,10 @@ export default function LoginHeader(){
                 fontSize:20,
                 m       :2,
             }}>初めての人</Typography>
+            <a href="/"><Button sx={{
+                fontSize:20,
+                m       :2,
+            }}>トップページに戻る</Button></a>
         </Box>
     )
 }

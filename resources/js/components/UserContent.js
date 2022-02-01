@@ -94,10 +94,7 @@ function UserContent() {
         <div>
             <LoginHeader />
             <Link to={`/AddFile`} >コンテンツ追加</Link>
-            <h1>Userペ-ジ</h1>
-            <a href="/">トップページに戻る</a>
             <ContentCatalog contentData={userContent} nowPage={nowPage} setNowPage={setNowPage} userContentFlag="True"/>
-
         </div>
     )
 }

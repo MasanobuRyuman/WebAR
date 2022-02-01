@@ -10,10 +10,7 @@ class MainController extends Controller
         session_start();
         $content = new content;
         $userName = $_SESSION['userName'];
-        echo $userName;
         $users = $content->userContent($userName);
-        echo "kita";
-
         return view('main', ['users' => $userName]);
 
     }
