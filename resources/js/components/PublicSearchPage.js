@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch , Link } from 'react-router-dom';
 import {Select,Input, Box,MenuItem,InputLabel,FormControl,Grid,Typography,Button} from '@mui/material';
 import PageButton from './UI/PageButton.js';
-import SearchTypeButton from './UI/searchTypeButton.js';
+import SearchBox from './UI/searchBox.js';
 import Header from './UI/Header.js';
 import ContentCatalog from './UI/ContentCatalog.js';
 
@@ -18,6 +18,11 @@ export default function PublicSerchPage() {
     const [tagDataList,setTagDataList] = useState([]);
     const [searchValue,setSearchValue] = useState("");
 
+    useEffect(()=>{
+        getContent()
+        console.log("nowPage");
+        console.log(nowPage);
+    },[nowPage])
     useEffect(()=>{
         getContent()
     },[searchValue])
@@ -58,13 +63,13 @@ export default function PublicSerchPage() {
             let searchContentName = localStorage.getItem("searchCharacter");
             let formData = new FormData();
             formData.append("searchContentName",searchContentName);
-            let gotContent = await axios.post('./api/getContentByContentAPI',formData);
+            let gotContent = await axios.post(`./api/getContentByContentAPI?page=${nowPage}`,formData);
             setSearchContent(gotContent);
         } else if (searchType == "ユーザー名"){
             let searchUserName = localStorage.getItem("searchCharacter");
             const formData = new FormData;
             formData.append("searchUserName",searchUserName);
-            let gotContent = await axios.post('./api/getContentByUserAPI',formData);
+            let gotContent = await axios.post(`./api/getContentByUserAPI?page=${nowPage}`,formData);
             setSearchContent(gotContent);
         }
         setTagDataList()
@@ -85,7 +90,7 @@ export default function PublicSerchPage() {
     return(
         <div>
             <Header />
-            <SearchTypeButton tagList={tagDataList} setSearchValue={setSearchValue}/>
+            <SearchBox tagList={tagDataList} setSearchValue={setSearchValue} pageSource="publicContent"/>
             <h1>検索画面</h1>
             <Link to='/'>戻る</Link>
             <ContentCatalog contentData={searchContent} nowPage={nowPage} setNowPage={setNowPage}/>

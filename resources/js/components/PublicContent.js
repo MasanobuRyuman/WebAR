@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch , Link ,withRouter} from 'react-router-dom
 import {Select,Input, Box,MenuItem,InputLabel,FormControl,Grid,Typography,Button} from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SearchIcon from '@mui/icons-material/Search';
-import SearchTypeButton from './UI/searchTypeButton.js';
+import SearchBox from './UI/searchBox.js';
 import Header from './UI/Header.js';
 import ContentCatalog from './UI/ContentCatalog.js';
 
@@ -68,8 +68,8 @@ function PublicContent() {
     return (
         <div>
             <Header />
-            <SearchTypeButton tagList={tagDataList}/>
-            <ContentCatalog contentData={publicContent} nowPage={nowPage} setNowPage={setNowPage}/>
+            <SearchBox tagList={tagDataList} pageSource="publicContent"/>
+            <ContentCatalog contentData={publicContent} nowPage={nowPage} setNowPage={setNowPage} />
         </div>
     )
 }
