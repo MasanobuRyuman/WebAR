@@ -66,6 +66,14 @@ export default function SearchBox(props){
                     color      :"black",
                 }}>検索</Button></Link>
             )
+        }else if(props.pageSource == "userContent"){
+            return(
+                <Link to='./userSearchPage' onClick={searchData}><Button variant="outlined" size="large" sx={{
+                    height     :55,
+                    borderColor:"grey.500",
+                    color      :"black",
+                }}>検索</Button></Link>
+            )
         }
     }
     return(

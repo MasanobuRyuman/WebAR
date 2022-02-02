@@ -6,6 +6,7 @@ import AddFile from './AddFile.js';
 import UserContentEdit from './UserContentEdit.js';
 import UserContentIntroduction from './UserContentIntroduction.js';
 import EditPhoto from './EditPhoto.js';
+import UserSearchPage from './UserSearchPage.js';
 
 export default function UserRouter() {
     function HomePage(){
@@ -29,6 +30,9 @@ export default function UserRouter() {
                 </Route>
                 <Route path="/EditPhoto">
                     <EditPhoto />
+                </Route>
+                <Route path="/UserSearchPage">
+                    <UserSearchPage />
                 </Route>
             </Switch>
         </BrowserRouter>

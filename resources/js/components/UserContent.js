@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch , Link ,withRouter} from 'react-router-dom
 import PageButton from './UI/PageButton.js';
 import ContentCatalog from './UI/ContentCatalog.js';
 import LoginHeader from './UI/LoginHeader.js';
+import SearchBox from './UI/SearchBox.js';
 
 function UserContent() {
     const [userContent, setUserContent] = useState([]);
@@ -13,9 +14,24 @@ function UserContent() {
     const [firstUseEffect,setFirstUseEffect] = useState(true);
     const [saveName,setSaveName] = useState("");
     const getUserName = document.getElementById('userName').value;
+    const [tagDataList,setTagDataList] = useState([]);
 
     const addLocalStorageData = async(saveName,contentName) =>{
         localStorage.setItem('saveName', saveName);
+    }
+
+    useEffect(()=>{
+        getTagList();
+    },[])
+
+    const options = []
+    const getTagList = async ()=>{
+        const res = await axios.get('/api/getTagAPI');
+        res.data.forEach(e => {
+            options.push(e.tagName);
+        })
+        setTagDataList(options);
+        console.log(options);
     }
 
     useEffect(() => {
@@ -94,6 +110,7 @@ function UserContent() {
         <div>
             <LoginHeader />
             <Link to={`/AddFile`} >コンテンツ追加</Link>
+            <SearchBox tagList={tagDataList} pageSource="userContent"/>
             <ContentCatalog contentData={userContent} nowPage={nowPage} setNowPage={setNowPage} userContentFlag="True"/>
         </div>
     )

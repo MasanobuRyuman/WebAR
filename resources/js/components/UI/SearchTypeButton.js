@@ -24,7 +24,7 @@ export default function SearchTypeButton(props){
                 </Select>
             </FormControl>
         )
-    }else if(props.pageSource="userContent"){
+    }else if(props.pageSource == "userContent"){
         return(
             <FormControl sx={{
                 width:150,
