@@ -35,3 +35,5 @@ Route::post('/editContentAndTagAPI',[App\Http\Controllers\api\editContentAndTagA
 Route::post('/addContentInfoAPI',[App\Http\Controllers\api\addContentInfoAPI::class,'add']);
 Route::post('/getContentByContentAPI',[App\Http\Controllers\api\getContentByContentAPI::class,'get']);
 Route::post('/getContentByUserAPI',[App\Http\Controllers\api\getContentByUserAPI::class,'get']);
+Route::post('/getUserContentByTagAPI',[App\Http\Controllers\api\getUserContentByTagAPI::class,'get']);
+Route::post('/getUserContentByContentAPI',[App\Http\Controllers\api\getUserContentByContentAPI::class,'get']);

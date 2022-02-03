@@ -64,12 +64,22 @@ class content extends Model
     }
 
     public function getContentByContent($contentName){
-        $gotContentList = DB::table('content')->select('name','contentName','saveName')->where("contentName",$contentName)->paginate(9);
-        return $gotContentList;
+        $getContentList = DB::table('content')->select('name','contentName','saveName')->where("contentName",$contentName)->paginate(9);
+        return $getContentList;
     }
 
-    public function getContentByUser($UserName){
-        $gotContentList = DB::table('content')->select('name','contentName','saveName')->where("name",$UserName)->paginate(9);
-        return $gotContentList;
+    public function getContentByUser($userName){
+        $getContentList = DB::table('content')->select('name','contentName','saveName')->where("name",$UserName)->paginate(9);
+        return $getContentList;
+    }
+
+    public function getSaveNameByUser($userName){
+        $getSaveNameList = DB::table('content')->select('saveName')->where("name",$userName);
+        return $getSaveNameList;
+    }
+
+    public function getContentByUserNameAndTag($userName,$tagIdList){
+        $getContentData = DB::table("content")->join('contentAndTag','content.saveName',"=",'contentAndTag.saveName')->select('name','contentName','content.saveName')->where("name",$userName)->whereIn('tagId',$tagIdList)->paginate(9);
+        return $getContentData;
     }
 }

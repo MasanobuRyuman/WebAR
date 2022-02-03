@@ -18,6 +18,8 @@ export default function UserSerchPage() {
     const [tagDataList,setTagDataList] = useState([]);
     const [searchValue,setSearchValue] = useState("");
 
+    const userName = localStorage.getItem("userName");
+
     useEffect(()=>{
         getContent()
         console.log("nowPage");
@@ -51,25 +53,20 @@ export default function UserSerchPage() {
         let searchType = localStorage.getItem('searchType');
         if (searchType == "タグ"){
             let searchBasedTagList = localStorage.getItem("selectedTagList");
-
             searchBasedTagList = JSON.parse(searchBasedTagList);
             let formData = new FormData();
             searchBasedTagList.forEach(i=>{
                 formData.append("searchBasedTagList[]",i);
             })
-            let request = await axios.post(`./api/getSearchContentAPI?page=${nowPage}`,formData);
+            formData.append('userName',userName);
+            let request = await axios.post(`./api/getUserContentByTagAPI?page=${nowPage}`,formData);
             setSearchContent(request);
         } else if (searchType == "コンテンツ名"){
             let searchContentName = localStorage.getItem("searchCharacter");
             let formData = new FormData();
             formData.append("searchContentName",searchContentName);
-            let gotContent = await axios.post(`./api/getContentByContentAPI?page=${nowPage}`,formData);
-            setSearchContent(gotContent);
-        } else if (searchType == "ユーザー名"){
-            let searchUserName = localStorage.getItem("searchCharacter");
-            const formData = new FormData;
-            formData.append("searchUserName",searchUserName);
-            let gotContent = await axios.post(`./api/getContentByUserAPI?page=${nowPage}`,formData);
+            formData.append("userName",userName);
+            let gotContent = await axios.post(`./api/getUserContentByContentAPI?page=${nowPage}`,formData);
             setSearchContent(gotContent);
         }
         setTagDataList()
