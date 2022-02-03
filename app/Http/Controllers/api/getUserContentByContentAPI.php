@@ -7,10 +7,12 @@ use App\Models\content;
 class getUserContentByContentAPI extends Controller
 {
     public function get(){
-        $searchName = $_POST["searchUserName"];
+        logger("user検索",["hiatta"=>"入った"]);
+        $searchContentName = $_POST["searchContentName"];
+        $userName = $_POST["userName"];
+        logger("検索内容",["検索内容"=>$searchContentName]);
         $content = new content;
-        $gotContent = $content->getContentByUser($searchName);
-
-        return \Response::json($gotContent);
+        $conditionalUserContent = $content->getContentByuserNameAndContentName($userName,$searchContentName);
+        return \Response::json($conditionalUserContent);
     }
 }

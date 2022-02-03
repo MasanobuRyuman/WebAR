@@ -82,4 +82,9 @@ class content extends Model
         $getContentData = DB::table("content")->join('contentAndTag','content.saveName',"=",'contentAndTag.saveName')->select('name','contentName','content.saveName')->where("name",$userName)->whereIn('tagId',$tagIdList)->paginate(9);
         return $getContentData;
     }
+
+    public function getContentByUserNameAndContentName($userName,$contentName){
+        $getContentData = DB::table('content')->select('name','contentName','saveName')->where([['name',$userName],['contentName',$contentName]])->paginate(9);
+        return $getContentData;
+    }
 }

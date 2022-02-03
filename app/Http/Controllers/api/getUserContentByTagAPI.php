@@ -9,7 +9,6 @@ use App\Models\tagList;
 class getUserContentByTagAPI extends Controller
 {
     public function get(){
-        logger('タグ',['タグからのコンテンツ'=>"入っている"]);
         $searchBasedTag = $_POST["searchBasedTagList"];
         $userName = $_POST["userName"];
 
@@ -25,7 +24,6 @@ class getUserContentByTagAPI extends Controller
         };
         $content = new content;
         $conditionalUserContent = $content ->getContentByUserNameAndTag($userName,$tagIdList);
-        logger('タグからのコンテンツ',['タグからのコンテンツ'=>$conditionalUserContent]);
         return \Response::json($conditionalUserContent);
     }
 }
