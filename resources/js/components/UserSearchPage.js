@@ -87,7 +87,7 @@ export default function UserSerchPage() {
     return(
         <div>
             <Header />
-            <SearchBox tagList={tagDataList} setSearchValue={setSearchValue} pageSource="publicContent"/>
+            <SearchBox tagList={tagDataList} setSearchValue={setSearchValue} pageSource="userContent"/>
             <h1>検索画面</h1>
             <Link to='/main'>戻る</Link>
             <ContentCatalog contentData={searchContent} nowPage={nowPage} setNowPage={setNowPage}/>
