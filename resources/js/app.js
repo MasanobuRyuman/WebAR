@@ -16,3 +16,4 @@ require('./components/PublicPageRouter');
 require('./components/WebAR');
 require('./components/UserRouter');
 require('./components/ContentIntroduction');
+require('./components/Object');

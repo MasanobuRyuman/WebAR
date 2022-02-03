@@ -14,6 +14,8 @@ export default function ContentIntroduction() {
     const [editTagData,setEditTagData] = useState([]);
     const [csrfToken,setCsrfToken] = useState("");
     const [userName,setUserName] = useState("");
+    const [selectedContentTyep,setSelectedContentType] = useState("");
+
     let saveName = document.getElementById('saveName').value;
     let contentName = document.getElementById('contentName').value;
 
@@ -74,9 +76,10 @@ export default function ContentIntroduction() {
         });
         setEditTagData(tagList);
     }
-    function arLink(){
+    function preparationCamera(contentType){
         let csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
         setCsrfToken(csrf_token);
+        setSelectedContentType(contentType);
     }
 
     const animatedComponents = makeAnimated();
@@ -111,10 +114,11 @@ export default function ContentIntroduction() {
                     </div>
                 ))}
 
-                <Button type="submit" onClick={arLink} variant="contained">AR</Button>
-                <Button type="submit" variant="contained">オブジェクト</Button>
+                <Button type="submit" onClick={()=>preparationCamera("AR")} variant="contained">AR</Button>
+                <Button type="submit" onClick={()=>preparationCamera("Object")} variant="contained">オブジェクト</Button>
                 <Input type="hidden" value={userName}></Input>
                 <Input type="hidden" name="saveName" value={saveName}></Input>
+                <Input type="hidden" name="contentType" id="contentType" value={selectedContentTyep}></Input>
                 <a href="javascript:window.open('http://twitter.com/share?text='+encodeURIComponent(document.title)+'&url='+encodeURIComponent(location.href),'sharewindow','width=550, height=450, personalbar=0, toolbar=0, scrollbars=1, resizable=!');">Tweet</a>
                 <a href="javascript:window.open('http://line.me/R/msg/text/?'+encodeURIComponent(document.title)+'%20'+encodeURIComponent(location.href),'sharewindow','width=550, height=450, personalbar=0, toolbar=0, scrollbars=1, resizable=!');">LINE</a>
             </form>
