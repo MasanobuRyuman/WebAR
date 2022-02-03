@@ -12,7 +12,7 @@ export default function ContentCatalog(props){
     const [paging,setPaging] = useState([]);
     const [firstUseEffect,setFirstUseEffect] = useState(true);
     console.log("contentCatalog");
-    console.log(props.contentName);
+    console.log(props.contentData);
     useEffect(()=>{
         if (firstUseEffect == true){
 
