@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch , Link } from 'react-router-dom';
-import Select from 'react-select';
+import {Select,Input, Box,MenuItem,InputLabel,FormControl,Grid,Typography,Button} from '@mui/material';
 import makeAnimated from 'react-select/animated';
 
 export default function UserContentIntroduction() {
@@ -12,6 +12,8 @@ export default function UserContentIntroduction() {
     const [tagDataList,setTagDataList] = useState([]);
     const [attachedTagList,setAttachedTagList] = useState([]);
     const [editTagData,setEditTagData] = useState([]);
+    const [selectedContentTyep,setSelectedContentType] = useState("");
+
     console.log('userContentIntroduction');
     let saveName = localStorage.getItem("saveName");
     console.log(saveName);
@@ -129,6 +131,11 @@ export default function UserContentIntroduction() {
             }
         );
     }
+    function preparationCamera(contentType){
+        let csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
+        setCsrfToken(csrf_token);
+        setSelectedContentType(contentType);
+    }
 
     const animatedComponents = makeAnimated();
 
@@ -164,8 +171,12 @@ export default function UserContentIntroduction() {
                 </div>
             ))}
             <Link to="EditPhoto"><input type="button" defaultValue="編集" /></Link>
-            <input type="submit" value="AR" />
-            <input type="submit" value="オブジェクト" />
+            <form method="POST" action={`./../AR`}>
+                <Button type="submit" onClick={()=>preparationCamera("AR")} variant="contained">AR</Button>
+                <Button type="submit" onClick={()=>preparationCamera("Object")} variant="contained">オブジェクト</Button>
+                <Input type="hidden" name="saveName" value={saveName}></Input>
+                <Input type="hidden" name="contentType" id="contentType" value={selectedContentTyep}></Input>
+            </form>
         </div>
     )
 }

@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Switch , Link } from 'react-router-dom';
 import {Select,Input, Box,MenuItem,InputLabel,FormControl,Grid,Typography,Button} from '@mui/material';
 import PageButton from './UI/PageButton.js';
 import SearchBox from './UI/searchBox.js';
-import Header from './UI/Header.js';
+import LoginHeader from './UI/LoginHeader.js';
 import ContentCatalog from './UI/ContentCatalog.js';
 
 export default function UserSerchPage() {
@@ -86,11 +86,11 @@ export default function UserSerchPage() {
     }
     return(
         <div>
-            <Header />
+            <LoginHeader />
             <SearchBox tagList={tagDataList} setSearchValue={setSearchValue} pageSource="userContent"/>
             <h1>検索画面</h1>
             <Link to='/main'>戻る</Link>
-            <ContentCatalog contentData={searchContent} nowPage={nowPage} setNowPage={setNowPage}/>
+            <ContentCatalog contentData={searchContent} nowPage={nowPage} setNowPage={setNowPage} userContentFlag="True"/>
         </div>
     )
 }
