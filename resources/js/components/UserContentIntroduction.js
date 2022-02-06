@@ -131,11 +131,7 @@ export default function UserContentIntroduction() {
             }
         );
     }
-    function preparationCamera(contentType){
-        let csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
-        setCsrfToken(csrf_token);
-        setSelectedContentType(contentType);
-    }
+    
 
     const animatedComponents = makeAnimated();
 
@@ -171,12 +167,7 @@ export default function UserContentIntroduction() {
                 </div>
             ))}
             <Link to="EditPhoto"><input type="button" defaultValue="編集" /></Link>
-            <form method="POST" action={`./../AR`}>
-                <Button type="submit" onClick={()=>preparationCamera("AR")} variant="contained">AR</Button>
-                <Button type="submit" onClick={()=>preparationCamera("Object")} variant="contained">オブジェクト</Button>
-                <Input type="hidden" name="saveName" value={saveName}></Input>
-                <Input type="hidden" name="contentType" id="contentType" value={selectedContentTyep}></Input>
-            </form>
+
         </div>
     )
 }
