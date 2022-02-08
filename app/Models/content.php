@@ -87,4 +87,9 @@ class content extends Model
         $getContentData = DB::table('content')->select('name','contentName','saveName')->where([['name',$userName],['contentName',$contentName]])->paginate(9);
         return $getContentData;
     }
+    public function getContentNameBySaveName($saveName){
+        $getContentName = DB::table('content')->select('contentName')->where('saveName',$saveName)->get();
+        logger('contentName',["contentName"=>$getContentName]);
+        return $getContentName;
+    }
 }

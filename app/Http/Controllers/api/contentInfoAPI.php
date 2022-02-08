@@ -45,7 +45,7 @@ class contentInfoAPI extends Controller
 
         $tagList = new tagList;
         $tagName = $tagList -> getConditionsTagName($tagIdList);
-    
+
         $tagNameList = array();
         if ($tagName !=""){
             foreach ($tagName as $temp){
@@ -54,11 +54,24 @@ class contentInfoAPI extends Controller
                 }
             }
         }
+        $content = new content;
+        $contentName = $content->getContentNameBySaveName($saveName);
+        logger("ccontnet名",["コンテント名"=>"kooko"]);
+
+        foreach($contentName as $temp){
+            foreach($temp as $temp2){
+                $contentName = $temp2;
+            }
+        }
+
         $array = array(
             "contentInfo" => $infoData,
             "contentPhoto" => $photoData,
             "tagNameList" => $tagNameList,
+            "contentName" => $contentName,
         );
+
+
         $json = json_encode($array);
         return $json;
     }
