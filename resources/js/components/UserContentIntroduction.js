@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch , Link } from 'react-router-dom';
-import Select from 'react-select';
+import {Select,Input, Box,MenuItem,InputLabel,FormControl,Grid,Typography,Button} from '@mui/material';
 import makeAnimated from 'react-select/animated';
 
 export default function UserContentIntroduction() {
@@ -12,21 +12,18 @@ export default function UserContentIntroduction() {
     const [tagDataList,setTagDataList] = useState([]);
     const [attachedTagList,setAttachedTagList] = useState([]);
     const [editTagData,setEditTagData] = useState([]);
-    console.log('userContentIntroduction');
-    let saveName = localStorage.getItem("saveName");
-    console.log(saveName);
+    const [selectedContentTyep,setSelectedContentType] = useState("");
+    const [tagEdit,setTagEdit] = useState(False);
 
+    let saveName = localStorage.getItem("saveName");
     useEffect(
         async ()=>{
-            console.log("contentInfo");
+            console.log("UserContentIntroduction");
             const formData = new FormData();
             formData.append('saveName',saveName);
             let request = await axios.post('/api/contentInfoAPI',formData);
-            console.log(request);
-            //console.log(request.data.contentInfo);
+            setContentName(request.data.contentName);
             setContentInfo(request.data.contentInfo);
-            //console.log("コンテント");
-            //console.log(request.data.contentName.contentName);
             document.getElementById('contentNameDecisionButton').style.display = "none";
             document.getElementById('decisionButton').style.display = "none";
             let photoArray = []
@@ -34,22 +31,21 @@ export default function UserContentIntroduction() {
                 photoArray.push(element);
             })
             setPhotoData(photoArray);
-            setContentName(request.data.contentName.contentName);
-            let attachedTag = []
+            let attachedTag = [];
             request.data.tagNameList.forEach(function(element){
-                attachedTag.push({value:element,label:element});
+                attachedTag.push(element);
             })
+
             console.log("attachedTag");
             console.log(attachedTag);
             setAttachedTagList(attachedTag);
+            console.log("ここまで");
             const tagName = await axios.get('/api/getTagAPI');
             let options = []
             tagName.data.forEach(e => {
-                console.log(e.tagName);
                 options.push({value:e.tagName,label:e.tagName});
             })
             setTagDataList(options);
-            console.log(options);
         }
     ,[])
 
@@ -59,7 +55,6 @@ export default function UserContentIntroduction() {
     }
 
     const decisionExplanation = async ()=>{
-            console.log("decisionExplanation");
             document.getElementById('infoArea').readOnly = true;
             document.getElementById('decisionButton').style.display = "none";
             let newInfo = document.getElementById('infoArea').value;
@@ -73,8 +68,6 @@ export default function UserContentIntroduction() {
             }
     }
     function editContentName(){
-        console.log("attachedTagList");
-        console.log(attachedTagList);
         document.getElementById('introductionContentNameArea').readOnly = false;
         document.getElementById('contentNameDecisionButton').style.display = "";
     }
@@ -86,33 +79,6 @@ export default function UserContentIntroduction() {
             tagList.push(i.value);
         });
         setEditTagData(tagList);
-    }
-
-    const editTag = async()=>{
-        console.log("editTag");
-        let tagData = editTagData;
-        const formData = new FormData;
-        let deleteTag = [];
-        let addTag = [];
-        let defalutTagList = []
-        attachedTagList.forEach(e=>{
-            console.log(e.value);
-            defalutTagList.push(e.value);
-            if (!editTagData.includes(e.value)){
-                deleteTag.push(e.value);
-            }
-        })
-        editTagData.forEach(e=>{
-            if (!defalutTagList.includes(e)){
-                addTag.push(e);
-            }
-        })
-        console.log(deleteTag);
-        console.log(addTag);
-        formData.append("saveName",saveName);
-        formData.append("deleteTag",deleteTag);
-        formData.append("addTag",addTag);
-        axios.post('/api/editContentAndTagAPI',formData);
     }
 
     const changeContentName = async ()=>{
@@ -130,7 +96,34 @@ export default function UserContentIntroduction() {
         );
     }
 
-    const animatedComponents = makeAnimated();
+    function editTag(){
+        setTagEdit(True);
+    }
+
+    function TagBox(){
+        if(tagEdit == False){
+            return(
+                <div key={attachedTagList}>
+                    <Select
+                        value={attachedTagList}
+                        renderValue={(selected) => selected.join(', ')}
+                    />
+                </div>
+            )
+        }else{
+            
+            return(
+                <div key={attachedTagList}>
+                    <Select
+                        value={attachedTagList}
+                        renderValue={(selected) => selected.join(', ')}
+                    />
+                </div>
+            )
+        }
+    }
+
+
 
     return(
         <div>
@@ -141,17 +134,8 @@ export default function UserContentIntroduction() {
             <input type="button" onClick={editContentName} defaultValue="編集" />
             <input id="contentNameDecisionButton" type="button" onClick={changeContentName} defaultValue="決定" />
             <p>タグ</p>
-            <div key={attachedTagList}>
-                <Select
-                    id = 'userContentTagData'
-                    closeMenuOnSelect={false}
-                    components = {animatedComponents}
-                    defaultValue = {attachedTagList}
-                    isMulti
-                    options={tagDataList}
-                    onChange = {addTagInfo}
-                />
-            </div>
+
+            <TagBox />
             <input type="button" onClick={editTag} defaultValue="編集" />
             <p>説明</p>
             <input type="button" onClick={editExplanation} defaultValue="編集" />
@@ -164,8 +148,6 @@ export default function UserContentIntroduction() {
                 </div>
             ))}
             <Link to="EditPhoto"><input type="button" defaultValue="編集" /></Link>
-            <input type="submit" value="AR" />
-            <input type="submit" value="オブジェクト" />
         </div>
     )
 }
