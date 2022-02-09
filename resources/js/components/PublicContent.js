@@ -56,8 +56,6 @@ function PublicContent() {
         searchBasedTagData.forEach(i=>{
             searchBasedTagList.push({tagName:i})
         });
-
-
         localStorage.setItem('searchBasedTag', JSON.stringify(searchBasedTagList));
     }
     function setSearchBasedName(){

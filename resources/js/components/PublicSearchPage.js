@@ -51,7 +51,8 @@ export default function PublicSerchPage() {
         let searchType = localStorage.getItem('searchType');
         if (searchType == "タグ"){
             let searchBasedTagList = localStorage.getItem("selectedTagList");
-
+            console.log("タグ検索をしている");
+            console.log(searchBasedTagList);
             searchBasedTagList = JSON.parse(searchBasedTagList);
             let formData = new FormData();
             searchBasedTagList.forEach(i=>{

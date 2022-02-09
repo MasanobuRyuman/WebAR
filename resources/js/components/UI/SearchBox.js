@@ -9,18 +9,12 @@ export default function SearchBox(props){
     const [selectTag, setSelectTag] = useState("default");
     const [selectedTagList, setSelectedTagList] = React.useState([]);
     function tagInput(e){
-        console.log("tagInput");
-        console.log(e.target.Value);
         setSelectTag(e.target.Value);
     }
     function addTagData(data){
-        console.log("addTagData");
-        console.log(data);
         setSelectTag(data);
     }
     function searchInput(e){
-        console.log(e.target.value);
-        console.log("kita");
         setSearchType(e.target.value);
     }
     function searchData(){
@@ -44,9 +38,6 @@ export default function SearchBox(props){
         }
     }
     function InputType(){
-        console.log("inputType")
-        console.log(selectTag)
-        console.log(props.tagList)
         if(searchType == "タグ"){
             return <TagSearchInput tagList={props.tagList} selectedTag={selectedTagList} setSelectedTag={setSelectedTagList} sx={{
                 width:300,
