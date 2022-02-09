@@ -52,5 +52,8 @@ class contentAndTag extends Model
         }
     }
 
-    
+    public function allDeleteTagDataBySaveName($saveName)
+    {
+        DB::table("contentAndTag")->where("saveName",$saveName)->delete();
+    }
 }

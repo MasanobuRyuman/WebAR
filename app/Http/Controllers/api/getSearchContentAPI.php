@@ -12,7 +12,7 @@ class getSearchContentAPI extends Controller
     public function get(Request $request){
 
         $searchBasedTag = $request -> get("searchBasedTagList");
-
+        logger('searchBasedTag',["searchbasedTag"=>$searchBasedTag]);
         $tagList = new TagList;
         $tagId = $tagList->getTagId($searchBasedTag);
         $tagIdList = array();
@@ -24,7 +24,7 @@ class getSearchContentAPI extends Controller
             }
         };
         $contentAndTag = new contentAndTag;
-        
+
         $saveName = $contentAndTag->getSaveName($tagIdList);
         $saveNameList = array();
         foreach($saveName as $temp){

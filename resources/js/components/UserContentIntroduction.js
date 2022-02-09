@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch , Link } from 'react-router-dom';
 import {Select,Input, Box,MenuItem,InputLabel,FormControl,Grid,Typography,Button} from '@mui/material';
 import makeAnimated from 'react-select/animated';
+import TagSearchInput from './UI/TagSearchInput.js';
 
 export default function UserContentIntroduction() {
     const [contentInfo, setContentInfo] = useState('');
@@ -13,7 +14,9 @@ export default function UserContentIntroduction() {
     const [attachedTagList,setAttachedTagList] = useState([]);
     const [editTagData,setEditTagData] = useState([]);
     const [selectedContentTyep,setSelectedContentType] = useState("");
-    const [tagEdit,setTagEdit] = useState(False);
+    const [tagEdit,setTagEdit] = useState("false");
+    const [selectedTagList, setSelectedTagList] = React.useState([]);
+    const [update,setUpdata]=useState(true);
 
     let saveName = localStorage.getItem("saveName");
     useEffect(
@@ -26,7 +29,8 @@ export default function UserContentIntroduction() {
             setContentInfo(request.data.contentInfo);
             document.getElementById('contentNameDecisionButton').style.display = "none";
             document.getElementById('decisionButton').style.display = "none";
-            let photoArray = []
+            document.getElementById('tagDecisionButton').style.display = "none";
+             let photoArray = []
             request.data.contentPhoto.forEach(function(element){
                 photoArray.push(element);
             })
@@ -35,11 +39,10 @@ export default function UserContentIntroduction() {
             request.data.tagNameList.forEach(function(element){
                 attachedTag.push(element);
             })
-
             console.log("attachedTag");
             console.log(attachedTag);
             setAttachedTagList(attachedTag);
-            console.log("ここまで");
+            setSelectedTagList(attachedTag);
             const tagName = await axios.get('/api/getTagAPI');
             let options = []
             tagName.data.forEach(e => {
@@ -47,7 +50,7 @@ export default function UserContentIntroduction() {
             })
             setTagDataList(options);
         }
-    ,[])
+    ,[update])
 
     function editExplanation(){
         document.getElementById('infoArea').readOnly = false;
@@ -81,7 +84,7 @@ export default function UserContentIntroduction() {
         setEditTagData(tagList);
     }
 
-    const changeContentName = async ()=>{
+    const changeContentName = async()=>{
         let newContentName=document.getElementById('introductionContentNameArea').value;
         document.getElementById('introductionContentNameArea').readOnly = true;
         document.getElementById('contentNameDecisionButton').style.display = "none";
@@ -97,33 +100,44 @@ export default function UserContentIntroduction() {
     }
 
     function editTag(){
-        setTagEdit(True);
+        setTagEdit("true");
+        document.getElementById('tagDecisionButton').style.display = "";
     }
 
     function TagBox(){
-        if(tagEdit == False){
+        if(tagEdit == "false"){
             return(
                 <div key={attachedTagList}>
                     <Select
                         value={attachedTagList}
-                        renderValue={(selected) => selected.join(', ')}
+                        renderValue={(selected) => selected.join(',')}
                     />
                 </div>
             )
         }else{
-            
+            document.getElementById('infoArea').readOnly = true;
             return(
-                <div key={attachedTagList}>
-                    <Select
-                        value={attachedTagList}
-                        renderValue={(selected) => selected.join(', ')}
-                    />
-                </div>
+                <TagSearchInput id="UserContentTagInfo" tagList={tagDataList} selectedTag={selectedTagList} setSelectedTag={setSelectedTagList} sx={{
+                    width:300,
+                }}/>
             )
         }
     }
 
-
+    const changeTagData = async()=>{
+        let formData = new FormData;
+        console.log("selectedTagList");
+        console.log(selectedTagList);
+        selectedTagList.forEach(i=>{
+            formData.append("selectedTagList[]",i);
+        })
+        formData.append("saveName",saveName);
+        axios.post("./api/editTagAPI",formData);
+        setTagEdit("false");
+        document.getElementById('tagDecisionButton').style.display = "none";
+        console.log("ここまできている");
+        setUpdata(update?false:true);
+    }
 
     return(
         <div>
@@ -131,15 +145,16 @@ export default function UserContentIntroduction() {
             <p>コンテンツ名</p>
             <p>{contentName}</p>
             <textarea id="introductionContentNameArea" defaultValue={contentName} readOnly />
-            <input type="button" onClick={editContentName} defaultValue="編集" />
-            <input id="contentNameDecisionButton" type="button" onClick={changeContentName} defaultValue="決定" />
+            <Input type="button" onClick={editContentName} defaultValue="編集" />
+            <Input id="contentNameDecisionButton" type="button" onClick={changeContentName} defaultValue="決定" />
             <p>タグ</p>
 
             <TagBox />
-            <input type="button" onClick={editTag} defaultValue="編集" />
+            <Input type="button" onClick={editTag} defaultValue="編集" />
+            <Input type="button" onClick={changeTagData} id="tagDecisionButton" value="決定">決定</Input>
             <p>説明</p>
-            <input type="button" onClick={editExplanation} defaultValue="編集" />
-            <input type="button" id="decisionButton" onClick={decisionExplanation} defaultValue="決定" />
+            <Input type="button" onClick={editExplanation} defaultValue="編集" />
+            <Input type="button" id="decisionButton" onClick={decisionExplanation} defaultValue="決定" />
             <textarea id="infoArea" defaultValue={contentInfo} readOnly></textarea>
             <p>コンテンツ写真</p>
             {photoData.map((data,index)=>(
@@ -147,7 +162,8 @@ export default function UserContentIntroduction() {
                     <img src={"storage/" + data} alt="not image" title="image" />
                 </div>
             ))}
-            <Link to="EditPhoto"><input type="button" defaultValue="編集" /></Link>
+            <Link to="EditPhoto"><Input type="button" defaultValue="編集" /></Link>
+            <h1>{update}</h1>
         </div>
     )
 }
