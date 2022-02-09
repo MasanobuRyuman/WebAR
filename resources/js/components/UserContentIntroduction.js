@@ -16,6 +16,7 @@ export default function UserContentIntroduction() {
     const [selectedContentTyep,setSelectedContentType] = useState("");
     const [tagEdit,setTagEdit] = useState("false");
     const [selectedTagList, setSelectedTagList] = React.useState([]);
+    const [update,setUpdata]=useState(true);
 
     let saveName = localStorage.getItem("saveName");
     useEffect(
@@ -49,7 +50,7 @@ export default function UserContentIntroduction() {
             })
             setTagDataList(options);
         }
-    ,[])
+    ,[update])
 
     function editExplanation(){
         document.getElementById('infoArea').readOnly = false;
@@ -109,13 +110,14 @@ export default function UserContentIntroduction() {
                 <div key={attachedTagList}>
                     <Select
                         value={attachedTagList}
-                        renderValue={(selected) => selected.join(', ')}
+                        renderValue={(selected) => selected.join(',')}
                     />
                 </div>
             )
         }else{
+            document.getElementById('infoArea').readOnly = true;
             return(
-                <TagSearchInput tagList={tagDataList} selectedTag={selectedTagList} setSelectedTag={setSelectedTagList} sx={{
+                <TagSearchInput id="UserContentTagInfo" tagList={tagDataList} selectedTag={selectedTagList} setSelectedTag={setSelectedTagList} sx={{
                     width:300,
                 }}/>
             )
@@ -133,6 +135,8 @@ export default function UserContentIntroduction() {
         axios.post("./api/editTagAPI",formData);
         setTagEdit("false");
         document.getElementById('tagDecisionButton').style.display = "none";
+        console.log("ここまできている");
+        setUpdata(update?false:true);
     }
 
     return(
@@ -159,6 +163,7 @@ export default function UserContentIntroduction() {
                 </div>
             ))}
             <Link to="EditPhoto"><Input type="button" defaultValue="編集" /></Link>
+            <h1>{update}</h1>
         </div>
     )
 }
