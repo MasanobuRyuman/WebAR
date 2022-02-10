@@ -12,12 +12,13 @@ class content extends Model
     use HasFactory;
     public function publicContent()
     {
-        $publicContent = DB::table('content')->select('name','contentName','saveName')->paginate(9);
+        $publicContent = DB::table('content')->select('name','contentName','saveName','contentPhoto')->paginate(9);
+        logger("publicContent",["パブリックコンテンツ"=>$publicContent]);
         return $publicContent;
     }
     public function userContent($name)
     {
-        $userContent = DB::table('content')->select('name','contentName','saveName')->where('name',$name)->paginate(9);
+        $userContent = DB::table('content')->select('name','contentName','content.saveName','contentPhoto')->where('name',$name)->paginate(9);
         return $userContent;
     }
     public function addContent($name,$contentName,$saveName,$relese)
@@ -59,7 +60,7 @@ class content extends Model
 
     public function getConditionsPublicContent($saveName)
     {
-        $conditionsPublicContent = DB::table('content')->select('name','contentName','saveName')->whereIn("saveName",$saveName)->paginate(9);
+        $conditionsPublicContent = DB::table('content')->select('name','contentName','saveName','contentPhoto')->whereIn("saveName",$saveName)->paginate(9);
         return $conditionsPublicContent;
     }
 
@@ -69,7 +70,7 @@ class content extends Model
     }
 
     public function getContentByUser($userName){
-        $getContentList = DB::table('content')->select('name','contentName','saveName')->where("name",$UserName)->paginate(9);
+        $getContentList = DB::table('content')->select('name','contentName','saveName','contentPhoto')->where("name",$UserName)->paginate(9);
         return $getContentList;
     }
 
@@ -79,17 +80,16 @@ class content extends Model
     }
 
     public function getContentByUserNameAndTag($userName,$tagIdList){
-        $getContentData = DB::table("content")->join('contentAndTag','content.saveName',"=",'contentAndTag.saveName')->select('name','contentName','content.saveName')->where("name",$userName)->whereIn('tagId',$tagIdList)->paginate(9);
+        $getContentData = DB::table("content")->join('contentAndTag','content.saveName',"=",'contentAndTag.saveName')->select('name','contentName','content.saveName','contentPhoto')->where("name",$userName)->whereIn('tagId',$tagIdList)->paginate(9);
         return $getContentData;
     }
 
     public function getContentByUserNameAndContentName($userName,$contentName){
-        $getContentData = DB::table('content')->select('name','contentName','saveName')->where([['name',$userName],['contentName',$contentName]])->paginate(9);
+        $getContentData = DB::table('content')->select('name','contentName','saveName','contentPhoto')->where([['name',$userName],['contentName',$contentName]])->paginate(9);
         return $getContentData;
     }
     public function getContentNameBySaveName($saveName){
         $getContentName = DB::table('content')->select('contentName')->where('saveName',$saveName)->get();
-        logger('contentName',["contentName"=>$getContentName]);
         return $getContentName;
     }
 }
