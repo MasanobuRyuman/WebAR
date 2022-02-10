@@ -39,6 +39,7 @@ function PublicContent() {
 
     const getUsers = async () => {
         const response = await axios.get(`/api/publicContentAPI?page=${nowPage}`);
+        console.log(response);
         setUserContent(response);
     }
 

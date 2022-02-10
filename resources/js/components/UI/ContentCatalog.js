@@ -96,6 +96,18 @@ export default function ContentCatalog(props){
                         }}>
                             <IntroductionButton saveName={data.saveName} contentName={data.contentName} />
                             <Typography>{data.name}</Typography>
+                            <Box
+                                component="img"
+                                sx={{
+                                  height: 200,
+                                  width: 230,
+                                  maxHeight: { xs: 200, md: 167 },
+                                  maxWidth: { xs: 230, md: 250 },
+                                  mx      :"auto",
+                                }}
+                                alt="The house from the offer."
+                                src={"storage/" + data.contentPhoto}
+                            />
                         </Box>
                     </Grid>
                 ))}
@@ -120,6 +132,7 @@ export default function ContentCatalog(props){
                 ))}
                 <Button type="button" onClick={add_current_page}>次</Button>
             </Box>
+
         </Box>
 
     )
