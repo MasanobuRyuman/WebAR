@@ -88,7 +88,7 @@ function WebAR() {
                     <a-asset-item id="cow" src={obj}></a-asset-item>
                     <a-asset-item id="mtl" src={mtl}></a-asset-item>
                 </a-assets>
-                <a-marker preset="hiro">
+                <a-marker type='pattern' url="storage/ar_marker/pattern-marker.patt" >
                     <a-obj-model src="#cow" mtl="#mtl" scale=".5 .5 .5" rotation={vectorData}></a-obj-model>
                 </a-marker>
             </a-scene>
