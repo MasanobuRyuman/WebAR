@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch , Link } from 'react-router-dom';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
-import {Input, Box,MenuItem,InputLabel,FormControl,Grid,Typography,Button,TextField} from '@mui/material';
+import {Input, Box,MenuItem,InputLabel,FormControl,Grid,Typography,Button,TextField,Dialog,DialogTitle,DialogActions,DialogContent,DialogContentText} from '@mui/material';
 
 export default function ContentIntroduction() {
     const [contentInfo, setContentInfo] = useState('');
@@ -15,6 +15,7 @@ export default function ContentIntroduction() {
     const [csrfToken,setCsrfToken] = useState("");
     const [userName,setUserName] = useState("");
     const [selectedContentTyep,setSelectedContentType] = useState("");
+    const [open, setOpen] = React.useState(false);
 
     let saveName = document.getElementById('saveName').value;
     let contentName = document.getElementById('contentName').value;
@@ -84,6 +85,16 @@ export default function ContentIntroduction() {
 
     const animatedComponents = makeAnimated();
 
+
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     return(
         <div>
             <form method="POST" action={`./../AR`}>
@@ -121,6 +132,40 @@ export default function ContentIntroduction() {
                 <Input type="hidden" name="contentType" id="contentType" value={selectedContentTyep}></Input>
                 <a href="javascript:window.open('http://twitter.com/share?text='+encodeURIComponent(document.title)+'&url='+encodeURIComponent(location.href),'sharewindow','width=550, height=450, personalbar=0, toolbar=0, scrollbars=1, resizable=!');">Tweet</a>
                 <a href="javascript:window.open('http://line.me/R/msg/text/?'+encodeURIComponent(document.title)+'%20'+encodeURIComponent(location.href),'sharewindow','width=550, height=450, personalbar=0, toolbar=0, scrollbars=1, resizable=!');">LINE</a>
+
+                <Button variant="outlined" onClick={handleClickOpen}>
+                    AR用のタグ
+                </Button>
+                <Dialog
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="alert-dialog-title"
+                  aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">
+                        {"AR用のマーカー"}
+                    </DialogTitle>
+                    <DialogContent>
+                        <Box
+                            component="img"
+                            sx={{
+                                height: 300,
+                                width: 230,
+                                maxHeight: { xs: 300, md: 167 },
+                                maxWidth: { xs: 230, md: 250 },
+                                mx      :"auto",
+                            }}
+                            alt="The house from the offer."
+                            src={"./../storage/ar_marker/pattern-marker.png"}
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <a href="./../storage/ar_marker/0d7338bc-1a4f-4ee8-bcba-843f9f292748.pdf" download>ダウンロード</a>
+                        <Button onClick={handleClose} autoFocus>
+                            閉じる
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </form>
         </div>
     )
