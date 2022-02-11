@@ -54,7 +54,8 @@ class content extends Model
 
     public function getContentPhoto($saveName)
     {
-        $contentPhoto = DB::table('contentPhoto')->select('contentPhoto')->where('saveName',$saveName);
+        $contentPhoto = DB::table('content')->select('contentPhoto')->where('saveName',$saveName)->get();
+        logger('getContentPhoto',["getContentPhoto"=>$contentPhoto]);
         return $contentPhoto;
     }
 
@@ -92,4 +93,6 @@ class content extends Model
         $getContentName = DB::table('content')->select('contentName')->where('saveName',$saveName)->get();
         return $getContentName;
     }
+
+
 }
