@@ -13,8 +13,10 @@ class contentInfoAPI extends Controller
         $saveName = $_POST['saveName'];
         $contentInfo = new contentInfo;
         $contentPhoto = new contentPhoto;
+        $content = new content;
         $info = $contentInfo -> getContentInfo($saveName);
-        $photo = $contentPhoto -> getContentPhoto($saveName);
+        $photo = $content -> getContentPhoto($saveName);
+
         $infoData = "";
         $photoData = "";
         if ($info != ""){
@@ -22,14 +24,13 @@ class contentInfoAPI extends Controller
                 $infoData = $temp;
             };
         }
-        $photoData = array();
-        if ($photo != ""){
-            foreach ($photo as $temp){
-                foreach($temp as $temp2){
-                    $photoData[] = $temp2;
-                }
-            };
+
+        foreach($photo as $temp){
+            foreach($temp as $temp2){
+                $photoData = $temp2;
+            }
         }
+        logger("写真データ",["photo"=>$photoData]);
 
         $contentAndTag = new contentAndTag;
         $tagId = $contentAndTag -> getTagId($saveName);
@@ -54,7 +55,7 @@ class contentInfoAPI extends Controller
                 }
             }
         }
-        $content = new content;
+
         $contentName = $content->getContentNameBySaveName($saveName);
         logger("ccontnet名",["コンテント名"=>"kooko"]);
 

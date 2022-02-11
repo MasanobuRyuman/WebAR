@@ -31,13 +31,9 @@ export default function ContentIntroduction() {
             setContentInfo(request.data.contentInfo);
             //console.log("コンテント");
 
-            document.getElementById('contentNameDecisionButton').style.display = "none";
-            document.getElementById('decisionButton').style.display = "none";
-            let photoArray = []
-            request.data.contentPhoto.forEach(function(element){
-                photoArray.push(element);
-            })
-            setPhotoData(photoArray);
+            console.log("写真データ");
+            console.log(request.data.contentPhoto);
+            setPhotoData(request.data.contentPhoto);
 
             let attachedTag = []
             request.data.tagNameList.forEach(function(element){
@@ -65,8 +61,7 @@ export default function ContentIntroduction() {
     function editContentName(){
         console.log("attachedTagList");
         console.log(attachedTagList);
-        document.getElementById('introductionContentNameArea').readOnly = false;
-        document.getElementById('contentNameDecisionButton').style.display = "";
+    
     }
 
     function addTagInfo(e){
@@ -119,11 +114,18 @@ export default function ContentIntroduction() {
                 <Typography>説明</Typography>
                 <textarea id="infoArea" defaultValue={contentInfo} readOnly></textarea>
                 <Typography>コンテンツ写真</Typography>
-                {photoData.map((data,index)=>(
-                    <div key={data}>
-                        <img src={"storage/" + data} alt="not image" title="image" />
-                    </div>
-                ))}
+                <Box
+                    component="img"
+                    sx={{
+                        height: 300,
+                        width: 230,
+                        maxHeight: { xs: 300, md: 167 },
+                        maxWidth: { xs: 230, md: 250 },
+                        mx      :"auto",
+                    }}
+                    alt="The house from the offer."
+                    src={"./../../storage/" + photoData}
+                />
 
                 <Button type="submit" onClick={()=>preparationCamera("AR")} variant="contained">AR</Button>
                 <Button type="submit" onClick={()=>preparationCamera("Object")} variant="contained">オブジェクト</Button>
