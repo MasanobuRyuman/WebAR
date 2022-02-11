@@ -30,11 +30,8 @@ export default function UserContentIntroduction() {
             document.getElementById('contentNameDecisionButton').style.display = "none";
             document.getElementById('decisionButton').style.display = "none";
             document.getElementById('tagDecisionButton').style.display = "none";
-             let photoArray = []
-            request.data.contentPhoto.forEach(function(element){
-                photoArray.push(element);
-            })
-            setPhotoData(photoArray);
+            let contentPhoto = request.data.contentPhoto;
+            setPhotoData(contentPhoto);
             let attachedTag = [];
             request.data.tagNameList.forEach(function(element){
                 attachedTag.push(element);
@@ -157,11 +154,18 @@ export default function UserContentIntroduction() {
             <Input type="button" id="decisionButton" onClick={decisionExplanation} defaultValue="決定" />
             <textarea id="infoArea" defaultValue={contentInfo} readOnly></textarea>
             <p>コンテンツ写真</p>
-            {photoData.map((data,index)=>(
-                <div key={data}>
-                    <img src={"storage/" + data} alt="not image" title="image" />
-                </div>
-            ))}
+            <Box
+                component="img"
+                sx={{
+                  height: 200,
+                  width: 230,
+                  maxHeight: { xs: 200, md: 167 },
+                  maxWidth: { xs: 230, md: 250 },
+                  mx      :"auto",
+                }}
+                alt="The house from the offer."
+                src={"./../storage/" + photoData}
+            />
             <Link to="EditPhoto"><Input type="button" defaultValue="編集" /></Link>
             <h1>{update}</h1>
         </div>
