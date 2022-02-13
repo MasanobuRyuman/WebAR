@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch , Link } from 'react-router-dom';
-import {Select,Input, Box,MenuItem,InputLabel,FormControl,Grid,Typography,Button} from '@mui/material';
+import {Input, Box,MenuItem,InputLabel,FormControl,Grid,Typography,Button,TextField,Dialog,DialogTitle,DialogActions,DialogContent,DialogContentText,Select} from '@mui/material';
 import makeAnimated from 'react-select/animated';
 import TagSearchInput from './UI/TagSearchInput.js';
 
@@ -17,6 +17,8 @@ export default function UserContentIntroduction() {
     const [tagEdit,setTagEdit] = useState("false");
     const [selectedTagList, setSelectedTagList] = React.useState([]);
     const [update,setUpdata]=useState(true);
+    const [open, setOpen] = React.useState(false);
+    const [csrfToken,setCsrfToken] = useState("");
 
     let saveName = localStorage.getItem("saveName");
     useEffect(
@@ -136,38 +138,65 @@ export default function UserContentIntroduction() {
         setUpdata(update?false:true);
     }
 
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    function preparationCamera(contentType){
+        let csrf_token = document.head.querySelector('meta[name="csrf-token"]').content;
+        setCsrfToken(csrf_token);
+        setSelectedContentType(contentType);
+    }
+
     return(
         <div>
-            <h1>紹介ページ</h1>
-            <p>コンテンツ名</p>
-            <p>{contentName}</p>
-            <textarea id="introductionContentNameArea" defaultValue={contentName} readOnly />
-            <Input type="button" onClick={editContentName} defaultValue="編集" />
-            <Input id="contentNameDecisionButton" type="button" onClick={changeContentName} defaultValue="決定" />
-            <p>タグ</p>
+            <form method="POST" action={`./../AR`}>
+            <Input type="hidden" name="_token" value={csrfToken} />
+                <h1>紹介ページ</h1>
+                <p>コンテンツ名</p>
+                <p>{contentName}</p>
+                <textarea id="introductionContentNameArea" defaultValue={contentName} readOnly />
+                <Input type="button" onClick={editContentName} defaultValue="編集" />
+                <Input id="contentNameDecisionButton" type="button" onClick={changeContentName} defaultValue="決定" />
+                <p>タグ</p>
 
-            <TagBox />
-            <Input type="button" onClick={editTag} defaultValue="編集" />
-            <Input type="button" onClick={changeTagData} id="tagDecisionButton" value="決定">決定</Input>
-            <p>説明</p>
-            <Input type="button" onClick={editExplanation} defaultValue="編集" />
-            <Input type="button" id="decisionButton" onClick={decisionExplanation} defaultValue="決定" />
-            <textarea id="infoArea" defaultValue={contentInfo} readOnly></textarea>
-            <p>コンテンツ写真</p>
-            <Box
-                component="img"
-                sx={{
-                  height: 200,
-                  width: 230,
-                  maxHeight: { xs: 200, md: 167 },
-                  maxWidth: { xs: 230, md: 250 },
-                  mx      :"auto",
-                }}
-                alt="The house from the offer."
-                src={"./../storage/" + photoData}
-            />
-            <Link to="EditPhoto"><Input type="button" defaultValue="編集" /></Link>
-            <h1>{update}</h1>
+                <TagBox />
+                <Input type="button" onClick={editTag} defaultValue="編集" />
+                <Input type="button" onClick={changeTagData} id="tagDecisionButton" value="決定">決定</Input>
+                <p>説明</p>
+                <Input type="button" onClick={editExplanation} defaultValue="編集" />
+                <Input type="button" id="decisionButton" onClick={decisionExplanation} defaultValue="決定" />
+                <textarea id="infoArea" defaultValue={contentInfo} readOnly></textarea>
+                <p>コンテンツ写真</p>
+                <Box
+                    component="img"
+                    sx={{
+                      height: 200,
+                      width: 230,
+                      maxHeight: { xs: 200, md: 167 },
+                      maxWidth: { xs: 230, md: 250 },
+                      mx      :"auto",
+                    }}
+                    alt="The house from the offer."
+                    src={"./../storage/" + photoData}
+                />
+                <h1>temp</h1>
+
+                <h1>temp</h1>
+
+                <Link to="EditPhoto"><Input type="button" defaultValue="編集" /></Link>
+                <Button type="submit" onClick={()=>preparationCamera("AR")} variant="contained">AR</Button>
+                <Button type="submit" onClick={()=>preparationCamera("Object")} variant="contained">オブジェクト</Button>
+                <Input type="hidden" value={userName}></Input>
+                <Input type="hidden" name="saveName" value={saveName}></Input>
+                <Input type="hidden" name="contentType" id="contentType" value={selectedContentTyep}></Input>
+            </form>
+
         </div>
     )
 }
