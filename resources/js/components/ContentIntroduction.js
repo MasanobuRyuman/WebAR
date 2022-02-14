@@ -61,7 +61,7 @@ export default function ContentIntroduction() {
     function editContentName(){
         console.log("attachedTagList");
         console.log(attachedTagList);
-    
+
     }
 
     function addTagInfo(e){
@@ -168,6 +168,7 @@ export default function ContentIntroduction() {
                         </Button>
                     </DialogActions>
                 </Dialog>
+                
             </form>
         </div>
     )
