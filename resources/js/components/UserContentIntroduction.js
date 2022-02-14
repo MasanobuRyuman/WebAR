@@ -3,8 +3,9 @@ import axios from 'axios';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch , Link } from 'react-router-dom';
 import {Input, Box,MenuItem,InputLabel,FormControl,Grid,Typography,Button,TextField,Dialog,DialogTitle,DialogActions,DialogContent,DialogContentText,Select} from '@mui/material';
-import makeAnimated from 'react-select/animated';
+import LoginHeader from './UI/LoginHeader.js';
 import TagSearchInput from './UI/TagSearchInput.js';
+
 
 export default function UserContentIntroduction() {
     const [contentInfo, setContentInfo] = useState('');
@@ -185,9 +186,39 @@ export default function UserContentIntroduction() {
                     alt="The house from the offer."
                     src={"./../storage/" + photoData}
                 />
-                <h1>temp</h1>
-
-                <h1>temp</h1>
+                <Button variant="outlined" onClick={handleClickOpen}>
+                    AR用のタグ
+                </Button>
+                <Dialog
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="alert-dialog-title"
+                  aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">
+                        {"AR用のマーカー"}
+                    </DialogTitle>
+                    <DialogContent>
+                        <Box
+                            component="img"
+                            sx={{
+                                height: 300,
+                                width: 230,
+                                maxHeight: { xs: 300, md: 167 },
+                                maxWidth: { xs: 230, md: 250 },
+                                mx      :"auto",
+                            }}
+                            alt="The house from the offer."
+                            src={"./../storage/ar_marker/pattern-marker.png"}
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <a href="./../storage/ar_marker/0d7338bc-1a4f-4ee8-bcba-843f9f292748.pdf" download>ダウンロード</a>
+                        <Button onClick={handleClose} autoFocus>
+                            閉じる
+                        </Button>
+                    </DialogActions>
+                </Dialog>
 
                 <Link to="EditPhoto"><Input type="button" defaultValue="編集" /></Link>
                 <Button type="submit" onClick={()=>preparationCamera("AR")} variant="contained">AR</Button>
