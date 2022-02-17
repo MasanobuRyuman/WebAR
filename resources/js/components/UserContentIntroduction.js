@@ -7,6 +7,8 @@ import LoginHeader from './UI/LoginHeader.js';
 import TagSearchInput from './UI/TagSearchInput.js';
 
 
+
+
 export default function UserContentIntroduction() {
     const [contentInfo, setContentInfo] = useState('');
     const [photoData,setPhotoData] = useState([]);
@@ -17,7 +19,7 @@ export default function UserContentIntroduction() {
     const [selectedContentTyep,setSelectedContentType] = useState("");
     const [tagEdit,setTagEdit] = useState("false");
     const [selectedTagList, setSelectedTagList] = React.useState([]);
-    const [update,setUpdata]=useState(true);
+    const [update,setUpdata] = useState(true);
     const [open, setOpen] = React.useState(false);
     const [csrfToken,setCsrfToken] = useState("");
 
@@ -154,78 +156,102 @@ export default function UserContentIntroduction() {
         setSelectedContentType(contentType);
     }
 
+
+
     return(
         <div>
+            <LoginHeader />
             <form method="POST" action={`./../AR`}>
-            <Input type="hidden" name="_token" value={csrfToken} />
-                <h1>紹介ページ</h1>
-                <p>コンテンツ名</p>
-                <p>{contentName}</p>
-                <textarea id="introductionContentNameArea" defaultValue={contentName} readOnly />
-                <Input type="button" onClick={editContentName} defaultValue="編集" />
-                <Input id="contentNameDecisionButton" type="button" onClick={changeContentName} defaultValue="決定" />
-                <p>タグ</p>
-
-                <TagBox />
-                <Input type="button" onClick={editTag} defaultValue="編集" />
-                <Input type="button" onClick={changeTagData} id="tagDecisionButton" value="決定">決定</Input>
-                <p>説明</p>
-                <Input type="button" onClick={editExplanation} defaultValue="編集" />
-                <Input type="button" id="decisionButton" onClick={decisionExplanation} defaultValue="決定" />
-                <textarea id="infoArea" defaultValue={contentInfo} readOnly></textarea>
-                <p>コンテンツ写真</p>
-                <Box
-                    component="img"
-                    sx={{
-                      height: 200,
-                      width: 230,
-                      maxHeight: { xs: 200, md: 167 },
-                      maxWidth: { xs: 230, md: 250 },
-                      mx      :"auto",
-                    }}
-                    alt="The house from the offer."
-                    src={"./../storage/" + photoData}
-                />
-                <Button variant="outlined" onClick={handleClickOpen}>
-                    AR用のタグ
-                </Button>
-                <Dialog
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="alert-dialog-title"
-                  aria-describedby="alert-dialog-description"
-                >
-                    <DialogTitle id="alert-dialog-title">
-                        {"AR用のマーカー"}
-                    </DialogTitle>
-                    <DialogContent>
-                        <Box
-                            component="img"
-                            sx={{
-                                height: 300,
-                                width: 230,
-                                maxHeight: { xs: 300, md: 167 },
-                                maxWidth: { xs: 230, md: 250 },
-                                mx      :"auto",
-                            }}
-                            alt="The house from the offer."
-                            src={"./../storage/ar_marker/pattern-marker.png"}
-                        />
-                    </DialogContent>
-                    <DialogActions>
-                        <a href="./../storage/ar_marker/0d7338bc-1a4f-4ee8-bcba-843f9f292748.pdf" download>ダウンロード</a>
-                        <Button onClick={handleClose} autoFocus>
-                            閉じる
-                        </Button>
-                    </DialogActions>
-                </Dialog>
-
-                <Link to="EditPhoto"><Input type="button" defaultValue="編集" /></Link>
-                <Button type="submit" onClick={()=>preparationCamera("AR")} variant="contained">AR</Button>
-                <Button type="submit" onClick={()=>preparationCamera("Object")} variant="contained">オブジェクト</Button>
-                <Input type="hidden" value={userName}></Input>
-                <Input type="hidden" name="saveName" value={saveName}></Input>
-                <Input type="hidden" name="contentType" id="contentType" value={selectedContentTyep}></Input>
+                <Input type="hidden" name="_token" value={csrfToken} />
+                <Box sx={{
+                    mt    :5,
+                    mr    :20,
+                    ml    :20,
+                    border:1,
+                    height:50,
+                }}>
+                    <Typography sx={{
+                        textAlign: 'center' ,
+                        fontSize:40,
+                    }}>紹介ページ</Typography>
+                </Box>
+                <Box sx={{
+                    mt    :5,
+                    mr    :20,
+                    ml    :20,
+                    border:1,
+                    height:600,
+                }}>
+                    <Box>
+                    </Box>
+                    <Typography sx={{
+                        fontSize:30,
+                        ml:10,
+                    }}>コンテンツ名</Typography>
+                    <textarea id="introductionContentNameArea" defaultValue={contentName} readOnly />
+                    <Input type="button" onClick={editContentName} defaultValue="編集" />
+                    <Input id="contentNameDecisionButton" type="button" onClick={changeContentName} defaultValue="決定" />
+                    <Typography>タグ</Typography>
+                    <TagBox />
+                    <Input type="button" onClick={editTag} defaultValue="編集" />
+                    <Input type="button" onClick={changeTagData} id="tagDecisionButton" value="決定">決定</Input>
+                    <Typography>説明</Typography>
+                    <Input type="button" onClick={editExplanation} defaultValue="編集" />
+                    <Input type="button" id="decisionButton" onClick={decisionExplanation} defaultValue="決定" />
+                    <textarea id="infoArea" defaultValue={contentInfo} readOnly></textarea>
+                    <Typography>コンテンツ写真</Typography>
+                    <Box
+                        component="img"
+                        sx={{
+                          height: 200,
+                          width: 230,
+                          maxHeight: { xs: 200, md: 167 },
+                          maxWidth: { xs: 230, md: 250 },
+                          mx      :"auto",
+                        }}
+                        alt="The house from the offer."
+                        src={"./../storage/" + photoData}
+                    />
+                    <Button variant="outlined" onClick={handleClickOpen}>
+                        AR用のタグ
+                    </Button>
+                    <Dialog
+                      open={open}
+                      onClose={handleClose}
+                      aria-labelledby="alert-dialog-title"
+                      aria-describedby="alert-dialog-description"
+                    >
+                        <DialogTitle id="alert-dialog-title">
+                            {"AR用のマーカー"}
+                        </DialogTitle>
+                        <DialogContent>
+                            <Box
+                                component="img"
+                                sx={{
+                                    height: 300,
+                                    width: 230,
+                                    maxHeight: { xs: 300, md: 167 },
+                                    maxWidth: { xs: 230, md: 250 },
+                                    mx      :"auto",
+                                }}
+                                alt="The house from the offer."
+                                src={"./../storage/ar_marker/pattern-marker.png"}
+                            />
+                        </DialogContent>
+                        <DialogActions>
+                            <a href="./../storage/ar_marker/0d7338bc-1a4f-4ee8-bcba-843f9f292748.pdf" download>ダウンロード</a>
+                            <Button onClick={handleClose} autoFocus>
+                                閉じる
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
+                    <Link to="EditPhoto"><Input type="button" defaultValue="編集" /></Link>
+                    <Button type="submit" onClick={()=>preparationCamera("AR")} variant="contained">AR</Button>
+                    <Button type="submit" onClick={()=>preparationCamera("Object")} variant="contained">オブジェクト</Button>
+                    <Input type="hidden" value={userName}></Input>
+                    <Input type="hidden" name="saveName" value={saveName}></Input>
+                    <Input type="hidden" name="contentType" id="contentType" value={selectedContentTyep}></Input>
+                </Box>
             </form>
 
         </div>

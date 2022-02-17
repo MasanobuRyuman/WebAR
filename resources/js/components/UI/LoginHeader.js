@@ -7,16 +7,18 @@ export default function LoginHeader(){
     return(
         <Box sx={{
             display        : 'flex',
-            backgroundColor: "#81c784",
+            backgroundColor: "black",
         }}>
             <Typography variant="h2" sx={{
                 fontSize:40,
                 display : 'inline',
                 m       : 'auto',
+                color   :'white',
             }}>ARShare</Typography>
             <Typography sx={{
                 fontSize:20,
                 m       :2,
+                color   :'white',
             }}>初めての人</Typography>
             <a href="/"><Button sx={{
                 fontSize:20,
