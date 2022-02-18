@@ -68,11 +68,17 @@ export default function ContentCatalog(props){
     function IntroductionButton(prop){
         if (props.userContentFlag != undefined){
             return(
-                <Link to={`/userContentIntroduction`} onClick={() => userInsertData(prop.saveName)}>{prop.contentName}</Link>
+                <Typography sx={{
+                    textAlign : 'center',
+                }}><Link  to={`/userContentIntroduction`} onClick={() => userInsertData(prop.saveName)} activeStyle={{textdecoration: 'none'}}><Input type="Button" value={prop.contentName}/></Link></Typography>
             )
         }else{
             return(
-                <Input type="submit" onClick={() => insertData(prop.saveName,prop.contentName)} value={prop.contentName} />
+                <Typography><Input type="submit" onClick={() => insertData(prop.saveName,prop.contentName)} value={prop.contentName} sx={{
+                    display : 'block',
+                    m       : 'auto',
+                    color   : 'black',
+                }}/></Typography>
             )
         }
 
@@ -84,18 +90,20 @@ export default function ContentCatalog(props){
         }}>
             <form method="GET" action={`ContentIntroduction/${saveName}`}>
                 <input type="hidden" name="_token" value={csrfToken} />
-                <Grid container spacing={2} alignItems="center" justify="center">
+                <Grid container spacing={1} alignItems="center" justify="center">
                 {props.contentData?.data?.data?.map((data,index)=>(
-                    <Grid item xs={4} >
+                    <Grid item xs={3} >
                         <Box key={index} id="contentFrame" sx={{
                             border      : 1,
                             borderRadius: 2,
                             height      : 250,
                             width       : 250,
-                            mx          :"auto",
+                            mx          : "auto",
                         }}>
                             <IntroductionButton saveName={data.saveName} contentName={data.contentName} />
-                            <Typography>{data.name}</Typography>
+                            <Typography sx={{
+                                textAlign : 'right',
+                            }}>{data.name}</Typography>
                             <Box
                                 component="img"
                                 sx={{

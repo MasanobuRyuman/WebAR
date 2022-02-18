@@ -10,7 +10,11 @@ export default function Header(){
             backgroundColor: "black",
         }}>
             <Typography variant="h2" sx={{
-                fontSize: 40,
+                fontSize: {
+                    md:40,
+                    sm:30,
+                    xs:20,
+                },
                 display : 'inline',
                 m       : 'auto',
                 color   : 'white',
@@ -19,11 +23,13 @@ export default function Header(){
                 fontSize: 20,
                 m       : 2,
                 color   : 'white',
+                float   : 'right',
             }}>初めての人</Typography>
             <Link to={'./LoginPage'}><Typography sx={{
                 fontSize: 20,
                 m       : 2,
                 color   : 'white',
+                float   : 'right',
             }}>ログイン</Typography></Link>
         </Box>
     )

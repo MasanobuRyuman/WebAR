@@ -5,9 +5,12 @@ import { BrowserRouter, Route, Switch , Link } from 'react-router-dom';
 import {Input, Box,MenuItem,InputLabel,FormControl,Grid,Typography,Button,TextField,Dialog,DialogTitle,DialogActions,DialogContent,DialogContentText,Select} from '@mui/material';
 import LoginHeader from './UI/LoginHeader.js';
 import TagSearchInput from './UI/TagSearchInput.js';
+import { styled } from '@mui/styles';
 
-
-
+const ItemText = styled(Typography)({
+    fontSize : 20,
+    ml       : 10,
+});
 
 export default function UserContentIntroduction() {
     const [contentInfo, setContentInfo] = useState('');
@@ -184,22 +187,35 @@ export default function UserContentIntroduction() {
                 }}>
                     <Box>
                     </Box>
-                    <Typography sx={{
-                        fontSize:30,
-                        ml:10,
-                    }}>コンテンツ名</Typography>
-                    <textarea id="introductionContentNameArea" defaultValue={contentName} readOnly />
-                    <Input type="button" onClick={editContentName} defaultValue="編集" />
-                    <Input id="contentNameDecisionButton" type="button" onClick={changeContentName} defaultValue="決定" />
-                    <Typography>タグ</Typography>
-                    <TagBox />
-                    <Input type="button" onClick={editTag} defaultValue="編集" />
-                    <Input type="button" onClick={changeTagData} id="tagDecisionButton" value="決定">決定</Input>
-                    <Typography>説明</Typography>
-                    <Input type="button" onClick={editExplanation} defaultValue="編集" />
-                    <Input type="button" id="decisionButton" onClick={decisionExplanation} defaultValue="決定" />
+                    <Box sx={{
+                        display: 'flex' ,
+                    }}>
+                        <ItemText sx={{
+                            fontSize:30,
+                            ml:10,
+                        }}>コンテンツ名</ItemText>
+                        <textarea id="introductionContentNameArea" defaultValue={contentName} readOnly />
+                        <Input type="button" onClick={editContentName} defaultValue="編集" />
+                        <Input id="contentNameDecisionButton" type="button" onClick={changeContentName} defaultValue="決定" />
+                    </Box>
+                    <Box sx={{
+                        display: 'flex' ,
+                    }}>
+                        <ItemText>タグ</ItemText>
+                        <TagBox />
+                        <Input type="button" onClick={editTag} defaultValue="編集" />
+                        <Input type="button" onClick={changeTagData} id="tagDecisionButton" value="決定">決定</Input>
+                    </Box>
+                    <Box sx={{
+                        display: 'flex' ,
+                    }}>
+                        <ItemText>説明</ItemText>
+                        <Input type="button" onClick={editExplanation} defaultValue="編集" />
+                        <Input type="button" id="decisionButton" onClick={decisionExplanation} defaultValue="決定" />
+                    </Box>
+
                     <textarea id="infoArea" defaultValue={contentInfo} readOnly></textarea>
-                    <Typography>コンテンツ写真</Typography>
+                    <ItemText>コンテンツ写真</ItemText>
                     <Box
                         component="img"
                         sx={{

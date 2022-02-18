@@ -8,6 +8,8 @@ import {Input, Box,MenuItem,InputLabel,FormControl,Grid,Typography,Button,TextFi
 import Header from './UI/Header.js';
 
 
+
+
 export default function ContentIntroduction() {
     const [contentInfo, setContentInfo] = useState('');
     const [photoData,setPhotoData] = useState([]);
@@ -228,8 +230,6 @@ export default function ContentIntroduction() {
                     </Dialog>
                 </form>
             </Box>
-
-
         </div>
     )
 }

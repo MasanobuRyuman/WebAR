@@ -20,6 +20,10 @@ export default function LoginHeader(){
                 m       :2,
                 color   :'white',
             }}>初めての人</Typography>
+            <Link to={`/AddFile`} ><Button sx={{
+                fontSize : 20,
+                m        : 2,
+            }}>コンテンツ追加</Button></Link>
             <a href="/"><Button sx={{
                 fontSize:20,
                 m       :2,
