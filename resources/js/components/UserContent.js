@@ -14,7 +14,7 @@ function UserContent() {
     const [tagDataList,setTagDataList] = useState([]);
 
     const getUserName = document.getElementById('userName').value;
-    
+
     useEffect(()=>{
         localStorage.setItem('userName',getUserName);
     },[])
@@ -49,7 +49,6 @@ function UserContent() {
     return (
         <div>
             <LoginHeader />
-            <Link to={`/AddFile`} >コンテンツ追加</Link>
             <SearchBox tagList={tagDataList} pageSource="userContent"/>
             <ContentCatalog contentData={userContent} nowPage={nowPage} setNowPage={setNowPage} userContentFlag="True"/>
         </div>

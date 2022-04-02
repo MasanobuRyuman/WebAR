@@ -7,21 +7,30 @@ export default function Header(){
     return(
         <Box sx={{
             display        : 'flex',
-            backgroundColor: "#81c784",
+            backgroundColor: "black",
         }}>
             <Typography variant="h2" sx={{
-                fontSize:40,
+                fontSize: {
+                    md:40,
+                    sm:30,
+                    xs:20,
+                },
                 display : 'inline',
                 m       : 'auto',
+                color   : 'white',
             }}>ARShare</Typography>
             <Typography sx={{
-                fontSize:20,
-                m       :2,
+                fontSize: 20,
+                m       : 2,
+                color   : 'white',
+                float   : 'right',
             }}>初めての人</Typography>
-            <Typography sx={{
-                fontSize:20,
-                m       :2,
-            }}><Link to={'./LoginPage'}>ログイン</Link></Typography>
+            <Link to={'./LoginPage'}><Typography sx={{
+                fontSize: 20,
+                m       : 2,
+                color   : 'white',
+                float   : 'right',
+            }}>ログイン</Typography></Link>
         </Box>
     )
 }
